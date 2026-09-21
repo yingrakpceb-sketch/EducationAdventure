@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ภารกิจนักล่าความรู้</title>
+<meta name="description" content="เกมตอบคำถามวิทยาศาสตร์สำหรับนักเรียนประถม">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Thai+2:wght@500;600;700;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ สีและโทเคน ============ */
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  scroll-padding-top:env(safe-area-inset-top,0px);
+
+  --bg:#FFF4DC; --bg2:#FFE6B4;
+  --card:#FFFFFF; --card2:#FFF7E6;
+  --ink:#33261A; --ink2:#7A6448; --line:#E8D2A6;
+
+  --green:#1E9A52; --green-d:#136B39;
+  --gold:#F0A81E; --gold-d:#B97A08;
+  --coral:#E4523C; --coral-d:#A83322;
+  --sky:#2494D6; --sky-d:#14669A;
+  --grape:#7A45C9; --grape-d:#552C93;
+  --pink:#D6437F; --pink-d:#9B2757;
+
+  --ok-bg:#DFF5E3; --ok-line:#1E9A52;
+  --no-bg:#FFE3DD; --no-line:#E4523C;
+  --shadow:rgba(90,60,20,.20);
+  --sun:#FFD447; --sky-bg:#9BDCF5; --hill:#63C07A; --hill2:#3E9A5B;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1D1830; --bg2:#282142;
+    --card:#2C2549; --card2:#362D58;
+    --ink:#F7EEDB; --ink2:#C3B5DE; --line:#4C4074;
+    --green:#3BC97B; --green-d:#1E7C4A;
+    --gold:#FFC64D; --gold-d:#B37F14;
+    --coral:#FF7C66; --coral-d:#AF4531;
+    --sky:#5AC1F2; --sky-d:#1F7BAF;
+    --grape:#AE86FF; --grape-d:#6C42B8;
+    --pink:#FF7BAE; --pink-d:#B0406F;
+    --ok-bg:#1F4433; --ok-line:#3BC97B;
+    --no-bg:#4A2A2A; --no-line:#FF7C66;
+    --shadow:rgba(0,0,0,.45);
+    --sky-bg:#2A3566; --hill:#2E6B48; --hill2:#1F4B33;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1D1830; --bg2:#282142; --card:#2C2549; --card2:#362D58;
+  --ink:#F7EEDB; --ink2:#C3B5DE; --line:#4C4074;
+  --green:#3BC97B; --green-d:#1E7C4A; --gold:#FFC64D; --gold-d:#B37F14;
+  --coral:#FF7C66; --coral-d:#AF4531; --sky:#5AC1F2; --sky-d:#1F7BAF;
+  --grape:#AE86FF; --grape-d:#6C42B8; --pink:#FF7BAE; --pink-d:#B0406F;
+  --ok-bg:#1F4433; --ok-line:#3BC97B; --no-bg:#4A2A2A; --no-line:#FF7C66;
+  --shadow:rgba(0,0,0,.45); --sky-bg:#2A3566; --hill:#2E6B48; --hill2:#1F4B33;
+}
+*,*::before,*::after{box-sizing:inherit}
+
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg);
+  background-image:radial-gradient(circle at 12% 8%, var(--bg2) 0 22%, transparent 22.5%),
+                   radial-gradient(circle at 88% 4%, var(--bg2) 0 16%, transparent 16.5%);
+  background-attachment:fixed;
+  color:var(--ink);
+  font-family:'Sarabun','Noto Sans Thai','Leelawadee UI',Tahoma,sans-serif;
+  font-size:17px; line-height:1.65; -webkit-text-size-adjust:100%;
+}
+h1,h2,h3,.display,.btn,.pill,.big{font-family:'Baloo Thai 2','Noto Sans Thai','Leelawadee UI',Tahoma,sans-serif;font-weight:700;line-height:1.35}
+h1{font-size:clamp(1.9rem,7vw,2.8rem);margin:0}
+h2{font-size:clamp(1.4rem,5.2vw,2rem);margin:0 0 .3em}
+h3{font-size:1.2rem;margin:0 0 .3em}
+p{margin:0 0 .8em;max-width:62ch}
+img,svg{max-width:100%}
+:focus-visible{outline:4px solid var(--sky);outline-offset:3px;border-radius:12px}
+
+.app{max-width:760px;margin:0 auto;padding:14px 14px 56px}
+.screen{display:none}
+.screen.on{display:block}
+.screen.on>*{animation:rise .32s ease both}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(4px)}}
+@keyframes sparkle{0%{transform:scale(0) rotate(0);opacity:1}100%{transform:scale(1.9) rotate(200deg);opacity:0}}
+@keyframes fall{to{transform:translateY(112vh) rotate(720deg);opacity:.2}}
+@keyframes curtain{0%{transform:translateY(102%)}22%{transform:translateY(0)}72%{transform:translateY(0)}100%{transform:translateY(-102%)}}
+@keyframes runner{0%,100%{transform:translateX(-14px) rotate(-5deg)}50%{transform:translateX(14px) rotate(5deg)}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 0 rgba(240,168,30,0))}50%{filter:drop-shadow(0 0 14px rgba(240,168,30,.85))}}
+
+html.calm *,html.calm *::before,html.calm *::after{animation:none !important;transition:none !important}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+
+/* ============ การ์ด ============ */
+.card{
+  background:var(--card); border:3px solid var(--line); border-radius:26px;
+  padding:20px; box-shadow:0 8px 0 var(--line),0 16px 26px var(--shadow); margin-bottom:18px;
+}
+.card.flat{box-shadow:0 5px 0 var(--line);}
+.card.tint{background:var(--card2)}
+
+/* ============ ปุ่ม ============ */
+.btn{
+  -webkit-appearance:none; appearance:none; display:flex; align-items:center; justify-content:center;
+  gap:10px; width:100%; margin:0 0 14px; padding:15px 18px; border:none; border-radius:20px;
+  font-size:1.3rem; color:#fff; background:var(--green); cursor:pointer; text-align:center;
+  box-shadow:0 6px 0 var(--green-d),0 11px 16px var(--shadow);
+  transition:transform .08s ease, box-shadow .08s ease;
+}
+.btn:active{transform:translateY(5px);box-shadow:0 1px 0 var(--green-d)}
+.btn.gold{background:var(--gold);box-shadow:0 6px 0 var(--gold-d),0 11px 16px var(--shadow)}
+.btn.gold:active{box-shadow:0 1px 0 var(--gold-d)}
+.btn.sky{background:var(--sky);box-shadow:0 6px 0 var(--sky-d),0 11px 16px var(--shadow)}
+.btn.sky:active{box-shadow:0 1px 0 var(--sky-d)}
+.btn.grape{background:var(--grape);box-shadow:0 6px 0 var(--grape-d),0 11px 16px var(--shadow)}
+.btn.grape:active{box-shadow:0 1px 0 var(--grape-d)}
+.btn.coral{background:var(--coral);box-shadow:0 6px 0 var(--coral-d),0 11px 16px var(--shadow)}
+.btn.coral:active{box-shadow:0 1px 0 var(--coral-d)}
+.btn.pink{background:var(--pink);box-shadow:0 6px 0 var(--pink-d),0 11px 16px var(--shadow)}
+.btn.pink:active{box-shadow:0 1px 0 var(--pink-d)}
+.btn.ghost{background:var(--card);color:var(--ink);border:3px solid var(--line);box-shadow:0 6px 0 var(--line)}
+.btn.ghost:active{box-shadow:0 1px 0 var(--line)}
+.btn.sm{font-size:1.05rem;padding:11px 14px;border-radius:16px;margin-bottom:10px}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row>.btn{flex:1 1 180px;width:auto}
+
+.iconbtn{
+  -webkit-appearance:none;appearance:none;border:3px solid var(--line);background:var(--card);
+  width:52px;height:52px;border-radius:17px;font-size:1.5rem;cursor:pointer;color:var(--ink);
+  box-shadow:0 4px 0 var(--line);display:grid;place-items:center;flex:0 0 auto;
+}
+.iconbtn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--line)}
+
+/* ============ หน้าแรก ============ */
+.topbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-bottom:8px}
+.hero{
+  position:relative;border:3px solid var(--line);border-radius:30px;overflow:hidden;
+  margin-bottom:18px;box-shadow:0 8px 0 var(--line),0 18px 30px var(--shadow);background:var(--sky-bg);
+}
+.hero .scene{display:block;width:100%;height:auto}
+.hero .heroChar{position:absolute;left:50%;bottom:4%;width:30%;max-width:150px;transform:translateX(-50%);animation:bob 3.4s ease-in-out infinite}
+.logo{text-align:center;padding:16px 14px 10px;background:linear-gradient(180deg,transparent,var(--card) 62%)}
+.logo .title{
+  font-family:'Baloo Thai 2',sans-serif;font-weight:800;font-size:clamp(2rem,8.6vw,3.2rem);
+  color:var(--gold);line-height:1.2;letter-spacing:.5px;
+  -webkit-text-stroke:2.5px var(--ink); paint-order:stroke fill;
+  text-shadow:0 5px 0 var(--ink);
+}
+.logo .sub{font-size:1.05rem;color:var(--ink2);margin-top:6px}
+.greet{display:flex;gap:12px;align-items:center;justify-content:center;font-size:1.25rem;font-family:'Baloo Thai 2',sans-serif;margin-bottom:14px;text-align:center}
+
+/* ============ กล่องคำพูดตัวละคร ============ */
+.speech{display:flex;gap:12px;align-items:flex-end;margin-bottom:16px}
+.speech .who{width:96px;flex:0 0 96px}
+.speech .bubble{
+  position:relative;flex:1;background:var(--card);border:3px solid var(--line);border-radius:22px;
+  padding:14px 16px;box-shadow:0 6px 0 var(--line);font-size:1.08rem
+}
+.speech .bubble::after{content:"";position:absolute;left:-13px;bottom:22px;width:0;height:0;
+  border:11px solid transparent;border-right-color:var(--line)}
+.speech .bubble::before{content:"";position:absolute;left:-8px;bottom:22px;width:0;height:0;z-index:1;
+  border:11px solid transparent;border-right-color:var(--card)}
+
+/* ============ วิธีเล่น ============ */
+.guide{display:grid;gap:12px}
+.guide .g{display:flex;gap:14px;align-items:flex-start;background:var(--card2);border:3px solid var(--line);border-radius:20px;padding:13px 15px}
+.guide .g .gi{font-size:2.1rem;line-height:1;flex:0 0 auto}
+.guide .g b{font-family:'Baloo Thai 2',sans-serif;font-size:1.12rem;display:block}
+.guide .g span{color:var(--ink2);font-size:.97rem}
+
+/* ============ เลือกวิชา ============ */
+.subjects{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.subj{
+  -webkit-appearance:none;appearance:none;text-align:left;cursor:pointer;color:#fff;border:none;
+  border-radius:24px;padding:16px 18px;display:flex;gap:14px;align-items:center;font-family:inherit;
+  transition:transform .08s ease,box-shadow .08s ease;
+}
+.subj:active{transform:translateY(5px)}
+.subj .se{font-size:2.5rem;line-height:1;background:rgba(255,255,255,.26);border-radius:18px;padding:8px 10px}
+.subj .sn{font-family:'Baloo Thai 2',sans-serif;font-size:1.32rem;display:block;line-height:1.3}
+.subj .sd{font-size:.93rem;opacity:.95}
+.subj.locked{filter:grayscale(.55);opacity:.72;cursor:not-allowed}
+.soon{display:inline-block;background:rgba(0,0,0,.28);border-radius:999px;padding:1px 11px;font-size:.85rem;margin-top:3px}
+
+/* ============ แผนที่ด่าน ============ */
+.bar{height:20px;background:var(--card2);border:3px solid var(--line);border-radius:999px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:999px;transition:width .6s ease}
+.barlab{display:flex;justify-content:space-between;font-size:.95rem;color:var(--ink2);margin:0 0 7px}
+.stages{display:grid;gap:14px;margin-top:16px}
+.stage{
+  -webkit-appearance:none;appearance:none;font-family:inherit;text-align:left;cursor:pointer;
+  display:flex;gap:14px;align-items:center;background:var(--card);color:var(--ink);
+  border:3px solid var(--line);border-radius:24px;padding:13px 15px;box-shadow:0 6px 0 var(--line);
+  transition:transform .08s ease,box-shadow .08s ease;
+}
+.stage:active{transform:translateY(4px);box-shadow:0 2px 0 var(--line)}
+.stage .num{
+  flex:0 0 58px;height:58px;border-radius:19px;display:grid;place-items:center;
+  font-family:'Baloo Thai 2',sans-serif;font-size:1.9rem;background:var(--card2);border:3px solid var(--line)
+}
+.stage .sname{font-family:'Baloo Thai 2',sans-serif;font-size:1.22rem;display:block;line-height:1.3}
+.stage .meta{font-size:.92rem;color:var(--ink2)}
+.stage.open .num{background:var(--gold);border-color:var(--gold-d);color:#fff}
+.stage.done .num{background:var(--green);border-color:var(--green-d);color:#fff}
+.stage.lock{opacity:.62;cursor:not-allowed}
+.stage.lock .num{background:var(--card2)}
+.stars{letter-spacing:2px;font-size:1.05rem}
+
+/* ============ หน้าเล่น ============ */
+.hud{
+  position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--card);
+  border:3px solid var(--line);border-radius:22px;padding:10px 12px;margin-bottom:14px;
+  box-shadow:0 6px 0 var(--line),0 10px 18px var(--shadow)
+}
+.hudrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;background:var(--card2);border:2px solid var(--line);
+  border-radius:999px;padding:4px 12px;font-family:'Baloo Thai 2',sans-serif;font-size:1.02rem;white-space:nowrap
+}
+.chip.hot{background:var(--gold);color:#fff;border-color:var(--gold-d);animation:glow 1.3s ease-in-out infinite}
+.hearts{letter-spacing:2px;font-size:1.15rem}
+.heart-gone{filter:grayscale(1);opacity:.35}
+.qcount{font-size:.95rem;color:var(--ink2);margin-top:8px;display:flex;justify-content:space-between;align-items:center}
+.qbar{height:12px;background:var(--card2);border:2px solid var(--line);border-radius:999px;overflow:hidden;margin-top:5px}
+.qbar>i{display:block;height:100%;background:var(--sky);transition:width .35s ease}
+
+.qtext{font-family:'Baloo Thai 2',sans-serif;font-size:clamp(1.25rem,4.7vw,1.62rem);line-height:1.5;margin:4px 0 4px}
+.qtag{display:inline-block;background:var(--card2);border:2px solid var(--line);border-radius:999px;padding:1px 12px;font-size:.9rem;color:var(--ink2);margin-bottom:10px}
+.opts{display:grid;gap:12px}
+.opt{
+  -webkit-appearance:none;appearance:none;font-family:inherit;cursor:pointer;width:100%;text-align:left;
+  display:flex;gap:13px;align-items:center;background:var(--card);color:var(--ink);
+  border:3px solid var(--line);border-radius:20px;padding:13px 15px;font-size:1.16rem;line-height:1.45;
+  box-shadow:0 5px 0 var(--line);transition:transform .08s ease,box-shadow .08s ease
+}
+.opt:active:not([disabled]){transform:translateY(4px);box-shadow:0 1px 0 var(--line)}
+.opt .key{
+  flex:0 0 42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--card2);
+  border:2px solid var(--line);font-family:'Baloo Thai 2',sans-serif;font-size:1.25rem
+}
+.opt .mark{margin-left:auto;font-size:1.5rem}
+.opt.right{background:var(--ok-bg);border-color:var(--ok-line);box-shadow:0 5px 0 var(--ok-line)}
+.opt.right .key{background:var(--ok-line);color:#fff;border-color:var(--ok-line)}
+.opt.wrongpick{background:var(--no-bg);border-color:var(--no-line);box-shadow:0 5px 0 var(--no-line);animation:shake .42s ease}
+.opt.wrongpick .key{background:var(--no-line);color:#fff;border-color:var(--no-line)}
+.opt.cut{opacity:.32;text-decoration:line-through}
+.opt[disabled]{cursor:default}
+
+.feed{border-radius:24px;border:3px solid var(--line);padding:16px;margin-top:16px;background:var(--card2);animation:pop .3s ease both}
+.feed.good{background:var(--ok-bg);border-color:var(--ok-line)}
+.feed.bad{background:var(--no-bg);border-color:var(--no-line)}
+.feed .fh{display:flex;gap:12px;align-items:center;font-family:'Baloo Thai 2',sans-serif;font-size:1.45rem;margin-bottom:6px}
+.feed .fh .fe{font-size:2.1rem}
+.feed .why{background:var(--card);border:2px dashed var(--line);border-radius:16px;padding:11px 13px;margin:10px 0 14px;font-size:1.02rem}
+.feed .why b{font-family:'Baloo Thai 2',sans-serif}
+.gain{display:inline-flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.gain span{background:var(--card);border:2px solid var(--line);border-radius:999px;padding:2px 12px;font-family:'Baloo Thai 2',sans-serif;animation:pop .35s ease both}
+
+/* ============ ผลลัพธ์ ============ */
+.result{text-align:center}
+.result .bigemoji{font-size:4.6rem;line-height:1;animation:bob 2.4s ease-in-out infinite;display:block;margin-bottom:6px}
+.bigstars{font-size:3rem;letter-spacing:8px;margin:6px 0 10px}
+.bigstars span{display:inline-block;animation:pop .5s ease both}
+.bigstars span:nth-child(2){animation-delay:.16s}
+.bigstars span:nth-child(3){animation-delay:.32s}
+.scorebig{font-family:'Baloo Thai 2',sans-serif;font-size:3.1rem;color:var(--gold);line-height:1.1;
+  -webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.tiles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin:14px 0}
+.tile{background:var(--card2);border:3px solid var(--line);border-radius:20px;padding:12px;text-align:center}
+.tile .tv{font-family:'Baloo Thai 2',sans-serif;font-size:1.8rem;line-height:1.2}
+.tile .tl{font-size:.93rem;color:var(--ink2)}
+
+/* ============ รางวัล ============ */
+.loot{display:grid;gap:12px;grid-template-columns:repeat(3,1fr);margin-bottom:16px}
+.loot .l{background:var(--card2);border:3px solid var(--line);border-radius:20px;padding:12px;text-align:center}
+.loot .le{font-size:2.2rem;line-height:1}
+.loot .lv{font-family:'Baloo Thai 2',sans-serif;font-size:1.5rem}
+.loot .ll{font-size:.9rem;color:var(--ink2)}
+.badges{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.badge{background:var(--card2);border:3px solid var(--line);border-radius:20px;padding:13px;text-align:center}
+.badge .be{font-size:2.4rem;line-height:1.1}
+.badge b{font-family:'Baloo Thai 2',sans-serif;display:block;font-size:1.05rem}
+.badge small{color:var(--ink2);font-size:.88rem;line-height:1.35;display:block}
+.badge.off{opacity:.5;filter:grayscale(1)}
+.badge.got{border-color:var(--gold);box-shadow:0 5px 0 var(--gold-d)}
+
+/* ============ ตั้งค่า ============ */
+.setrow{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:2px dashed var(--line)}
+.setrow:last-of-type{border-bottom:none}
+.setrow b{font-family:'Baloo Thai 2',sans-serif;font-size:1.12rem;display:block}
+.setrow small{color:var(--ink2);font-size:.92rem}
+.sw{-webkit-appearance:none;appearance:none;flex:0 0 auto;width:74px;height:40px;border-radius:999px;border:3px solid var(--line);
+  background:var(--card2);position:relative;cursor:pointer;transition:background .18s ease}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:var(--ink2);transition:transform .18s ease,background .18s ease}
+.sw[aria-checked="true"]{background:var(--green);border-color:var(--green-d)}
+.sw[aria-checked="true"]::after{transform:translateX(34px);background:#fff}
+
+/* ============ ม่านเปลี่ยนฉาก + ประกายไฟ ============ */
+#curtain{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background:var(--green);
+  transform:translateY(102%);pointer-events:none}
+#curtain.on{animation:curtain 1.25s cubic-bezier(.65,0,.35,1) both}
+#curtain .cw{text-align:center}
+#curtain svg{width:132px;animation:runner .5s ease-in-out infinite}
+#curtain .ct{font-family:'Baloo Thai 2',sans-serif;font-size:2.2rem;color:#fff;margin-top:8px;text-shadow:0 4px 0 rgba(0,0,0,.28)}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:150;overflow:hidden}
+#fx i{position:absolute;top:-8vh;font-size:1.7rem;font-style:normal;animation:fall linear forwards}
+.spark{position:absolute;pointer-events:none;font-size:1.5rem;font-style:normal;animation:sparkle .75s ease-out forwards}
+
+.foot{text-align:center;color:var(--ink2);font-size:.9rem;margin-top:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="fx" aria-hidden="true"></div>
+<div id="curtain" aria-hidden="true"></div>
+
+<main class="app">
+
+<!-- ========== 1. หน้าแรก ========== -->
+<section class="screen on" id="s-home" aria-label="หน้าแรก">
+  <div class="topbar">
+    <button class="iconbtn" data-go="s-rewards" title="รางวัล" aria-label="รางวัล">🏅</button>
+    <button class="iconbtn" data-go="s-settings" title="ตั้งค่า" aria-label="ตั้งค่า">⚙️</button>
+  </div>
+  <div class="hero">
+    <svg class="scene" viewBox="0 0 400 230" role="img" aria-label="ฉากผจญภัย ภูเขา ป่าไม้ และปราสาทความรู้">
+      <rect width="400" height="230" fill="var(--sky-bg)"/>
+      <circle cx="338" cy="44" r="27" fill="var(--sun)"/>
+      <g fill="#fff" opacity=".88">
+        <ellipse cx="70" cy="44" rx="30" ry="15"/><ellipse cx="94" cy="38" rx="21" ry="16"/><ellipse cx="46" cy="40" rx="18" ry="12"/>
+        <ellipse cx="240" cy="30" rx="24" ry="12"/><ellipse cx="258" cy="26" rx="17" ry="12"/>
+      </g>
+      <g fill="#8E79B8" opacity=".55"><path d="M0 130 L54 66 L104 130 Z"/><path d="M92 130 L150 58 L206 130 Z"/></g>
+      <g transform="translate(276,52)">
+        <rect x="14" y="26" width="52" height="58" fill="#B49AD8"/>
+        <rect x="2" y="12" width="20" height="72" fill="#C9B2E8"/><rect x="58" y="12" width="20" height="72" fill="#C9B2E8"/>
+        <path d="M-2 12 L12 -10 L26 12 Z" fill="var(--grape)"/><path d="M54 12 L68 -10 L82 12 Z" fill="var(--grape)"/>
+        <path d="M12 14 L40 -14 L68 14 Z" fill="var(--grape)"/>
+        <rect x="33" y="52" width="16" height="32" rx="8" fill="#6B5090"/>
+        <circle cx="40" cy="20" r="5" fill="var(--gold)"/>
+      </g>
+      <path d="M0 132 Q70 104 140 132 Q220 160 300 130 Q350 112 400 128 L400 230 L0 230 Z" fill="var(--hill)"/>
+      <path d="M0 168 Q90 142 176 172 Q262 200 400 164 L400 230 L0 230 Z" fill="var(--hill2)"/>
+      <path d="M186 230 Q196 186 200 164 Q204 186 214 230 Z" fill="#E6C98C" opacity=".85"/>
+      <g>
+        <rect x="42" y="150" width="9" height="30" fill="#7A5230"/><circle cx="46" cy="144" r="21" fill="#2E8C4E"/><circle cx="31" cy="152" r="13" fill="#3AA35D"/><circle cx="62" cy="152" r="13" fill="#3AA35D"/>
+        <rect x="336" y="156" width="9" height="30" fill="#7A5230"/><circle cx="340" cy="150" r="19" fill="#2E8C4E"/><circle cx="356" cy="158" r="12" fill="#3AA35D"/>
+        <rect x="112" y="176" width="8" height="24" fill="#7A5230"/><circle cx="116" cy="170" r="16" fill="#3AA35D"/>
+      </g>
+      <g font-size="15" opacity=".9"><text x="262" y="150">📗</text><text x="146" y="128">✨</text><text x="86" y="112">⭐</text><text x="308" y="186">🔬</text></g>
+    </svg>
+    <div class="heroChar" id="heroChar" aria-hidden="true"></div>
+  </div>
+
+  <div class="logo">
+    <div class="title">ภารกิจนักล่าความรู้</div>
+    <div class="sub">เกมตอบคำถามวิทยาศาสตร์ สำหรับนักเรียนประถม</div>
+  </div>
+
+  <div class="greet"><span aria-hidden="true">👋</span><span>สวัสดีนักผจญภัย! วันนี้พร้อมออกล่าความรู้หรือยัง</span></div>
+
+  <button class="btn gold" id="btnStart">🚀 เริ่มเกม</button>
+  <button class="btn sky" data-go="s-howto">📖 วิธีเล่น</button>
+  <button class="btn grape" data-go="s-stats">📊 ดูคะแนน</button>
+  <button class="btn ghost" id="btnPickStage">🗺️ เลือกด่าน</button>
+  <p class="foot">ความคืบหน้าเก็บไว้ในเครื่องนี้ ไม่ต้องล็อกอิน</p>
+</section>
+
+<!-- ========== 2. วิธีเล่น ========== -->
+<section class="screen" id="s-howto" aria-label="วิธีเล่น">
+  <h1>📖 วิธีเล่น</h1>
+  <div class="speech" style="margin-top:14px">
+    <div class="who" id="howtoChar" aria-hidden="true"></div>
+    <div class="bubble">อ่านคำถาม แล้วเลือกคำตอบที่คิดว่าถูก 1 ข้อ จาก 4 ข้อ ตอบครบทุกข้อโดยหัวใจไม่หมด ก็ผ่านด่าน!</div>
+  </div>
+  <div class="card">
+    <div class="guide">
+      <div class="g"><span class="gi" aria-hidden="true">❤️</span><div><b>หัวใจ 3 ดวง</b><span>ตอบผิด 1 ครั้ง เสียหัวใจ 1 ดวง หัวใจหมดเมื่อไหร่ เริ่มด่านใหม่ได้ทันที</span></div></div>
+      <div class="g"><span class="gi" aria-hidden="true">💡</span><div><b>คำใบ้ 3 ครั้ง</b><span>กดแล้วระบบจะตัดตัวเลือกที่ผิดออกให้ 1 ข้อ เหลือให้เดาน้อยลง</span></div></div>
+      <div class="g"><span class="gi" aria-hidden="true">⭐</span><div><b>ดาว</b><span>จบด่านแล้วได้ดาว 1–3 ดวง ยิ่งตอบถูกมาก ยิ่งได้ดาวเยอะ</span></div></div>
+      <div class="g"><span class="gi" aria-hidden="true">🪙</span><div><b>เหรียญ</b><span>ตอบถูก 1 ข้อได้ 5 เหรียญ ผ่านด่านได้โบนัสอีก 20 เหรียญ</span></div></div>
+      <div class="g"><span class="gi" aria-hidden="true">🔥</span><div><b>คอมโบ</b><span>ตอบถูกติดกัน 2 ข้อได้คะแนนคูณ 2, ครบ 4 ข้อคูณ 3, ตอบถูกยกด่าน 6 ข้อรวดคูณ 5</span></div></div>
+      <div class="g"><span class="gi" aria-hidden="true">💬</span><div><b>คำอธิบายทุกข้อ</b><span>ตอบถูกหรือผิด ก็จะมีคำอธิบายให้อ่านเสมอ ผิดได้ไม่เป็นไร ได้ความรู้กลับไป</span></div></div>
+    </div>
+  </div>
+  <button class="btn" id="btnHowtoGo">🚀 เริ่มเล่นเลย</button>
+  <button class="btn ghost" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+<!-- ========== 3. เลือกวิชา ========== -->
+<section class="screen" id="s-subjects" aria-label="เลือกวิชา">
+  <h1>เลือกวิชาที่อยากผจญภัย</h1>
+  <p style="color:var(--ink2);margin-top:6px">ตอนนี้เปิดให้เล่นวิชาวิทยาศาสตร์ก่อน วิชาอื่นกำลังตามมา</p>
+  <div class="subjects" id="subjectList"></div>
+  <button class="btn ghost" style="margin-top:18px" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+<!-- ========== 4. แผนที่ด่าน ========== -->
+<section class="screen" id="s-map" aria-label="แผนที่ด่าน">
+  <h1 id="mapTitle">🗺️ แผนที่การผจญภัย</h1>
+  <div class="card flat" style="margin-top:14px">
+    <div class="barlab"><span id="mapProgLabel">ความคืบหน้า</span><span id="mapProgPct">0%</span></div>
+    <div class="bar"><i id="mapProgBar" style="width:0%"></i></div>
+  </div>
+  <div class="stages" id="stageList"></div>
+  <div class="row" style="margin-top:18px">
+    <button class="btn ghost sm" data-go="s-subjects">📚 เปลี่ยนวิชา</button>
+    <button class="btn ghost sm" data-go="s-home">🏠 หน้าหลัก</button>
+  </div>
+</section>
+
+<!-- ========== 5. เรื่องราวก่อนเข้าด่าน ========== -->
+<section class="screen" id="s-story" aria-label="เรื่องราวก่อนเข้าด่าน">
+  <h1 id="storyTitle"></h1>
+  <div class="speech" style="margin-top:16px">
+    <div class="who" id="storyChar" aria-hidden="true"></div>
+    <div class="bubble" id="storyText"></div>
+  </div>
+  <button class="btn gold" id="btnStoryGo">⚔️ ลุยด่านนี้</button>
+  <button class="btn ghost" data-go="s-map">🗺️ กลับแผนที่</button>
+</section>
+
+<!-- ========== 6. หน้าเล่น ========== -->
+<section class="screen" id="s-play" aria-label="หน้าเล่นเกม">
+  <div class="hud">
+    <div class="hudrow">
+      <span class="chip hearts" id="hudHearts" title="หัวใจ">❤️❤️❤️</span>
+      <span class="chip" id="hudScore">⭐ 0</span>
+      <span class="chip" id="hudCombo">🔥 x1</span>
+      <button class="chip" id="btnHint" style="cursor:pointer;color:inherit;font-family:'Baloo Thai 2',sans-serif">💡 คำใบ้ 3</button>
+    </div>
+    <div class="qcount"><span id="hudCount">ข้อที่ 1 จาก 6</span><span id="hudStage"></span></div>
+    <div class="qbar"><i id="hudBar" style="width:0%"></i></div>
+  </div>
+
+  <div class="card">
+    <span class="qtag" id="qTag"></span>
+    <div class="qtext" id="qText"></div>
+  </div>
+  <div class="opts" id="optList"></div>
+  <div id="feedSlot" aria-live="polite"></div>
+  <button class="btn ghost sm" id="btnQuit" style="margin-top:22px">↩️ ออกจากด่าน</button>
+</section>
+
+<!-- ========== 8. ภารกิจยังไม่สำเร็จ ========== -->
+<section class="screen" id="s-over" aria-label="ภารกิจยังไม่สำเร็จ">
+  <div class="card result">
+    <span class="bigemoji" aria-hidden="true">🌧️</span>
+    <h1>ภารกิจยังไม่สำเร็จ</h1>
+    <p style="margin:10px auto 0;color:var(--ink2)">หัวใจหมดแล้ว แต่ความรู้ที่ได้ยังอยู่กับเรา ลองอีกรอบแล้วจะเก่งขึ้นแน่นอน</p>
+    <div class="speech" style="margin-top:18px;text-align:left">
+      <div class="who" id="overChar" aria-hidden="true"></div>
+      <div class="bubble" id="overText"></div>
+    </div>
+    <div class="tiles" id="overTiles"></div>
+  </div>
+  <button class="btn gold" id="btnRetry">🔄 เล่นด่านนี้ใหม่</button>
+  <button class="btn sky" data-go="s-map">🗺️ เลือกด่านอื่น</button>
+  <button class="btn ghost" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+<!-- ========== 9. ผ่านด่าน ========== -->
+<section class="screen" id="s-win" aria-label="ผ่านด่าน">
+  <div class="card result">
+    <span class="bigemoji" aria-hidden="true">🎉</span>
+    <h1>ภารกิจสำเร็จ!</h1>
+    <div class="bigstars" id="winStars"></div>
+    <div class="scorebig" id="winScore">0</div>
+    <div style="color:var(--ink2)">คะแนนที่ได้ในด่านนี้</div>
+    <div class="speech" style="margin-top:16px;text-align:left">
+      <div class="who" id="winChar" aria-hidden="true"></div>
+      <div class="bubble" id="winText"></div>
+    </div>
+    <div class="tiles" id="winTiles"></div>
+    <div id="winBadges"></div>
+  </div>
+  <button class="btn gold" id="btnNext">➡️ ไปด่านต่อไป</button>
+  <button class="btn sky" id="btnAgain">🔄 เล่นด่านนี้อีกครั้ง</button>
+  <button class="btn ghost" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+<!-- ========== 10. ผลการเรียนรู้ ========== -->
+<section class="screen" id="s-stats" aria-label="ผลการเรียนรู้">
+  <h1>📊 ผลการเรียนรู้</h1>
+  <div class="card flat" style="margin-top:14px">
+    <div class="barlab"><span>ความคืบหน้าทั้งหมด</span><span id="statPct">0%</span></div>
+    <div class="bar"><i id="statBar" style="width:0%"></i></div>
+  </div>
+  <div class="tiles" id="statTiles"></div>
+  <div class="card" id="statPerStage"></div>
+  <button class="btn ghost" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+<!-- ========== 11. รางวัล ========== -->
+<section class="screen" id="s-rewards" aria-label="รางวัล">
+  <h1>🏅 คลังรางวัล</h1>
+  <div class="loot" id="lootRow" style="margin-top:14px"></div>
+  <h2 style="margin-top:20px">เหรียญตราความสำเร็จ</h2>
+  <p style="color:var(--ink2);margin-top:0" id="badgeCount"></p>
+  <div class="badges" id="badgeList"></div>
+  <button class="btn ghost" style="margin-top:18px" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+<!-- ========== 12. ตั้งค่า ========== -->
+<section class="screen" id="s-settings" aria-label="ตั้งค่า">
+  <h1>⚙️ ตั้งค่า</h1>
+  <div class="card" style="margin-top:14px">
+    <div class="setrow">
+      <div><b>🔊 เสียงในเกม</b><small>เสียงตอบถูก ตอบผิด เก็บเหรียญ และผ่านด่าน</small></div>
+      <button class="sw" id="swSound" role="switch" aria-checked="true" aria-label="เปิดปิดเสียงในเกม"></button>
+    </div>
+    <div class="setrow">
+      <div><b>🐢 ลดอนิเมชัน</b><small>ปิดภาพเคลื่อนไหว เหมาะกับเด็กที่ไวต่อการกระพริบ หรือเครื่องที่ช้า</small></div>
+      <button class="sw" id="swCalm" role="switch" aria-checked="false" aria-label="เปิดปิดการลดอนิเมชัน"></button>
+    </div>
+  </div>
+  <div class="card tint">
+    <h3>🧹 ล้างความคืบหน้า</h3>
+    <p style="color:var(--ink2);margin-bottom:12px">ลบคะแนน ดาว เหรียญ และด่านที่ปลดล็อกทั้งหมดในเครื่องนี้ เหมาะกับตอนส่งเครื่องให้นักเรียนคนใหม่เล่น</p>
+    <button class="btn coral sm" id="btnWipe" style="margin-bottom:0">ล้างความคืบหน้าทั้งหมด</button>
+  </div>
+  <button class="btn ghost" data-go="s-home">🏠 กลับหน้าหลัก</button>
+</section>
+
+</main>
+<script>
+/* ============================================================================
+   ╔══════════════════════════════════════════════════════════════════════╗
+   ║  ส่วนที่ 1 : คลังข้อมูลวิชาและคำถาม   (คุณครูแก้ได้ตรงนี้เท่านั้น)        ║
+   ╚══════════════════════════════════════════════════════════════════════╝
+
+   วิธีเพิ่มคำถาม
+   -----------------------------------------------------------------------
+   ไปที่ด่านที่ต้องการ แล้วเพิ่มบล็อกนี้ต่อท้ายในรายการ questions
+       { q:"คำถาม?", c:["ตัวเลือก 1","ตัวเลือก 2","ตัวเลือก 3","ตัวเลือก 4"],
+         a:0, why:"คำอธิบายที่จะแสดงหลังตอบ" }
+   a คือ ลำดับของคำตอบที่ถูก โดยนับจาก 0  (0 = ตัวเลือกแรก, 3 = ตัวเลือกสุดท้าย)
+
+   วิธีเปิดวิชาใหม่
+   -----------------------------------------------------------------------
+   หาวิชาที่เขียนว่า ready:false แล้วเปลี่ยนเป็น ready:true
+   จากนั้นใส่ levels ให้ครบ 5 ด่าน เลียนแบบรูปแบบของวิชาวิทยาศาสตร์
+   จำนวนข้อต่อด่านไม่จำเป็นต้องเท่ากับ 6 ระบบนับจำนวนข้อให้อัตโนมัติ
+============================================================================ */
+
+const SUBJECTS = [
+  {
+    id:"science", name:"วิทยาศาสตร์", emoji:"🔬", tint:"var(--green)", tintD:"var(--green-d)",
+    blurb:"ร่างกาย พืช สัตว์ โลก และอวกาศ", ready:true,
+    levels:[
+      {
+        name:"หมู่บ้านนักเรียน", emoji:"🏘️", topic:"ร่างกายและสิ่งมีชีวิตรอบตัว",
+        story:"ยินดีต้อนรับสู่หมู่บ้านนักเรียน จุดเริ่มต้นของนักล่าความรู้ทุกคน! ที่นี่เราจะเรียนรู้เรื่องร่างกายของเราและสิ่งมีชีวิตรอบตัว ตอบให้ถูกแล้วประตูสู่ป่าใหญ่จะเปิดออก",
+        questions:[
+          { q:"อวัยวะใดทำหน้าที่หายใจ นำอากาศเข้าสู่ร่างกาย", c:["ปอด","หัวใจ","กระเพาะอาหาร","ตับ"], a:0,
+            why:"ปอดรับอากาศเข้าไป ดูดแก๊สออกซิเจนไปใช้ แล้วปล่อยแก๊สคาร์บอนไดออกไซด์ออกมาทางลมหายใจ" },
+          { q:"อวัยวะใดทำหน้าที่สูบฉีดเลือดไปเลี้ยงทั่วร่างกาย", c:["ปอด","หัวใจ","ไต","สมอง"], a:1,
+            why:"หัวใจบีบตัวเหมือนปั๊ม ดันเลือดไปตามหลอดเลือดเพื่อส่งอาหารและออกซิเจนให้ทุกส่วนของร่างกาย" },
+          { q:"สิ่งใดต่อไปนี้ไม่ใช่สิ่งมีชีวิต", c:["มดแดง","ต้นมะม่วง","ก้อนหิน","ปลาทอง"], a:2,
+            why:"สิ่งมีชีวิตต้องกินอาหาร เจริญเติบโต และสืบพันธุ์ได้ ก้อนหินทำสิ่งเหล่านี้ไม่ได้จึงไม่ใช่สิ่งมีชีวิต" },
+          { q:"เราใช้อวัยวะใดรับรู้ว่าอาหารมีรสหวาน", c:["จมูก","ลิ้น","หู","ผิวหนัง"], a:1,
+            why:"ลิ้นมีตุ่มรับรสกระจายอยู่ทั่ว ช่วยให้เรารู้รสหวาน เปรี้ยว เค็ม ขม" },
+          { q:"อาหารหมู่ใดเป็นแหล่งพลังงานหลักที่ทำให้เรามีแรงวิ่งเล่น", c:["ข้าวและแป้ง","ผักใบเขียว","ผลไม้","น้ำเปล่า"], a:0,
+            why:"ข้าวและแป้งมีคาร์โบไฮเดรตมาก ร่างกายย่อยแล้วเปลี่ยนเป็นพลังงานสำหรับเดิน วิ่ง และคิด" },
+          { q:"ข้อใดเป็นวิธีดูแลร่างกายให้แข็งแรงที่ถูกต้องที่สุด", c:["นอนดึกทุกคืน","กินขนมหวานแทนข้าว","ออกกำลังกายและกินอาหารให้ครบ 5 หมู่","ดูจอนาน ๆ โดยไม่พัก"], a:2,
+            why:"ร่างกายแข็งแรงได้ด้วยการกินอาหารครบ 5 หมู่ ออกกำลังกายสม่ำเสมอ และนอนหลับให้เพียงพอ" }
+        ]
+      },
+      {
+        name:"ป่าแห่งความรู้", emoji:"🌳", topic:"พืชและสัตว์",
+        story:"ข้างหน้าคือป่าใหญ่ที่เต็มไปด้วยพืชและสัตว์นับไม่ถ้วน ต้นไม้ใหญ่บอกว่าจะเปิดทางให้เฉพาะคนที่รู้จักธรรมชาติจริง ๆ เท่านั้น",
+        questions:[
+          { q:"ส่วนใดของพืชทำหน้าที่ดูดน้ำและแร่ธาตุจากดิน", c:["ใบ","ดอก","ราก","ผล"], a:2,
+            why:"รากชอนไชลงในดินและมีขนรากเล็ก ๆ คอยดูดน้ำกับแร่ธาตุส่งขึ้นไปเลี้ยงลำต้นและใบ" },
+          { q:"พืชสร้างอาหารเองได้ด้วยกระบวนการใด", c:["การสังเคราะห์ด้วยแสง","การหายใจ","การคายน้ำ","การผสมเกสร"], a:0,
+            why:"ใบสีเขียวใช้แสงแดด น้ำ และแก๊สคาร์บอนไดออกไซด์ มาสร้างเป็นอาหาร เรียกว่าการสังเคราะห์ด้วยแสง" },
+          { q:"สัตว์ชนิดใดเป็นสัตว์เลี้ยงลูกด้วยน้ำนม", c:["จระเข้","นกกระจอก","ปลาวาฬ","กบ"], a:2,
+            why:"ปลาวาฬอาศัยในน้ำก็จริง แต่หายใจด้วยปอดและเลี้ยงลูกด้วยน้ำนม จึงเป็นสัตว์เลี้ยงลูกด้วยน้ำนม" },
+          { q:"ผีเสื้อมีลำดับการเจริญเติบโตอย่างไร", c:["ไข่ → ดักแด้ → หนอน → ตัวเต็มวัย","ไข่ → หนอน → ดักแด้ → ตัวเต็มวัย","หนอน → ไข่ → ตัวเต็มวัย → ดักแด้","ไข่ → ตัวเต็มวัย → หนอน → ดักแด้"], a:1,
+            why:"ผีเสื้อเปลี่ยนรูปร่างครบ 4 ขั้น เริ่มจากไข่ ฟักเป็นหนอน เข้าดักแด้ แล้วออกมาเป็นผีเสื้อตัวเต็มวัย" },
+          { q:"แมลงชนิดใดช่วยผสมเกสรให้ดอกไม้มากที่สุด", c:["ผึ้ง","ปลวก","แมลงสาบ","ยุง"], a:0,
+            why:"ผึ้งบินไปดูดน้ำหวานตามดอกไม้ ละอองเกสรติดขนตามตัวแล้วถูกพาไปยังดอกอื่น ทำให้เกิดผลและเมล็ด" },
+          { q:"สัตว์ในข้อใดเป็นสัตว์กินพืชเป็นอาหาร", c:["เสือโคร่ง","วัว","งูเหลือม","เหยี่ยว"], a:1,
+            why:"วัวกินหญ้าและใบไม้ จึงเป็นสัตว์กินพืช ส่วนเสือ งู และเหยี่ยวล่าสัตว์อื่นเป็นอาหาร" }
+        ]
+      },
+      {
+        name:"เมืองประวัติศาสตร์", emoji:"🏛️", topic:"โลกและการเปลี่ยนแปลง",
+        story:"เมืองเก่าแห่งนี้ซ่อนซากดึกดำบรรพ์และร่องรอยของโลกเมื่อหลายล้านปีก่อนเอาไว้ใต้ชั้นหิน มาช่วยกันไขความลับของโลกใบนี้กันเถอะ",
+        questions:[
+          { q:"ซากดึกดำบรรพ์ หรือฟอสซิล คืออะไร", c:["หินที่มีสีสวยงาม","ซากหรือร่องรอยของสิ่งมีชีวิตในอดีตที่คงอยู่ในหิน","ดินที่อยู่ลึกที่สุด","น้ำแข็งที่อยู่ใต้ดิน"], a:1,
+            why:"ฟอสซิลคือซากหรือร่องรอยของสิ่งมีชีวิตเมื่อนานมาแล้วที่ถูกทับถมอยู่ในชั้นหิน ช่วยให้เรารู้เรื่องราวในอดีตของโลก" },
+          { q:"สัตว์กลุ่มใดสูญพันธุ์ไปจากโลกแล้ว", c:["ไดโนเสาร์","ช้างเอเชีย","เต่าทะเล","แรด"], a:0,
+            why:"ไดโนเสาร์สูญพันธุ์ไปนานมากแล้ว เรารู้จักพวกมันจากฟอสซิลที่นักวิทยาศาสตร์ขุดพบ" },
+          { q:"น้ำในแม่น้ำได้รับความร้อนจากดวงอาทิตย์แล้วจะเปลี่ยนเป็นอะไร", c:["น้ำแข็ง","ไอน้ำ","หิน","ดิน"], a:1,
+            why:"ความร้อนทำให้น้ำระเหยกลายเป็นไอน้ำลอยขึ้นสู่อากาศ เป็นขั้นแรกของวัฏจักรน้ำ" },
+          { q:"เมฆบนท้องฟ้าเกิดขึ้นได้อย่างไร", c:["ควันจากรถยนต์ลอยขึ้นไป","ไอน้ำลอยขึ้นสูงแล้วควบแน่นเป็นละอองน้ำเล็ก ๆ","ฝุ่นจากพื้นดินรวมตัวกัน","ลมพัดทรายขึ้นไปบนฟ้า"], a:1,
+            why:"ไอน้ำที่ลอยขึ้นไปเจออากาศเย็นด้านบน จะควบแน่นเป็นละอองน้ำเล็ก ๆ เกาะกลุ่มกันจนเรามองเห็นเป็นเมฆ" },
+          { q:"หินชนิดใดเกิดจากลาวาหรือหินหนืดที่เย็นตัวลง", c:["หินอัคนี","หินตะกอน","หินแปร","หินปูน"], a:0,
+            why:"หินอัคนีเกิดจากหินหนืดหรือลาวาที่เย็นตัวแล้วแข็งตัว เช่น หินบะซอลต์และหินแกรนิต" },
+          { q:"ดินชั้นบนที่เหมาะกับการปลูกพืชมากที่สุดมีลักษณะอย่างไร", c:["เป็นทรายล้วน ไม่อุ้มน้ำ","สีคล้ำ ร่วนซุย มีซากพืชซากสัตว์ทับถม","เป็นก้อนหินแข็งทั้งชั้น","เป็นดินเหนียวแน่นจนน้ำซึมไม่ได้"], a:1,
+            why:"ดินชั้นบนมีฮิวมัสจากซากพืชซากสัตว์ทับถม ทำให้มีธาตุอาหารมาก ร่วนซุย และอุ้มน้ำได้ดี" }
+        ]
+      },
+      {
+        name:"ห้องทดลอง", emoji:"🧪", topic:"สสาร แรง และพลังงาน",
+        story:"ห้องทดลองของศาสตราจารย์เต็มไปด้วยหลอดแก้ว แม่เหล็ก และแสงสีแปลกตา ระวังอย่าทำอะไรหกนะ ตอบคำถามให้ครบแล้วเราจะได้กุญแจสู่ปราสาท",
+        questions:[
+          { q:"น้ำแข็งละลายกลายเป็นน้ำ เป็นการเปลี่ยนสถานะจากอะไรเป็นอะไร", c:["ของเหลวเป็นแก๊ส","ของแข็งเป็นของเหลว","แก๊สเป็นของเหลว","ของแข็งเป็นแก๊ส"], a:1,
+            why:"น้ำแข็งเป็นของแข็ง เมื่อได้รับความร้อนจะละลายกลายเป็นน้ำซึ่งเป็นของเหลว" },
+          { q:"แรงใดที่ทำให้ผลมะม่วงหล่นจากต้นลงสู่พื้นดิน", c:["แรงแม่เหล็ก","แรงเสียดทาน","แรงโน้มถ่วงของโลก","แรงลม"], a:2,
+            why:"โลกดึงดูดวัตถุทุกอย่างเข้าหาตัวเองด้วยแรงโน้มถ่วง ของที่ปล่อยมือจึงตกลงสู่พื้นเสมอ" },
+          { q:"วัสดุใดนำไฟฟ้าได้ดีที่สุด", c:["ลวดทองแดง","ไม้บรรทัดพลาสติก","ยางลบ","แก้วน้ำ"], a:0,
+            why:"โลหะอย่างทองแดงนำไฟฟ้าได้ดี จึงใช้ทำสายไฟ ส่วนพลาสติก ยาง และแก้วเป็นฉนวนที่ไฟฟ้าผ่านได้ยาก" },
+          { q:"แม่เหล็กดูดสิ่งใดต่อไปนี้ได้", c:["ตะปูเหล็ก","ช้อนไม้","กระดาษ","ยางลบ"], a:0,
+            why:"แม่เหล็กดูดวัตถุที่มีเหล็ก นิกเกิล หรือโคบอลต์เป็นส่วนประกอบ ตะปูเหล็กจึงถูกดูดติด" },
+          { q:"เงาของวัตถุเกิดขึ้นเมื่อใด", c:["เมื่ออากาศร้อนจัด","เมื่อมีวัตถุทึบแสงมาขวางทางเดินของแสง","เมื่อมีลมพัดแรง","เมื่อวัตถุมีสีเข้ม"], a:1,
+            why:"แสงเดินทางเป็นเส้นตรง เมื่อมีวัตถุทึบแสงมาขวาง แสงผ่านไปไม่ได้ จึงเกิดเป็นเงามืดด้านหลังวัตถุ" },
+          { q:"น้ำบริสุทธิ์เดือดกลายเป็นไอที่อุณหภูมิประมาณเท่าใด", c:["0 องศาเซลเซียส","50 องศาเซลเซียส","100 องศาเซลเซียส","200 องศาเซลเซียส"], a:2,
+            why:"น้ำเดือดที่ประมาณ 100 องศาเซลเซียส ส่วน 0 องศาเซลเซียสคืออุณหภูมิที่น้ำเริ่มกลายเป็นน้ำแข็ง" }
+        ]
+      },
+      {
+        name:"ปราสาทความรู้", emoji:"🏰", topic:"โลก ดวงดาว และอวกาศ",
+        story:"ปราสาทความรู้ลอยอยู่เหนือหมู่ดาว นี่คือด่านสุดท้ายแล้ว! ใช้ทุกอย่างที่เรียนมาตลอดการเดินทาง เพื่อคว้ามงกุฎนักล่าความรู้มาครอง",
+        questions:[
+          { q:"สิ่งใดเป็นศูนย์กลางของระบบสุริยะ", c:["โลก","ดวงจันทร์","ดวงอาทิตย์","ดาวอังคาร"], a:2,
+            why:"ดวงอาทิตย์เป็นดาวฤกษ์ที่อยู่ตรงกลาง โดยมีดาวเคราะห์ทั้งแปดดวงรวมถึงโลกโคจรอยู่รอบ ๆ" },
+          { q:"โลกหมุนรอบตัวเอง 1 รอบใช้เวลาประมาณเท่าใด", c:["1 ชั่วโมง","24 ชั่วโมง","1 เดือน","1 ปี"], a:1,
+            why:"โลกหมุนรอบตัวเองครบ 1 รอบในเวลาประมาณ 24 ชั่วโมง ทำให้ด้านที่หันเข้าหาดวงอาทิตย์เป็นกลางวัน อีกด้านเป็นกลางคืน" },
+          { q:"เหตุใดเราจึงมองเห็นดวงจันทร์สว่างในเวลากลางคืน", c:["ดวงจันทร์มีไฟอยู่ข้างใน","ดวงจันทร์สะท้อนแสงจากดวงอาทิตย์","ดวงจันทร์เผาไหม้ตัวเอง","ดวงจันทร์สะท้อนแสงจากไฟบนโลก"], a:1,
+            why:"ดวงจันทร์ไม่มีแสงสว่างในตัวเอง แต่สะท้อนแสงจากดวงอาทิตย์มาเข้าตาเรา จึงดูสว่างในคืนเดือนหงาย" },
+          { q:"การเกิดฤดูกาลบนโลกเป็นผลมาจากอะไร", c:["โลกโคจรรอบดวงอาทิตย์โดยที่แกนโลกเอียง","ดวงจันทร์โคจรรอบโลก","โลกหมุนรอบตัวเองเร็วขึ้น","ดวงอาทิตย์เคลื่อนที่รอบโลก"], a:0,
+            why:"แกนของโลกเอียง เมื่อโลกโคจรรอบดวงอาทิตย์ แต่ละช่วงของปีจึงได้รับแสงไม่เท่ากัน ทำให้เกิดฤดูกาลต่างกัน" },
+          { q:"ดาวเคราะห์ดวงใดอยู่ใกล้ดวงอาทิตย์มากที่สุด", c:["ดาวศุกร์","ดาวพุธ","โลก","ดาวอังคาร"], a:1,
+            why:"ดาวพุธเป็นดาวเคราะห์วงในสุด อยู่ใกล้ดวงอาทิตย์ที่สุด และเป็นดาวเคราะห์ที่มีขนาดเล็กที่สุดในระบบสุริยะ" },
+          { q:"สุริยุปราคาเกิดขึ้นเมื่อใด", c:["เมื่อโลกอยู่ระหว่างดวงอาทิตย์กับดวงจันทร์","เมื่อดวงจันทร์โคจรมาอยู่ระหว่างโลกกับดวงอาทิตย์","เมื่อดวงอาทิตย์ดับลงชั่วคราว","เมื่อโลกหยุดหมุน"], a:1,
+            why:"เมื่อดวงจันทร์เคลื่อนมาบังดวงอาทิตย์พอดี เงาของดวงจันทร์จะทอดลงบนโลก คนในเงานั้นจึงเห็นสุริยุปราคา" }
+        ]
+      }
+    ]
+  },
+  { id:"social",  name:"สังคมศึกษา",      emoji:"🌏", tint:"var(--gold)",  tintD:"var(--gold-d)",  blurb:"ชุมชน ประเทศไทย และโลกของเรา", ready:false, levels:[] },
+  { id:"math",    name:"คณิตศาสตร์",       emoji:"🔢", tint:"var(--sky)",   tintD:"var(--sky-d)",   blurb:"บวก ลบ คูณ หาร และรูปทรง",   ready:false, levels:[] },
+  { id:"thai",    name:"ภาษาไทย",         emoji:"📕", tint:"var(--coral)", tintD:"var(--coral-d)", blurb:"สระ วรรณยุกต์ และคำศัพท์",   ready:false, levels:[] },
+  { id:"english", name:"ภาษาอังกฤษ",      emoji:"🔤", tint:"var(--grape)", tintD:"var(--grape-d)", blurb:"คำศัพท์และประโยคง่าย ๆ",     ready:false, levels:[] },
+  { id:"coding",  name:"วิทยาการคำนวณ",   emoji:"💻", tint:"var(--pink)",  tintD:"var(--pink-d)",  blurb:"ลำดับขั้นตอนและการแก้ปัญหา",  ready:false, levels:[] }
+];
+
+/* เหรียญตราความสำเร็จ */
+const BADGES = [
+  { id:"first",     e:"🌱", n:"นักผจญภัยหน้าใหม่", d:"ผ่านด่านแรกได้สำเร็จ" },
+  { id:"combo5",    e:"🔥", n:"คอมโบเพลิง",        d:"ตอบถูกติดต่อกัน 5 ข้อ" },
+  { id:"perfect",   e:"💯", n:"ไร้ที่ติ",           d:"ผ่านด่านโดยไม่เสียหัวใจเลย" },
+  { id:"nohint",    e:"🧠", n:"คิดเองได้",          d:"ผ่านด่านโดยไม่ใช้คำใบ้" },
+  { id:"star10",    e:"⭐", n:"นักสะสมดาว",         d:"สะสมดาวครบ 10 ดวง" },
+  { id:"coin100",   e:"🪙", n:"เศรษฐีเหรียญ",       d:"สะสมเหรียญครบ 100 เหรียญ" },
+  { id:"correct50", e:"📚", n:"ขยันเรียน",          d:"ตอบถูกรวม 50 ข้อ" },
+  { id:"champion",  e:"🏆", n:"เจ้าแห่งความรู้",     d:"ผ่านครบทั้ง 5 ด่าน" }
+];
+
+/* ============================================================================
+   ╔══════════════════════════════════════════════════════════════════════╗
+   ║  ส่วนที่ 2 : กลไกของเกม  (ปกติไม่ต้องแก้ส่วนนี้)                        ║
+   ╚══════════════════════════════════════════════════════════════════════╝
+============================================================================ */
+
+const $  = (s,r)=>(r||document).querySelector(s);
+const $$ = (s,r)=>Array.prototype.slice.call((r||document).querySelectorAll(s));
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pick = a => a[Math.floor(Math.random()*a.length)];
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+
+/* ---------- ตัวละครนักสำรวจ 5 อารมณ์ ---------- */
+function charSVG(mood){
+  mood = mood || 'happy';
+  const SKIN='#F5C595', INK='#33261A', SHIRT='#1E9A52', SHIRT_D='#136B39';
+  const up = mood==='celebrate';
+  let eyes, mouth, brow='', extra='';
+
+  if(mood==='happy' || mood==='celebrate'){
+    eyes = '<path d="M48 70 q9 -12 18 0" stroke="'+INK+'" stroke-width="5" fill="none" stroke-linecap="round"/>'
+         + '<path d="M74 70 q9 -12 18 0" stroke="'+INK+'" stroke-width="5" fill="none" stroke-linecap="round"/>';
+  } else if(mood==='surprised'){
+    eyes = '<circle cx="57" cy="68" r="10" fill="#fff" stroke="'+INK+'" stroke-width="3"/><circle cx="57" cy="68" r="4.5" fill="'+INK+'"/>'
+         + '<circle cx="83" cy="68" r="10" fill="#fff" stroke="'+INK+'" stroke-width="3"/><circle cx="83" cy="68" r="4.5" fill="'+INK+'"/>';
+  } else if(mood==='thinking'){
+    eyes = '<ellipse cx="57" cy="68" rx="7" ry="8" fill="#fff" stroke="'+INK+'" stroke-width="2.5"/><circle cx="59" cy="64" r="3.6" fill="'+INK+'"/>'
+         + '<ellipse cx="83" cy="68" rx="7" ry="8" fill="#fff" stroke="'+INK+'" stroke-width="2.5"/><circle cx="85" cy="64" r="3.6" fill="'+INK+'"/>';
+  } else { /* confident */
+    eyes = '<ellipse cx="57" cy="69" rx="6.5" ry="7.5" fill="'+INK+'"/><circle cx="59.5" cy="66" r="2.3" fill="#fff"/>'
+         + '<ellipse cx="83" cy="69" rx="6.5" ry="7.5" fill="'+INK+'"/><circle cx="85.5" cy="66" r="2.3" fill="#fff"/>';
+    brow = '<path d="M48 56 q9 -4 18 -1" stroke="'+INK+'" stroke-width="4" fill="none" stroke-linecap="round"/>'
+         + '<path d="M74 52 q9 -3 18 2" stroke="'+INK+'" stroke-width="4" fill="none" stroke-linecap="round"/>';
+  }
+
+  if(mood==='celebrate'){
+    mouth = '<path d="M56 82 Q70 104 84 82 Z" fill="#8E3B3B"/><path d="M62 93 Q70 101 78 93 Z" fill="#E8798F"/>';
+    extra = '<path d="M16 34 l3.5 8 8 3.5 -8 3.5 -3.5 8 -3.5 -8 -8 -3.5 8 -3.5 Z" fill="#F0A81E"/>'
+          + '<path d="M124 46 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 Z" fill="#F0A81E"/>';
+  } else if(mood==='surprised'){
+    mouth = '<ellipse cx="70" cy="89" rx="7.5" ry="9.5" fill="#8E3B3B"/>';
+    extra = '<path d="M122 16 L122 32" stroke="#E4523C" stroke-width="5" stroke-linecap="round"/><circle cx="122" cy="40" r="3" fill="#E4523C"/>';
+  } else if(mood==='thinking'){
+    mouth = '<path d="M59 88 q6 -5 11 0 q5 5 11 0" stroke="'+INK+'" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
+    extra = '<circle cx="110" cy="42" r="4" fill="#fff" stroke="'+INK+'" stroke-width="2"/>'
+          + '<circle cx="119" cy="24" r="12" fill="#fff" stroke="'+INK+'" stroke-width="2"/>'
+          + '<circle cx="113.5" cy="24" r="1.9" fill="'+INK+'"/><circle cx="119" cy="24" r="1.9" fill="'+INK+'"/><circle cx="124.5" cy="24" r="1.9" fill="'+INK+'"/>';
+  } else if(mood==='confident'){
+    mouth = '<path d="M58 85 q13 9 24 -3" stroke="'+INK+'" stroke-width="4" fill="none" stroke-linecap="round"/>';
+  } else {
+    mouth = '<path d="M57 84 q13 12 26 0" stroke="'+INK+'" stroke-width="4.5" fill="none" stroke-linecap="round"/>';
+  }
+
+  return '<svg viewBox="0 0 140 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ตัวละครนักสำรวจ">'
+    + '<ellipse cx="70" cy="170" rx="40" ry="6" fill="rgba(0,0,0,.14)"/>'
+    + '<rect x="55" y="140" width="13" height="22" rx="6.5" fill="#4A3B2A"/><rect x="72" y="140" width="13" height="22" rx="6.5" fill="#4A3B2A"/>'
+    + '<rect x="48" y="156" width="24" height="12" rx="6" fill="#2F2419"/><rect x="68" y="156" width="24" height="12" rx="6" fill="#2F2419"/>'
+    + '<g transform="rotate('+(up?-46:12)+' 44 108)"><rect x="30" y="102" width="15" height="38" rx="7.5" fill="'+SHIRT+'"/><circle cx="37.5" cy="142" r="8.5" fill="'+SKIN+'"/></g>'
+    + '<g transform="rotate('+(up?46:-12)+' 96 108)"><rect x="95" y="102" width="15" height="38" rx="7.5" fill="'+SHIRT+'"/><circle cx="102.5" cy="142" r="8.5" fill="'+SKIN+'"/></g>'
+    + '<rect x="42" y="98" width="56" height="48" rx="19" fill="'+SHIRT+'"/>'
+    + '<path d="M56 99 L62 146 M84 99 L78 146" stroke="'+SHIRT_D+'" stroke-width="5" stroke-linecap="round"/>'
+    + '<rect x="62" y="88" width="16" height="14" fill="'+SKIN+'"/>'
+    + '<path d="M47 94 q23 15 46 0 l4 13 q-27 15 -54 0 Z" fill="#E4523C"/>'
+    + '<ellipse cx="70" cy="66" rx="34" ry="32" fill="'+SKIN+'"/>'
+    + '<circle cx="36" cy="72" r="7.5" fill="'+SKIN+'"/><circle cx="104" cy="72" r="7.5" fill="'+SKIN+'"/>'
+    + '<ellipse cx="45" cy="81" rx="8.5" ry="5.5" fill="#F0837F" opacity=".5"/><ellipse cx="95" cy="81" rx="8.5" ry="5.5" fill="#F0837F" opacity=".5"/>'
+    + brow + eyes + mouth
+    + '<path d="M40 42 C41 14 54 5 70 5 C86 5 99 14 100 42 Z" fill="#CE9151"/>'
+    + '<path d="M41 32 C52 27 88 27 99 32 L100 42 L40 42 Z" fill="'+SHIRT+'"/>'
+    + '<ellipse cx="70" cy="43" rx="46" ry="9.5" fill="#B57A3C"/>'
+    + '<path d="M70 12 l3.5 8 8.5 1 -6.5 6 1.8 8.5 -7.3 -4.5 -7.3 4.5 1.8 -8.5 -6.5 -6 8.5 -1 Z" fill="#F0A81E"/>'
+    + extra + '</svg>';
+}
+
+/* ---------- บันทึกความคืบหน้าในเครื่อง ---------- */
+const KEY='knowledge-quest-th-v1';
+const FRESH={ unlocked:{science:1}, best:{}, coins:0, diamonds:0, correct:0, wrong:0,
+              bestScore:0, totalScore:0, plays:0, badges:[], sound:true, calm:false };
+let SAVE = JSON.parse(JSON.stringify(FRESH));
+
+function load(){
+  try{
+    const raw = localStorage.getItem(KEY);
+    if(raw){
+      const o = JSON.parse(raw) || {};
+      SAVE = Object.assign(JSON.parse(JSON.stringify(FRESH)), o);
+      SAVE.unlocked = o.unlocked || {science:1};
+      SAVE.best     = o.best     || {};
+      SAVE.badges   = Array.isArray(o.badges) ? o.badges : [];
+    }
+  }catch(e){ SAVE = JSON.parse(JSON.stringify(FRESH)); }
+  if(!SAVE.unlocked.science) SAVE.unlocked.science = 1;
+}
+function persist(){ try{ localStorage.setItem(KEY, JSON.stringify(SAVE)); }catch(e){} }
+
+const subj = id => SUBJECTS.filter(s=>s.id===id)[0];
+const openLevels = sid => Math.max(1, SAVE.unlocked[sid]||1);
+const bestOf = (sid,i) => SAVE.best[sid+':'+i] || null;
+function starsTotal(){ let n=0; for(const k in SAVE.best) n+=SAVE.best[k].stars; return n; }
+function clearedCount(sid){ const s=subj(sid); let n=0; for(let i=0;i<s.levels.length;i++) if(bestOf(sid,i)) n++; return n; }
+const starRow = n => '⭐'.repeat(n)+'☆'.repeat(Math.max(0,3-n));
+const mult = s => s>=6?5 : s>=4?3 : s>=2?2 : 1;
+const calm = () => !!SAVE.calm || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+/* ---------- เสียงสังเคราะห์ ---------- */
+let actx=null;
+function ac(){
+  if(!SAVE.sound) return null;
+  try{
+    if(!actx){ const AC = window.AudioContext||window.webkitAudioContext; if(!AC) return null; actx = new AC(); }
+    if(actx.state==='suspended') actx.resume();
+    return actx;
+  }catch(e){ return null; }
+}
+function tone(f, at, dur, type, vol){
+  const c=ac(); if(!c) return;
+  try{
+    const o=c.createOscillator(), g=c.createGain(), t=c.currentTime+at;
+    o.type=type||'sine'; o.frequency.setValueAtTime(f,t);
+    g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(vol||0.16,t+0.02);
+    g.gain.exponentialRampToValueAtTime(0.0001,t+dur);
+    o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+dur+0.05);
+  }catch(e){}
+}
+const SFX={
+  click  : ()=> tone(640,0,.07,'triangle',.10),
+  correct: ()=> [523,659,784,1047].forEach((f,i)=>tone(f,i*.07,.22,'triangle',.15)),
+  wrong  : ()=> { tone(311,0,.16,'sine',.13); tone(233,.14,.3,'sine',.11); },
+  coin   : ()=> { tone(988,0,.08,'square',.07); tone(1319,.07,.14,'square',.06); },
+  win    : ()=> [523,659,784,1047,1319].forEach((f,i)=>tone(f,i*.13,.4,'triangle',.15))
+};
+
+/* ---------- เอฟเฟกต์ ---------- */
+function confetti(n){
+  if(calm()) return;
+  const box=$('#fx'), em=['⭐','🎉','✨','🪙','💎','🌟','🎊'];
+  for(let i=0;i<n;i++){
+    const el=document.createElement('i');
+    el.textContent=pick(em);
+    el.style.left=(Math.random()*100)+'vw';
+    el.style.animationDuration=(1.7+Math.random()*1.7)+'s';
+    el.style.animationDelay=(Math.random()*.6)+'s';
+    box.appendChild(el);
+    setTimeout(function(){ el.remove(); },4600);
+  }
+}
+function sparkleAt(el){
+  if(calm()||!el) return;
+  const r=el.getBoundingClientRect();
+  for(let i=0;i<9;i++){
+    const s=document.createElement('i');
+    s.className='spark'; s.textContent=pick(['✨','⭐','🌟']);
+    s.style.position='fixed'; s.style.zIndex='160';
+    s.style.left=(r.left+Math.random()*r.width)+'px';
+    s.style.top=(r.top+Math.random()*r.height)+'px';
+    s.style.animationDelay=(Math.random()*.2)+'s';
+    document.body.appendChild(s);
+    setTimeout(function(){ s.remove(); },1100);
+  }
+}
+function curtain(cb){
+  if(calm()){ cb(); return; }
+  const c=$('#curtain');
+  c.innerHTML='<div class="cw">'+charSVG('confident')+'<div class="ct">ลุยเลย!</div></div>';
+  c.classList.remove('on'); void c.offsetWidth; c.classList.add('on');
+  setTimeout(cb,430);
+  setTimeout(function(){ c.classList.remove('on'); },1320);
+}
+
+/* ---------- สลับหน้าจอ ---------- */
+function go(id){
+  $$('.screen').forEach(function(s){ s.classList.toggle('on', s.id===id); });
+  window.scrollTo(0,0);
+}
+
+/* ---------- สถานะรอบการเล่น ---------- */
+let G={ sid:'science', li:0, qi:0, qs:[], score:0, hearts:3, hints:3,
+        streak:0, bestStreak:0, right:0, wrong:0, hintsUsed:0, locked:false };
+
+const PRAISE=['เก่งมาก!','สุดยอดไปเลย!','ถูกต้องนะครับ!','ยอดเยี่ยม!','เยี่ยมมาก!','แม่นมาก!'];
+const CHEER =['ไม่เป็นไรนะ ข้อนี้ยากจริง ๆ','ใกล้แล้ว! อ่านคำอธิบายแล้วไปต่อกัน','ตอบผิดได้ เราได้ความรู้เพิ่มแล้ว','ไม่ต้องเสียใจ ข้อหน้าเอาใหม่!'];
+
+/* ---------- 3. เลือกวิชา ---------- */
+function renderSubjects(){
+  const box=$('#subjectList'); box.innerHTML='';
+  SUBJECTS.forEach(function(s){
+    const b=document.createElement('button');
+    b.className='subj'+(s.ready?'':' locked');
+    b.style.background=s.tint;
+    b.style.boxShadow='0 6px 0 '+s.tintD+',0 11px 16px var(--shadow)';
+    const tail = s.ready
+      ? '<span class="sd">ผ่านแล้ว '+clearedCount(s.id)+' จาก '+s.levels.length+' ด่าน</span>'
+      : '<span class="soon">เร็ว ๆ นี้</span>';
+    b.innerHTML='<span class="se" aria-hidden="true">'+s.emoji+'</span>'
+      +'<span style="flex:1"><span class="sn">'+esc(s.name)+'</span>'
+      +'<span class="sd">'+esc(s.blurb)+'</span>'+tail+'</span>';
+    if(s.ready){
+      b.addEventListener('click',function(){ SFX.click(); G.sid=s.id; renderMap(); go('s-map'); });
+    }else{
+      b.disabled=true;
+    }
+    box.appendChild(b);
+  });
+}
+
+/* ---------- 4. แผนที่ด่าน ---------- */
+function renderMap(){
+  const s=subj(G.sid), total=s.levels.length, cleared=clearedCount(G.sid);
+  const pct=Math.round(cleared/total*100);
+  $('#mapTitle').textContent='🗺️ '+s.name+' · แผนที่การผจญภัย';
+  $('#mapProgLabel').textContent='ผ่านแล้ว '+cleared+' จาก '+total+' ด่าน';
+  $('#mapProgPct').textContent=pct+'%';
+  $('#mapProgBar').style.width=pct+'%';
+
+  const list=$('#stageList'); list.innerHTML='';
+  const open=openLevels(G.sid);
+  s.levels.forEach(function(lv,i){
+    const b=document.createElement('button');
+    const bst=bestOf(G.sid,i), locked=(i+1)>open;
+    b.className='stage '+(locked?'lock':(bst?'done':'open'));
+    const meta = locked ? 'ผ่านด่านก่อนหน้าก่อนถึงจะเข้าได้'
+      : bst ? '<span class="stars">'+starRow(bst.stars)+'</span> คะแนนสูงสุด '+bst.score
+            : lv.questions.length+' ข้อ · ยังไม่เคยเล่น';
+    b.innerHTML='<span class="num" aria-hidden="true">'+(locked?'🔒':lv.emoji)+'</span>'
+      +'<span style="flex:1"><span class="sname">ด่าน '+(i+1)+' · '+esc(lv.name)+'</span>'
+      +'<span class="meta">'+meta+'</span></span>';
+    if(locked){ b.disabled=true; }
+    else b.addEventListener('click',function(){ SFX.click(); G.li=i; showStory(); });
+    list.appendChild(b);
+  });
+}
+
+/* ---------- 5. เรื่องราวก่อนเข้าด่าน ---------- */
+function showStory(){
+  const lv=subj(G.sid).levels[G.li];
+  $('#storyTitle').textContent=lv.emoji+' ด่าน '+(G.li+1)+' · '+lv.name;
+  $('#storyText').textContent=lv.story;
+  $('#storyChar').innerHTML=charSVG('confident');
+  go('s-story');
+}
+
+/* ---------- 6. หน้าเล่น ---------- */
+function prepare(list){
+  return shuffle(list.slice()).map(function(q){
+    const order=shuffle(q.c.map(function(_,i){ return i; }));
+    return { q:q.q, c:order.map(function(i){ return q.c[i]; }), a:order.indexOf(q.a), why:q.why };
+  });
+}
+function startLevel(){
+  const lv=subj(G.sid).levels[G.li];
+  G.qs=prepare(lv.questions);
+  G.qi=0; G.score=0; G.hearts=3; G.hints=3; G.streak=0; G.bestStreak=0;
+  G.right=0; G.wrong=0; G.hintsUsed=0; G.locked=false;
+  renderQuestion();
+}
+function updateHUD(){
+  let h='';
+  for(let i=0;i<3;i++) h += (i<G.hearts) ? '❤️' : '<span class="heart-gone">🤍</span>';
+  $('#hudHearts').innerHTML=h;
+  $('#hudHearts').setAttribute('aria-label','หัวใจเหลือ '+G.hearts+' ดวง');
+  $('#hudScore').textContent='⭐ '+G.score;
+  const m=mult(G.streak), c=$('#hudCombo');
+  c.textContent='🔥 x'+m+(G.streak>=2?' ('+G.streak+')':'');
+  c.classList.toggle('hot', m>1);
+  const hb=$('#btnHint');
+  hb.textContent='💡 คำใบ้ '+G.hints;
+  hb.disabled=(G.hints<=0 || G.locked);
+}
+function renderQuestion(){
+  const lv=subj(G.sid).levels[G.li], q=G.qs[G.qi];
+  G.locked=false;
+  $('#qTag').textContent=lv.emoji+' '+lv.topic;
+  $('#qText').textContent=q.q;
+  $('#hudStage').textContent='ด่าน '+(G.li+1)+' · '+lv.name;
+  $('#hudCount').textContent='ข้อที่ '+(G.qi+1)+' จาก '+G.qs.length;
+  $('#hudBar').style.width=Math.round(G.qi/G.qs.length*100)+'%';
+  updateHUD();
+  const keys=['ก','ข','ค','ง'], box=$('#optList');
+  box.innerHTML='';
+  q.c.forEach(function(txt,i){
+    const b=document.createElement('button');
+    b.className='opt'; b.setAttribute('data-i',i);
+    b.innerHTML='<span class="key" aria-hidden="true">'+keys[i]+'</span>'
+      +'<span style="flex:1">'+esc(txt)+'</span><span class="mark" aria-hidden="true"></span>';
+    b.addEventListener('click',function(){ answer(i); });
+    box.appendChild(b);
+  });
+  $('#feedSlot').innerHTML='';
+}
+function useHint(){
+  if(G.hints<=0 || G.locked) return;
+  const q=G.qs[G.qi], opts=$$('#optList .opt'), cand=[];
+  opts.forEach(function(b,i){ if(i!==q.a && !b.classList.contains('cut')) cand.push(i); });
+  if(!cand.length) return;
+  const k=pick(cand), el=opts[k];
+  el.classList.add('cut'); el.disabled=true;
+  el.querySelector('.mark').textContent='🚫';
+  G.hints--; G.hintsUsed++;
+  SFX.coin(); updateHUD();
+}
+function answer(i){
+  if(G.locked) return;
+  G.locked=true;
+  const q=G.qs[G.qi], opts=$$('#optList .opt');
+  opts.forEach(function(b){ b.disabled=true; });
+  opts[q.a].classList.add('right');
+  opts[q.a].querySelector('.mark').textContent='✅';
+  const ok=(i===q.a);
+  let gains=[];
+  if(ok){
+    G.right++; G.streak++;
+    if(G.streak>G.bestStreak) G.bestStreak=G.streak;
+    const m=mult(G.streak), add=10*m;
+    G.score+=add; SAVE.coins+=5; SAVE.correct++;
+    gains.push('⭐ +'+add);
+    if(m>1) gains.push('🔥 คอมโบ x'+m);
+    gains.push('🪙 +5');
+    SFX.correct(); sparkleAt(opts[q.a]);
+  }else{
+    opts[i].classList.add('wrongpick');
+    opts[i].querySelector('.mark').textContent='❌';
+    G.wrong++; G.streak=0; G.hearts--; SAVE.wrong++;
+    SFX.wrong();
+  }
+  persist(); updateHUD(); showFeed(ok,q,gains);
+}
+function showFeed(ok,q,gains){
+  const dead=G.hearts<=0, last=(G.qi+1)>=G.qs.length;
+  const label = dead ? '📋 ดูผลภารกิจ' : last ? '🎉 ดูผลด่านนี้' : '➡️ ข้อต่อไป';
+  const body = ok
+    ? '<div class="gain">'+gains.map(function(g){ return '<span>'+g+'</span>'; }).join('')+'</div>'
+    : '<div style="margin-bottom:9px">คำตอบที่ถูกคือ <b>'+esc(q.c[q.a])+'</b><br>เสียหัวใจไป 1 ดวง เหลืออีก '+G.hearts+' ดวง</div>';
+  const f=document.createElement('div');
+  f.className='feed '+(ok?'good':'bad');
+  f.innerHTML=
+      '<div style="display:flex;gap:13px;align-items:flex-start">'
+    +   '<div style="width:74px;flex:0 0 74px" aria-hidden="true">'+charSVG(ok?'happy':'surprised')+'</div>'
+    +   '<div style="flex:1">'
+    +     '<div class="fh"><span class="fe" aria-hidden="true">'+(ok?'🌟':'💪')+'</span>'
+    +     '<span>'+(ok?pick(PRAISE):'ลองอีกครั้งนะ')+'</span></div>'
+    +     (ok?'':'<div style="margin-bottom:6px;color:var(--ink2)">'+pick(CHEER)+'</div>')
+    +     body
+    +   '</div>'
+    + '</div>'
+    + '<div class="why"><b>💬 ทำไมถึงเป็นแบบนั้น</b><br>'+esc(q.why)+'</div>'
+    + '<button class="btn '+(ok?'':'sky')+'" id="btnNextQ" style="margin-bottom:0">'+label+'</button>';
+  const slot=$('#feedSlot'); slot.innerHTML=''; slot.appendChild(f);
+  $('#btnNextQ').addEventListener('click',nextQ);
+  $('#btnNextQ').focus({preventScroll:true});
+}
+function nextQ(){
+  SFX.click();
+  if(G.hearts<=0){ endLevel(false); return; }
+  G.qi++;
+  if(G.qi>=G.qs.length){ endLevel(true); return; }
+  renderQuestion(); window.scrollTo(0,0);
+}
+
+/* ---------- 8 + 9. จบด่าน ---------- */
+function checkBadges(stars){
+  const got=[];
+  const add=function(id){ if(SAVE.badges.indexOf(id)<0){ SAVE.badges.push(id); got.push(id); } };
+  let anyCleared=false; for(const k in SAVE.best){ anyCleared=true; break; }
+  if(anyCleared) add('first');
+  if(G.bestStreak>=5) add('combo5');
+  if(stars>0 && G.hearts>=3) add('perfect');
+  if(stars>0 && G.hintsUsed===0) add('nohint');
+  if(starsTotal()>=10) add('star10');
+  if(SAVE.coins>=100) add('coin100');
+  if(SAVE.correct>=50) add('correct50');
+  if(clearedCount(G.sid)>=subj(G.sid).levels.length) add('champion');
+  return got;
+}
+const tiles = arr => arr.map(function(t){
+  return '<div class="tile"><div class="tv">'+t[0]+' '+t[1]+'</div><div class="tl">'+t[2]+'</div></div>';
+}).join('');
+
+function endLevel(passed){
+  SAVE.plays++; SAVE.totalScore+=G.score;
+  if(G.score>SAVE.bestScore) SAVE.bestScore=G.score;
+  if(passed){
+    const st=Math.max(1,Math.min(3,G.hearts));
+    const key=G.sid+':'+G.li, prev=SAVE.best[key];
+    SAVE.best[key]={ score:Math.max(G.score, prev?prev.score:0), stars:Math.max(st, prev?prev.stars:0) };
+    SAVE.coins+=20;
+    if(st===3 && !(prev && prev.stars===3)) SAVE.diamonds+=1;
+    const total=subj(G.sid).levels.length;
+    if(G.li+1>=openLevels(G.sid) && G.li+1<total) SAVE.unlocked[G.sid]=G.li+2;
+    const fresh=checkBadges(st);
+    persist(); renderWin(st,fresh); go('s-win'); SFX.win(); confetti(52);
+  }else{
+    checkBadges(0); persist(); renderOver(); go('s-over');
+  }
+}
+function renderWin(st,fresh){
+  $('#winStars').innerHTML=[0,1,2].map(function(i){ return '<span>'+(i<st?'⭐':'☆')+'</span>'; }).join('');
+  $('#winStars').setAttribute('aria-label','ได้ '+st+' ดาว จาก 3 ดาว');
+  $('#winScore').textContent=G.score;
+  $('#winChar').innerHTML=charSVG('celebrate');
+  $('#winText').textContent = st===3 ? 'สมบูรณ์แบบ! ไม่เสียหัวใจเลยสักดวง เก่งมากจริง ๆ'
+    : st===2 ? 'ทำได้ดีมาก! อีกนิดเดียวก็เก็บครบ 3 ดาวแล้ว'
+    : 'ผ่านด่านแล้ว! ลองเล่นซ้ำอีกรอบเพื่อเก็บดาวให้ครบนะ';
+  $('#winTiles').innerHTML=tiles([
+    ['✅',G.right,'ตอบถูก'], ['❌',G.wrong,'ตอบผิด'],
+    ['🔥','x'+mult(G.bestStreak),'คอมโบสูงสุด'], ['🪙','+'+(G.right*5+20),'เหรียญที่ได้']
+  ]);
+  $('#winBadges').innerHTML = fresh.length
+    ? '<h3 style="margin-top:16px">🏅 ปลดล็อกเหรียญตราใหม่</h3><div class="badges">'
+      + fresh.map(function(id){
+          const b=BADGES.filter(function(x){ return x.id===id; })[0];
+          return '<div class="badge got"><div class="be">'+b.e+'</div><b>'+esc(b.n)+'</b><small>'+esc(b.d)+'</small></div>';
+        }).join('') + '</div>'
+    : '';
+  const last=(G.li+1)>=subj(G.sid).levels.length;
+  const nx=$('#btnNext');
+  nx.style.display = last ? 'none' : 'flex';
+  if(last) $('#winText').textContent='👑 ผ่านครบทุกด่านแล้ว! ตอนนี้เธอคือนักล่าความรู้ตัวจริง';
+}
+function renderOver(){
+  $('#overChar').innerHTML=charSVG('surprised');
+  $('#overText').textContent='รอบนี้เราตอบถูกไป '+G.right+' ข้อนะ จำคำอธิบายที่เพิ่งอ่านไว้ แล้วลุยใหม่อีกรอบกันเถอะ!';
+  $('#overTiles').innerHTML=tiles([['✅',G.right,'ตอบถูก'],['❌',G.wrong,'ตอบผิด'],['⭐',G.score,'คะแนนที่ทำได้']]);
+}
+
+/* ---------- 10. ผลการเรียนรู้ ---------- */
+function renderStats(){
+  const s=subj(G.sid), total=s.levels.length, cleared=clearedCount(G.sid);
+  const pct=Math.round(cleared/total*100);
+  $('#statPct').textContent=pct+'%';
+  $('#statBar').style.width=pct+'%';
+  const ans=SAVE.correct+SAVE.wrong;
+  const acc=ans>0 ? Math.round(SAVE.correct/ans*100) : 0;
+  $('#statTiles').innerHTML=tiles([
+    ['⭐',SAVE.totalScore,'คะแนนรวมสะสม'],
+    ['🏆',SAVE.bestScore,'คะแนนสูงสุดในด่านเดียว'],
+    ['✅',SAVE.correct,'ตอบถูกทั้งหมด'],
+    ['❌',SAVE.wrong,'ตอบผิดทั้งหมด'],
+    ['🎯',acc+'%','ความแม่นยำ'],
+    ['🗺️',cleared+'/'+total,'ด่านที่ผ่าน']
+  ]);
+  let html='<h3>คะแนนสูงสุดของแต่ละด่าน</h3>';
+  s.levels.forEach(function(lv,i){
+    const b=bestOf(G.sid,i);
+    html+='<div class="setrow"><div><b>'+lv.emoji+' ด่าน '+(i+1)+' · '+esc(lv.name)+'</b><small>'+esc(lv.topic)+'</small></div>'
+      +'<div style="text-align:right;flex:0 0 auto"><div class="stars">'+(b?starRow(b.stars):'☆☆☆')+'</div>'
+      +'<small>'+(b? b.score+' คะแนน' : 'ยังไม่ผ่าน')+'</small></div></div>';
+  });
+  $('#statPerStage').innerHTML=html;
+}
+
+/* ---------- 11. รางวัล ---------- */
+function renderRewards(){
+  $('#lootRow').innerHTML=
+      '<div class="l"><div class="le" aria-hidden="true">⭐</div><div class="lv">'+starsTotal()+'</div><div class="ll">ดาว</div></div>'
+    + '<div class="l"><div class="le" aria-hidden="true">🪙</div><div class="lv">'+SAVE.coins+'</div><div class="ll">เหรียญ</div></div>'
+    + '<div class="l"><div class="le" aria-hidden="true">💎</div><div class="lv">'+SAVE.diamonds+'</div><div class="ll">เพชร</div></div>';
+  $('#badgeCount').textContent='ปลดล็อกแล้ว '+SAVE.badges.length+' จาก '+BADGES.length+' เหรียญตรา';
+  $('#badgeList').innerHTML=BADGES.map(function(b){
+    const got=SAVE.badges.indexOf(b.id)>=0;
+    return '<div class="badge '+(got?'got':'off')+'"><div class="be" aria-hidden="true">'+(got?b.e:'🔒')+'</div>'
+      +'<b>'+esc(b.n)+'</b><small>'+esc(b.d)+'</small></div>';
+  }).join('');
+}
+
+/* ---------- 12. ตั้งค่า ---------- */
+function renderSettings(){
+  $('#swSound').setAttribute('aria-checked', SAVE.sound?'true':'false');
+  $('#swCalm').setAttribute('aria-checked', SAVE.calm?'true':'false');
+}
+
+/* ---------- เชื่อมปุ่มทั้งหมด ---------- */
+$$('[data-go]').forEach(function(b){
+  b.addEventListener('click',function(){
+    SFX.click();
+    const t=b.getAttribute('data-go');
+    if(t==='s-subjects') renderSubjects();
+    if(t==='s-map')      renderMap();
+    if(t==='s-stats')    renderStats();
+    if(t==='s-rewards')  renderRewards();
+    if(t==='s-settings') renderSettings();
+    go(t);
+  });
+});
+$('#btnStart').addEventListener('click',function(){ SFX.click(); curtain(function(){ renderSubjects(); go('s-subjects'); }); });
+$('#btnHowtoGo').addEventListener('click',function(){ SFX.click(); curtain(function(){ renderSubjects(); go('s-subjects'); }); });
+$('#btnPickStage').addEventListener('click',function(){ SFX.click(); renderMap(); go('s-map'); });
+$('#btnStoryGo').addEventListener('click',function(){ SFX.click(); curtain(function(){ startLevel(); go('s-play'); }); });
+$('#btnHint').addEventListener('click',useHint);
+$('#btnQuit').addEventListener('click',function(){
+  SFX.click();
+  if(confirm('ออกจากด่านนี้เลยไหม คะแนนรอบนี้จะไม่ถูกบันทึก')){ renderMap(); go('s-map'); }
+});
+$('#btnRetry').addEventListener('click',function(){ SFX.click(); curtain(function(){ startLevel(); go('s-play'); }); });
+$('#btnAgain').addEventListener('click',function(){ SFX.click(); curtain(function(){ startLevel(); go('s-play'); }); });
+$('#btnNext').addEventListener('click',function(){
+  SFX.click();
+  const total=subj(G.sid).levels.length;
+  if(G.li+1<total){ G.li++; showStory(); } else { renderMap(); go('s-map'); }
+});
+$('#swSound').addEventListener('click',function(){
+  SAVE.sound=!SAVE.sound; persist(); renderSettings(); if(SAVE.sound) SFX.coin();
+});
+$('#swCalm').addEventListener('click',function(){
+  SAVE.calm=!SAVE.calm; persist(); renderSettings();
+  document.documentElement.classList.toggle('calm', !!SAVE.calm);
+  SFX.click();
+});
+$('#btnWipe').addEventListener('click',function(){
+  if(confirm('ล้างความคืบหน้าทั้งหมดในเครื่องนี้ใช่ไหม คะแนน ดาว เหรียญ และด่านที่ปลดล็อกจะหายทั้งหมด')){
+    const keepSound=SAVE.sound, keepCalm=SAVE.calm;
+    SAVE=JSON.parse(JSON.stringify(FRESH));
+    SAVE.sound=keepSound; SAVE.calm=keepCalm;
+    persist(); renderSettings(); renderSubjects(); renderMap();
+    alert('ล้างความคืบหน้าเรียบร้อยแล้ว');
+  }
+});
+
+/* ปุ่มลัดบนคีย์บอร์ด 1-4 สำหรับเล่นผ่านจอโปรเจกเตอร์ */
+document.addEventListener('keydown',function(e){
+  if(!$('#s-play').classList.contains('on')) return;
+  if(e.key>='1' && e.key<='4'){
+    const opts=$$('#optList .opt'), k=parseInt(e.key,10)-1;
+    if(opts[k] && !opts[k].disabled) opts[k].click();
+  }
+  if(e.key==='Enter'){ const n=$('#btnNextQ'); if(n) n.click(); }
+  if(e.key.toLowerCase()==='h'){ useHint(); }
+});
+
+/* ---------- เริ่มต้น ---------- */
+load();
+document.documentElement.classList.toggle('calm', !!SAVE.calm);
+$('#heroChar').innerHTML=charSVG('happy');
+$('#howtoChar').innerHTML=charSVG('thinking');
+renderSubjects();
+</script>
+</body>
+</html>
