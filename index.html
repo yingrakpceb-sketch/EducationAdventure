@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ภารกิจนักล่าความรู้</title>
-<meta name="description" content="เกมตอบคำถามวิทยาศาสตร์สำหรับนักเรียนประถม">
+<meta name="description" content="เกมตอบคำถามครบ 6 วิชาสำหรับนักเรียนประถม">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+Thai+2:wght@500;600;700;800&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
@@ -314,6 +314,278 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
 
 .foot{text-align:center;color:var(--ink2);font-size:.9rem;margin-top:10px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.qvisual{min-height:122px;margin:-4px 0 14px;border:3px solid var(--line);border-radius:24px;display:grid;place-items:center;background:linear-gradient(145deg,var(--card2),var(--bg2));box-shadow:0 5px 0 var(--line);position:relative;overflow:hidden}.qvisual:before,.qvisual:after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.5)}.qvisual:before{width:90px;height:90px;left:-30px;top:-30px}.qvisual:after{width:110px;height:110px;right:-35px;bottom:-45px}.qvisual .pic{font-size:clamp(3.5rem,14vw,5.4rem);filter:drop-shadow(0 7px 2px rgba(80,50,20,.18));animation:bob 3s ease-in-out infinite;z-index:1}.subject-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 18px}.subject-summary span{background:var(--card2);border:2px solid var(--line);padding:8px;border-radius:16px;text-align:center;font-family:'Baloo Thai 2',sans-serif}@media(max-width:460px){.subject-summary{grid-template-columns:1fr}.speech .who{width:74px;flex-basis:74px}}
+
+/* ===== Colorful cute edition ===== */
+:root{--bg:#FFF8D9;--bg2:#FFE9B8;--line:#E9C77E;--green:#27B968;--green-d:#13814A;--gold:#FFB928;--gold-d:#C47D08;--coral:#FF6656;--coral-d:#B7372D;--sky:#31AEEF;--sky-d:#197BB4;--grape:#9367E8;--grape-d:#6740B7;--pink:#EF5CA2;--pink-d:#AA3370}
+body{background-image:radial-gradient(circle at 8% 6%,#FFF0A8 0 12%,transparent 12.5%),radial-gradient(circle at 92% 8%,#FFD9E9 0 13%,transparent 13.5%),linear-gradient(180deg,#FFF9DF,#FFF0D8)}
+.card,.hero,.hud{border-color:#F0C96E}.hero{background:linear-gradient(180deg,#82DFFF,#C5F4FF)}
+.hero:before{content:'🌈';position:absolute;left:3%;top:5%;font-size:3.4rem;z-index:2;filter:drop-shadow(0 4px 2px rgba(0,0,0,.12));animation:bob 3.2s ease-in-out infinite}.hero:after{content:'🦋  ✨  🐝';position:absolute;right:3%;top:8%;font-size:1.55rem;z-index:2;letter-spacing:8px;animation:bob 2.8s ease-in-out infinite}
+.logo .title{background:linear-gradient(90deg,#FF8B55,#FFB928,#27B968,#31AEEF,#9367E8,#EF5CA2);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:2.5px var(--ink);filter:drop-shadow(0 5px 0 rgba(255,255,255,.6))}
+.btn,.subj,.stage,.opt{transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}.btn:hover,.subj:hover,.stage:hover,.opt:hover:not([disabled]){transform:translateY(-3px) scale(1.015);filter:saturate(1.13) brightness(1.04)}
+.qvisual{min-height:150px;background:linear-gradient(135deg,#FFF6A9,#FFD8EC 48%,#C5EEFF);border-color:#F2BF62}.qvisual:before{content:'☁️';background:none;width:auto;height:auto;left:7%;top:11%;font-size:2.4rem}.qvisual:after{content:'🌟';background:none;width:auto;height:auto;right:9%;bottom:13%;font-size:2rem;animation:glow 1.8s infinite}.qvisual .pic{font-size:clamp(4.3rem,17vw,6.6rem);filter:drop-shadow(0 8px 0 rgba(255,255,255,.65)) drop-shadow(0 12px 5px rgba(80,50,20,.2))}
+.speech .who svg,.heroChar svg{filter:drop-shadow(0 8px 4px rgba(93,43,105,.22)) saturate(1.22) brightness(1.06)}
+.subj .se{background:rgba(255,255,255,.36);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35);animation:bob 3.4s ease-in-out infinite}
+.badge.got{background:linear-gradient(145deg,#FFF8C5,#FFE1F0);transform:rotate(-1deg)}
+@media(max-width:460px){.hero:after{font-size:1.1rem;letter-spacing:3px}.hero:before{font-size:2.5rem}.qvisual{min-height:130px}}
+
+
+/* ===== หน้าคะแนนรวมทุกวิชา ===== */
+#s-stats .app{} .score-page-title{text-align:center;margin:4px 0 18px;color:var(--ink)}
+#statPerStage{background:transparent;border:none;padding:0;box-shadow:none}
+.subject-score{background:var(--card);border:3px solid var(--subject-color);border-radius:25px;padding:16px;margin:0 0 20px;box-shadow:0 7px 0 var(--subject-dark),0 14px 24px var(--shadow)}
+.subject-score-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.subject-score-name{display:flex;gap:12px;align-items:center;min-width:0}.subject-score-icon{font-size:2.5rem;background:var(--card2);border:2px solid var(--line);border-radius:17px;padding:5px 9px;line-height:1}.subject-score-name h3{font-size:1.35rem;margin:0}.subject-score-name small{display:block;color:var(--ink2);line-height:1.35}.subject-total{text-align:center;flex:0 0 auto;background:var(--subject-color);color:#fff;border-radius:18px;padding:7px 13px;box-shadow:0 4px 0 var(--subject-dark)}.subject-total b{font-family:'Baloo Thai 2',sans-serif;font-size:1.65rem;display:block;line-height:1}.subject-total span{font-size:.78rem;white-space:nowrap}.subject-metrics{display:flex;gap:7px;flex-wrap:wrap;margin:13px 0 8px}.subject-metrics span{background:var(--card2);border:2px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.9rem}.mini-progress{height:11px;background:var(--card2);border:2px solid var(--line);border-radius:999px;overflow:hidden;margin-bottom:13px}.mini-progress i{display:block;height:100%;border-radius:999px}.stage-score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.stage-score-card{position:relative;background:var(--card2);border:2px solid var(--line);border-radius:18px;padding:11px;min-height:152px;display:flex;flex-direction:column}.stage-score-card.passed{border-color:var(--subject-color);background:linear-gradient(145deg,var(--card),var(--card2))}.stage-score-card.not-played{opacity:.68}.stage-score-top{display:flex;align-items:center;justify-content:space-between}.stage-emoji{font-size:1.7rem}.stage-number{font-family:'Baloo Thai 2',sans-serif;font-size:.86rem;color:var(--ink2)}.stage-title{font-family:'Baloo Thai 2',sans-serif;font-size:1.02rem;margin-top:3px}.stage-topic{color:var(--ink2);line-height:1.3;margin-bottom:8px}.stage-result{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:5px}.stage-result strong{font-family:'Baloo Thai 2',sans-serif;color:var(--subject-dark);white-space:nowrap}.stage-status{font-size:.77rem;margin-top:4px;color:var(--ink2)}
+@media(max-width:520px){.subject-score-head{align-items:flex-start}.subject-score-name small{display:none}.subject-total b{font-size:1.35rem}.stage-score-grid{grid-template-columns:1fr 1fr}.stage-score-card{min-height:145px}.stage-result{display:block}.stage-result strong{display:block}}
+@media(max-width:360px){.stage-score-grid{grid-template-columns:1fr}}
+
+
+/* Little Knowledge Adventurer: final polish */
+.page-kicker{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border:2px solid var(--line);border-radius:999px;background:var(--card2);color:var(--ink2);font-weight:700;margin-bottom:7px}.story-panel{position:relative;overflow:hidden;background:linear-gradient(145deg,var(--card),var(--card2));border:3px solid var(--line);border-radius:28px;padding:18px;margin:14px 0 18px;box-shadow:0 7px 0 var(--line),0 14px 24px var(--shadow)}.story-panel:after{content:'✨';position:absolute;right:15px;top:10px;font-size:1.6rem}.mission-chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}.mission-chips span{background:var(--card);border:2px solid var(--line);border-radius:999px;padding:5px 11px;font-family:'Baloo Thai 2',sans-serif}.subj{position:relative;overflow:hidden;min-height:142px}.subj:after{content:'✨';position:absolute;right:10px;top:8px;opacity:.35}.subj-info{display:grid;gap:5px;min-width:0}.subj-foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:5px}.subj-mini{height:10px;background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.7);border-radius:999px;overflow:hidden}.subj-mini i{display:block;height:100%;background:#fff}.stage{position:relative}.stage:not(.lock):after{content:'›';font-size:2rem;font-weight:800;color:var(--ink2)}.stage.done{background:linear-gradient(145deg,var(--card),var(--ok-bg))}.toast{position:fixed;left:50%;bottom:24px;z-index:300;transform:translateX(-50%);max-width:min(92vw,520px);background:var(--ink);color:var(--card);border-radius:18px;padding:11px 16px;box-shadow:0 10px 28px var(--shadow);font-weight:700}dialog.confirm-dialog{border:0;padding:0;background:transparent;color:var(--ink);max-width:min(92vw,520px);width:100%}dialog.confirm-dialog::backdrop{background:rgba(30,24,48,.58);backdrop-filter:blur(3px)}.dialog-card{background:var(--card);border:3px solid var(--line);border-radius:26px;padding:20px;box-shadow:0 12px 0 var(--line),0 24px 50px rgba(0,0,0,.28)}.dialog-icon{font-size:3.2rem;text-align:center}.dialog-actions{display:flex;gap:10px;flex-wrap:wrap}.dialog-actions .btn{flex:1 1 170px;margin:0}.settings-state{display:block;margin-top:2px;font-weight:700;color:var(--green)}
+@media(min-width:768px){.app{max-width:940px;padding:20px 20px 70px}.stages{grid-template-columns:1fr 1fr}.stages .stage:last-child:nth-child(odd){grid-column:1/-1}.guide{grid-template-columns:1fr 1fr}}
+@media(max-width:479px){.app{padding:10px 12px 48px}.card{padding:15px}.btn{font-size:1.12rem;padding:13px 14px}.hud{padding:8px}.chip{font-size:.9rem;padding:3px 8px}.qtext{font-size:1.25rem}.loot{gap:7px}.stage{padding:12px}}
+@media(max-width:359px){body{font-size:16px}.iconbtn{width:46px;height:46px}.hudrow{justify-content:flex-start}.chip{white-space:normal}.opt{font-size:1.02rem;padding:11px}.loot{grid-template-columns:1fr}}
+
+/* =====================================================================
+   PREMIUM MAGICAL KNOWLEDGE ADVENTURE DESIGN SYSTEM
+   ===================================================================== */
+:root{
+ --sky-top:#4FC7FA;--sky-bottom:#BDEEFF;--cream:#FFF5D8;--cream-soft:#FFFBEF;
+ --wood-light:#C98236;--wood:#9A5522;--wood-dark:#633519;
+ --gold-light:#FFE06B;--gold:#FFB91F;--gold-dark:#C56E08;
+ --pink-light:#FF8295;--pink:#F74368;--pink-dark:#BD2347;
+ --green-light:#82DB53;--green:#43B83E;--green-dark:#237A2E;
+ --blue:#42B9ED;--purple:#A55BE7;--purple-dark:#7035AE;
+ --text-dark:#4A2B1E;--text-soft:#775440;--white:#fff;
+ --success:#40B956;--success-soft:#DCF8DF;--error:#EC6257;--error-soft:#FFE2DE;
+ --game-shadow:rgba(84,48,22,.28);--paper:#fffaf0;
+}
+html{overflow-x:hidden}body{overflow-x:hidden;min-height:100%;background:linear-gradient(180deg,#bceeff 0,#ecf9d7 45%,#fff4d2 100%);color:var(--text-dark)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:radial-gradient(circle at 15% 12%,rgba(255,255,255,.9),transparent 18%),radial-gradient(circle at 90% 24%,rgba(255,244,170,.65),transparent 18%)}
+.app{max-width:1180px;padding:18px 20px 90px;position:relative}.screen:not(#s-home){max-width:960px;margin-inline:auto;padding:18px;background:linear-gradient(180deg,rgba(255,251,239,.96),rgba(255,245,216,.95));border:4px solid #f3cc69;border-radius:32px;box-shadow:0 10px 0 #c98a31,0 24px 56px rgba(71,43,22,.24)}
+.screen:not(#s-home).on{margin-top:16px}.screen:not(#s-home)>h1{display:inline-block;padding:8px 20px;background:linear-gradient(#d79442,#9a5522);color:#fff9df;border:4px solid #6b391b;border-radius:20px;box-shadow:inset 0 3px rgba(255,255,255,.25),0 7px 0 #633519;text-shadow:0 2px 0 #5b321b}
+.card,.story-panel,.hud,.subject-score{background:linear-gradient(160deg,rgba(255,255,255,.98),rgba(255,245,216,.98));border:4px solid #f2c75f;box-shadow:inset 0 2px #fff,0 7px 0 #c58a2b,0 15px 25px var(--game-shadow)}
+.btn{min-height:58px;border:4px solid rgba(255,255,255,.9);background:linear-gradient(180deg,#67dc8a 0,#32b967 55%,#269650 100%);box-shadow:inset 0 3px rgba(255,255,255,.52),inset 0 -3px rgba(0,0,0,.12),0 8px 0 var(--green-dark),0 13px 20px var(--game-shadow);text-shadow:0 2px rgba(75,42,20,.3)}
+.btn.gold{background:linear-gradient(180deg,#ffe77d,#ffbd31 55%,#ee9013);box-shadow:inset 0 3px rgba(255,255,255,.7),inset 0 -3px rgba(0,0,0,.11),0 8px 0 #a85b08,0 13px 20px var(--game-shadow)}
+.btn.sky{background:linear-gradient(#75d9ff,#3ab6ef 55%,#188fca)}.btn.grape{background:linear-gradient(#c78bff,#995ee4 55%,#713ab8)}.btn.coral{background:linear-gradient(#ff9b88,#f66555 55%,#c83d35)}.btn.ghost{background:linear-gradient(#fffdf5,#f7e8c4);color:var(--text-dark);text-shadow:none;border-color:#f1ce76;box-shadow:inset 0 2px #fff,0 7px 0 #c49243,0 10px 18px var(--game-shadow)}
+.btn:hover:not([disabled]){transform:translateY(-3px);filter:saturate(1.08) brightness(1.04)}.btn:active:not([disabled]){transform:translateY(6px);box-shadow:inset 0 2px rgba(255,255,255,.4),0 2px 0 var(--wood-dark)}
+/* full game home */
+#s-home{position:relative;min-height:calc(100vh - 38px);isolation:isolate;border:5px solid #733f1e;border-radius:38px;overflow:hidden;background:linear-gradient(var(--sky-top),var(--sky-bottom) 45%,#7dd55b 46%,#3f9d3d);box-shadow:inset 0 0 0 4px #ffd974,0 12px 0 #633519,0 25px 55px rgba(40,82,43,.35)}
+.home-world{position:absolute;inset:0;z-index:-2}.home-world svg{width:100%;height:100%;display:block;object-fit:cover}.home-world:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(30,81,42,.2),transparent 24%,transparent 76%,rgba(30,81,42,.22)),linear-gradient(0deg,rgba(32,96,43,.22),transparent 28%);pointer-events:none}
+.home-ui{min-height:calc(100vh - 48px);padding:16px;display:grid;grid-template-columns:190px minmax(360px,1fr) 150px;grid-template-rows:auto 1fr auto;gap:12px;align-items:start}
+.player-card{grid-column:1;grid-row:1;background:linear-gradient(160deg,#fffdf5,#ffe4a6);border:4px solid #a66025;border-radius:28px;padding:8px;display:grid;grid-template-columns:64px 1fr;gap:8px;box-shadow:inset 0 3px #fff,0 7px 0 #6b391b,0 12px 24px var(--game-shadow);z-index:4}.avatar-ring{width:64px;height:64px;border-radius:50%;background:linear-gradient(#7adf80,#2eaa58);border:4px solid #fff2b2;box-shadow:0 0 0 3px #a65d20;overflow:hidden;padding:4px}.avatar-ring svg{width:100%;height:100%;object-fit:cover}.player-name{font:800 1rem 'Baloo Thai 2',sans-serif;line-height:1.2;margin-top:4px}.player-level{display:inline-block;background:linear-gradient(#ffdb55,#f69a13);color:#6a3517;border:2px solid #b66a1c;border-radius:999px;padding:0 8px;font-weight:800;font-size:.82rem}.xp-label{font-size:.74rem;font-weight:700;display:flex;justify-content:space-between}.xp-track{height:11px;background:#8a4a22;border:2px solid #6b3519;border-radius:99px;overflow:hidden}.xp-fill{display:block;height:100%;background:linear-gradient(90deg,#fff06e,#ffac23);border-radius:99px}
+.resource-bar{grid-column:2/4;grid-row:1;justify-self:end;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:9px;z-index:4}.resource-pill{min-width:118px;height:48px;display:flex;align-items:center;gap:7px;padding:5px 12px 5px 7px;background:linear-gradient(#874c26,#603119);border:3px solid #f8dfa0;border-radius:999px;color:#fff9e8;box-shadow:inset 0 2px rgba(255,255,255,.22),0 4px 0 #472312,0 8px 14px rgba(52,29,13,.3);font:800 1.08rem 'Baloo Thai 2',sans-serif}.resource-icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(#fff57e,#ffb71e);border:2px solid #fff3bd;box-shadow:0 2px 0 #a75912;font-size:1.25rem}.resource-pill.heart .resource-icon{background:linear-gradient(#ff94a9,#f43f68)}.resource-pill.gem .resource-icon{background:linear-gradient(#dd9cff,#8e4ae0)}
+.wood-nav{grid-column:1;grid-row:2;align-self:center;display:grid;gap:13px;z-index:4}.wood-btn{position:relative;width:100%;min-height:60px;border:4px solid #633519;border-radius:10px 18px 18px 10px;color:#fff7d5;background:repeating-linear-gradient(4deg,rgba(255,255,255,.07) 0 2px,transparent 2px 10px),linear-gradient(#d38a3e,#9b5524 60%,#814017);box-shadow:inset 0 3px rgba(255,239,180,.3),0 6px 0 #552b16,0 10px 18px rgba(48,27,14,.3);font:800 1.15rem 'Baloo Thai 2',sans-serif;text-shadow:0 2px #5b2b13;cursor:pointer}.wood-btn:before,.wood-btn:after{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#f2bd55;border:1px solid #6c3a17;top:10px}.wood-btn:before{left:8px}.wood-btn:after{right:8px}.wood-btn:nth-child(even){transform:translateX(8px) rotate(.7deg)}.wood-btn:hover{transform:translateY(-3px) rotate(-1deg)}.wood-btn:nth-child(even):hover{transform:translate(8px,-3px) rotate(1deg)}
+.central-home{grid-column:2;grid-row:2;align-self:center;justify-self:center;width:min(100%,640px);text-align:center;z-index:3;display:grid;justify-items:center}.game-logo{position:relative;width:min(100%,610px);padding:18px 30px 15px;background:repeating-linear-gradient(3deg,rgba(255,255,255,.08) 0 2px,transparent 2px 12px),linear-gradient(#cb8037,#94501f);border:6px solid #643419;border-radius:30px 38px 26px 34px;box-shadow:inset 0 5px rgba(255,231,157,.28),0 9px 0 #4c2715,0 16px 28px rgba(67,36,18,.38);transform:rotate(-.4deg)}.game-logo:before{content:"⭐";position:absolute;left:-22px;top:-18px;font-size:2.8rem;filter:drop-shadow(0 3px #986010)}.game-logo:after{content:"📚";position:absolute;right:-22px;bottom:-22px;font-size:2.8rem;filter:drop-shadow(0 3px #724417)}.logo-main{font:800 clamp(2.25rem,5.2vw,4.7rem)/.98 'Baloo Thai 2',sans-serif;background:linear-gradient(#fff579 0,#ffbf27 50%,#f7752c 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:5px #fff8db;paint-order:stroke fill;filter:drop-shadow(0 6px 0 #6f351b);letter-spacing:.5px}.logo-ribbon{display:inline-block;margin-top:12px;padding:5px 19px;background:linear-gradient(#fff0a2,#ffc941);border:3px solid #a86018;border-radius:8px 8px 20px 20px;color:#693717;font-weight:800;box-shadow:0 4px 0 #7b4219}
+.start-quest{width:min(92%,420px);min-height:88px;margin:24px auto 10px;border:5px solid #fff2c8;border-radius:34px;background:linear-gradient(180deg,#ff91a3 0,#f74368 52%,#cf294e 100%);box-shadow:inset 0 5px rgba(255,255,255,.5),inset 0 -5px rgba(140,20,52,.15),0 10px 0 #a51c3c,0 17px 28px rgba(78,34,28,.35);color:#fff;font:800 clamp(1.8rem,4vw,2.65rem) 'Baloo Thai 2',sans-serif;text-shadow:0 3px #a32645;cursor:pointer;position:relative}.start-quest:before{content:"✨";position:absolute;left:24px;top:13px;font-size:1.4rem}.start-quest:after{content:"⭐";position:absolute;right:22px;bottom:12px;font-size:1.4rem}.start-quest:hover{transform:translateY(-4px) scale(1.02);filter:brightness(1.05)}.start-quest:active{transform:translateY(7px);box-shadow:inset 0 4px rgba(255,255,255,.35),0 3px 0 #a51c3c}.home-hint{max-width:460px;background:rgba(255,251,232,.94);border:3px solid #cf8d33;border-radius:20px;padding:8px 14px;font-weight:700;box-shadow:0 5px 0 #9b5a23}
+.right-nav{grid-column:3;grid-row:2;align-self:center;display:grid;gap:14px;z-index:4}.round-menu{border:0;background:transparent;color:#fff7dc;font:800 1rem 'Baloo Thai 2',sans-serif;text-shadow:0 2px #603018;cursor:pointer}.round-icon{width:78px;height:78px;margin:auto;display:grid;place-items:center;border-radius:50%;font-size:2.45rem;background:radial-gradient(circle at 35% 25%,#fff7ab,#ffc832 54%,#df8113 55%);border:5px solid #fff2bb;box-shadow:0 0 0 3px #8f4a18,inset 0 4px rgba(255,255,255,.7),0 6px 0 #6a3518,0 10px 18px rgba(56,31,15,.35)}.round-menu:hover .round-icon{transform:translateY(-4px) rotate(3deg)}
+.home-character{position:absolute;left:16%;bottom:82px;width:clamp(150px,19vw,265px);height:auto;z-index:2;filter:drop-shadow(0 14px 8px rgba(44,57,28,.25));animation:bob 3.6s ease-in-out infinite}.helper-creature{position:absolute;right:18%;bottom:26%;z-index:2;font-size:clamp(3rem,6vw,5.5rem);filter:drop-shadow(0 7px 4px rgba(52,50,35,.25));transform:rotate(-8deg)}
+.shortcut-bar{grid-column:2;grid-row:3;align-self:end;justify-self:center;display:grid;grid-template-columns:repeat(4,minmax(90px,125px));gap:10px;z-index:4}.shortcut{min-height:94px;border:4px solid #fff0ae;border-radius:22px;background:linear-gradient(#ffd75e,#f5a51f);box-shadow:inset 0 4px rgba(255,255,255,.55),0 7px 0 #a75d12,0 12px 18px var(--game-shadow);color:#603319;font:800 1rem 'Baloo Thai 2',sans-serif;cursor:pointer}.shortcut span{display:block;font-size:2.2rem;transition:transform .18s}.shortcut:hover span{transform:translateY(-5px) scale(1.08)}
+/* premium destinations */
+.subjects{grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px}.subj{min-height:190px;border:5px solid rgba(255,255,255,.9);box-shadow:inset 0 5px rgba(255,255,255,.32),inset 0 -5px rgba(0,0,0,.1),0 9px 0 var(--wood-dark),0 16px 25px var(--game-shadow)!important}.subj .se{font-size:3.4rem;border:3px solid rgba(255,255,255,.65)}.subj .sn{font-size:1.55rem}.subj-foot{background:rgba(62,30,17,.2);border-radius:12px;padding:5px 8px}.subj:has(.subj-mini i[style="width:100%"]){animation:glow 2.4s ease-in-out infinite}
+#s-map{background-image:radial-gradient(circle at 10% 20%,rgba(93,190,85,.22),transparent 18%),radial-gradient(circle at 90% 70%,rgba(66,185,237,.2),transparent 20%),linear-gradient(160deg,#fff9de,#f3ecc6)}.stages{position:relative;gap:22px;padding:10px}.stages:before{content:"";position:absolute;left:50%;top:12px;bottom:12px;width:8px;border-radius:99px;background:repeating-linear-gradient(#e0a04a 0 17px,#fff0aa 17px 29px);transform:translateX(-50%);opacity:.8}.stage{z-index:1;width:calc(50% - 28px);min-height:112px;border:4px solid #dfaa4e;box-shadow:inset 0 3px #fff,0 7px 0 #9b6429,0 13px 20px var(--game-shadow)}.stage:nth-child(even){margin-left:auto}.stage.open{box-shadow:inset 0 3px #fff,0 0 0 5px rgba(255,201,49,.28),0 7px 0 #9b6429,0 13px 20px var(--game-shadow)}
+.hud{backdrop-filter:blur(10px);background:rgba(255,249,226,.96)}.chip{border:3px solid #d89a36;background:linear-gradient(#fffaf0,#ffe3a7);box-shadow:0 3px 0 #a56728}.qvisual{background:linear-gradient(160deg,#bceeff,#e8f9ff 48%,#d9efad);border-width:4px}.opt{border:4px solid #e3b65c;background:linear-gradient(#fffef8,#fff0cc);box-shadow:inset 0 2px #fff,0 6px 0 #b77a31,0 10px 15px rgba(78,45,20,.16)}.opt:hover:not([disabled]){border-color:#5bbfee}.opt.right{background:linear-gradient(#efffed,#c8f3ce);border-color:var(--success)}.opt.wrongpick{background:linear-gradient(#fff3ef,#ffd8d2);border-color:var(--error)}
+#s-rewards{background-image:radial-gradient(circle at 50% 0,rgba(255,225,90,.45),transparent 26%),linear-gradient(160deg,#fff5ce,#f4d793)}.loot .l,.badge{box-shadow:inset 0 3px #fff,0 6px 0 #bf8431}.badge.got{animation:glow 2.6s ease-in-out infinite}
+.result{background-image:radial-gradient(circle at 50% 0,rgba(255,229,91,.36),transparent 35%)}
+@media(max-width:1023px){.home-ui{grid-template-columns:150px 1fr 120px}.wood-btn{font-size:1rem}.resource-pill{min-width:105px}.home-character{left:12%;bottom:90px}.round-icon{width:67px;height:67px}.game-logo{max-width:520px}}
+@media(max-width:767px){.app{padding:0 0 96px}.screen:not(#s-home){margin:10px 10px 0;padding:14px;border-radius:24px}.home-ui{min-height:calc(100vh - 8px);display:flex;flex-direction:column;padding:10px 10px 112px}.player-card{width:min(100%,270px);align-self:flex-start}.resource-bar{position:absolute;top:10px;right:10px;width:calc(100% - 290px);gap:5px}.resource-pill{min-width:76px;height:40px;padding:3px 8px;font-size:.9rem}.resource-icon{width:27px;height:27px;font-size:1rem}.central-home{order:2;margin-top:78px;width:100%}.game-logo{width:min(94%,520px);padding:14px}.logo-main{-webkit-text-stroke:3px #fff8db;font-size:clamp(2.1rem,9vw,3.6rem)}.start-quest{min-height:70px;margin-top:18px}.wood-nav,.right-nav{display:none}.home-character{position:absolute;left:2%;bottom:118px;width:150px}.helper-creature{right:4%;bottom:145px;font-size:3.4rem}.shortcut-bar{order:3;width:100%;grid-template-columns:repeat(4,1fr);margin-top:auto;gap:6px}.shortcut{min-width:0;min-height:75px;padding:5px 2px;font-size:.78rem}.shortcut span{font-size:1.8rem}.home-hint{font-size:.88rem}.stages:before{left:29px}.stage,.stage:nth-child(even){width:100%;margin-left:0;padding-left:70px}.stage .num{position:absolute;left:4px}.bottom-game-nav{display:grid}}
+@media(max-width:479px){#s-home{border-width:3px;border-radius:0;min-height:100vh}.home-ui{padding:8px 8px 105px}.player-card{width:190px;grid-template-columns:48px 1fr;border-radius:19px;padding:5px}.avatar-ring{width:48px;height:48px}.player-name{font-size:.82rem}.player-level{font-size:.7rem}.xp-label{display:none}.resource-bar{width:auto;left:202px;right:5px;display:grid;grid-template-columns:1fr 1fr}.resource-pill{min-width:0;height:34px;padding:2px 5px;font-size:.78rem}.resource-pill.heart{grid-column:1/-1}.resource-icon{width:23px;height:23px}.central-home{margin-top:75px}.game-logo{padding:12px 8px}.logo-main{font-size:clamp(1.85rem,11vw,2.8rem);-webkit-text-stroke:2px #fff8db;filter:drop-shadow(0 4px #6f351b)}.logo-ribbon{font-size:.78rem;margin-top:8px;padding:4px 9px}.start-quest{width:96%;font-size:1.75rem;min-height:64px;border-width:4px}.home-character{width:100px;left:1%;bottom:112px}.helper-creature{font-size:2.6rem;right:2%;bottom:130px}.home-hint{font-size:.76rem;max-width:260px}.shortcut-bar{grid-template-columns:repeat(4,1fr);position:absolute;left:6px;right:6px;bottom:10px;width:auto}.shortcut{min-height:70px;border-width:3px;border-radius:15px}.shortcut span{font-size:1.55rem}.screen:not(#s-home)>h1{font-size:1.55rem;padding:6px 12px}.subjects{grid-template-columns:1fr}.subj{min-height:165px}.qcount{align-items:flex-start;gap:7px}.qcount span:last-child{text-align:right}.hudrow{gap:5px}.chip{font-size:.82rem}.stages{padding:5px}.stage{padding-left:62px}.stage .num{width:50px;height:50px}.loot{grid-template-columns:repeat(3,1fr)}}
+
+
+/* ===== Refined balanced stage map and original cute adventurer ===== */
+#s-map{max-width:1040px;padding:22px 24px 28px}
+#s-map>h1{display:block;width:fit-content;max-width:100%;margin:0 auto 16px;text-align:center}
+#s-map>.card.flat{max-width:760px;margin:0 auto 22px;padding:15px 18px}
+.stages{display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:22px 18px!important;padding:22px 14px 12px!important;align-items:stretch}
+.stages:before{content:""!important;position:absolute!important;left:7%!important;right:7%!important;top:50%!important;bottom:auto!important;width:auto!important;height:10px!important;transform:translateY(-50%)!important;border:3px solid #c07b2b;border-radius:999px;background:repeating-linear-gradient(90deg,#ffe382 0 22px,#e3a044 22px 38px)!important;opacity:.8;z-index:0}
+.stage,.stage:nth-child(even),.stage:last-child:nth-child(odd){grid-column:span 2!important;width:auto!important;margin:0!important;min-height:148px!important;padding:15px 14px!important;display:grid!important;grid-template-columns:62px minmax(0,1fr) 20px!important;align-content:center!important;align-items:center!important;gap:12px!important;border-radius:25px!important;background:linear-gradient(155deg,#fffef8,#ffefc8)!important}
+.stage:nth-child(4){grid-column:2/span 2!important}.stage:nth-child(5){grid-column:4/span 2!important}
+.stage .num{position:static!important;left:auto!important;width:62px!important;height:62px!important;flex-basis:auto!important;border-radius:20px!important;font-size:2rem!important;box-shadow:inset 0 3px rgba(255,255,255,.65),0 4px 0 rgba(99,53,25,.25)}
+.stage .sname{font-size:1.16rem!important;line-height:1.25!important}.stage .meta{display:block;margin-top:6px;font-size:.88rem!important;line-height:1.35!important}.stage:after{position:static!important;justify-self:end!important}.stage.done{background:linear-gradient(155deg,#f7fff1,#d9f5c8)!important}.stage.lock{background:linear-gradient(155deg,#fffdf7,#ede5d3)!important;opacity:.72}.stage.open{transform:translateY(-2px);box-shadow:inset 0 3px #fff,0 0 0 5px rgba(255,201,49,.2),0 8px 0 #9b6429,0 15px 22px var(--game-shadow)!important}
+#s-map>.row{max-width:640px!important;justify-content:center!important;margin:24px auto 0!important}
+#s-map>.row>.btn{max-width:300px!important}
+/* Character proportions and placement */
+.home-character{width:clamp(150px,17vw,225px)!important;left:4%!important;bottom:112px!important}.avatar-ring svg{transform:scale(1.28) translateY(4px)}
+.speech .who svg,#heroChar svg{filter:drop-shadow(0 9px 5px rgba(67,43,30,.22)) saturate(1.08)}
+@media(max-width:900px){.stages{grid-template-columns:repeat(2,minmax(0,1fr))!important}.stages:before{left:50%!important;right:auto!important;top:20px!important;bottom:20px!important;width:9px!important;height:auto!important;transform:translateX(-50%)!important;background:repeating-linear-gradient(#ffe382 0 22px,#e3a044 22px 38px)!important}.stage,.stage:nth-child(4),.stage:nth-child(5){grid-column:auto!important;min-height:136px!important}.stage:nth-child(5){grid-column:1/-1!important;width:calc(50% - 9px)!important;justify-self:center!important}}
+@media(max-width:620px){#s-map{padding:15px 13px 20px}.stages{grid-template-columns:1fr!important;gap:16px!important;padding:15px 3px 8px!important}.stages:before{left:31px!important;transform:none!important}.stage,.stage:nth-child(4),.stage:nth-child(5){grid-column:1!important;width:100%!important;justify-self:stretch!important;min-height:112px!important;grid-template-columns:54px minmax(0,1fr) 16px!important;padding:12px 11px 12px 8px!important}.stage .num{width:54px!important;height:54px!important;font-size:1.7rem!important}.stage .sname{font-size:1.04rem!important}.stage .meta{font-size:.82rem!important}.home-character{width:90px!important;left:1%!important;bottom:92px!important}}
+
+
+/* ===== FINAL BALANCED UX: one menu per function and balanced stage journey ===== */
+.wood-nav,.right-nav,.shortcut-bar{display:none!important}
+.home-ui{grid-template-columns:minmax(180px,220px) minmax(420px,1fr);grid-template-rows:auto 1fr auto;column-gap:22px;row-gap:12px;padding:16px 20px 20px}
+.player-card{grid-column:1;grid-row:1}.resource-bar{grid-column:2;grid-row:1}.central-home{grid-column:2;grid-row:2;width:min(100%,590px)}
+.home-menu{grid-column:1/-1;grid-row:3;justify-self:center;display:grid;grid-template-columns:repeat(5,minmax(96px,128px));gap:10px;z-index:5;padding:9px 11px;background:rgba(255,248,218,.93);border:4px solid #ae6829;border-radius:24px;box-shadow:inset 0 3px #fff,0 7px 0 #693719,0 13px 24px rgba(62,36,18,.28);backdrop-filter:blur(8px)}
+.home-menu-btn{min-height:74px;border:4px solid #fff0af;border-radius:17px;background:linear-gradient(#ffd969,#f3a61e);box-shadow:inset 0 4px rgba(255,255,255,.56),0 6px 0 #a65e13;color:#603319;font:700 .9rem 'Baloo Thai 2',sans-serif;cursor:pointer;padding:6px 4px}.home-menu-btn span{display:block;font-size:1.75rem;line-height:1.05}.home-menu-btn:hover{transform:translateY(-3px);filter:brightness(1.05)}.home-menu-btn:active{transform:translateY(5px);box-shadow:0 1px 0 #a65e13}
+/* Stage map is a centered journey, eliminating uneven 3+2 card rows */
+#s-map{max-width:900px!important;padding:22px 24px 28px!important}
+#s-map>h1{display:block!important;width:fit-content;max-width:100%;margin:0 auto 16px!important;text-align:center}
+#s-map>.card.flat{max-width:680px;margin:0 auto 24px!important;padding:14px 18px!important}
+.stages{position:relative!important;display:grid!important;grid-template-columns:1fr!important;gap:18px!important;max-width:720px!important;margin:0 auto!important;padding:10px 0 8px 72px!important}
+.stages:before{content:""!important;position:absolute!important;left:31px!important;top:26px!important;bottom:26px!important;width:12px!important;height:auto!important;border:3px solid #b86f25!important;border-radius:999px!important;background:repeating-linear-gradient(#ffe682 0 23px,#df9a3b 23px 39px)!important;transform:none!important;opacity:.95!important;z-index:0!important}
+.stage,.stage:nth-child(even),.stage:nth-child(4),.stage:nth-child(5),.stage:last-child:nth-child(odd){grid-column:1!important;width:100%!important;margin:0!important;min-height:112px!important;padding:14px 16px!important;display:grid!important;grid-template-columns:68px minmax(0,1fr) 26px!important;align-items:center!important;gap:14px!important;border-radius:25px!important;background:linear-gradient(155deg,#fffef8,#ffefc8)!important;position:relative!important;text-align:left!important}
+.stage:before{content:"";position:absolute;left:-55px;top:50%;width:38px;height:8px;transform:translateY(-50%);border-radius:99px;background:#d58d35;border:2px solid #a86325;z-index:-1}
+.stage .num{position:static!important;left:auto!important;width:68px!important;height:68px!important;flex-basis:auto!important;border-radius:22px!important;font-size:2.05rem!important;box-shadow:inset 0 3px rgba(255,255,255,.65),0 4px 0 rgba(99,53,25,.25)}
+.stage .sname{font-size:1.18rem!important;line-height:1.3!important;overflow-wrap:anywhere}.stage .meta{display:block!important;margin-top:5px!important;font-size:.9rem!important;line-height:1.4!important;overflow-wrap:anywhere}.stage:after{position:static!important;justify-self:end!important}
+.stage.done{background:linear-gradient(155deg,#f8fff2,#d9f4c8)!important}.stage.lock{background:linear-gradient(155deg,#fffdf7,#eae3d5)!important;opacity:.72}.stage.open{transform:none!important;box-shadow:inset 0 3px #fff,0 0 0 5px rgba(255,201,49,.2),0 8px 0 #9b6429,0 15px 22px var(--game-shadow)!important}
+.stage:hover:not([disabled]){transform:translateY(-3px)!important}.stage:active:not([disabled]){transform:translateY(4px)!important}
+#s-map>.row{max-width:420px!important;margin:24px auto 0!important;display:block!important}#s-map>.row>.btn{width:100%!important;max-width:420px!important;margin-left:auto!important;margin-right:auto!important}
+@media(max-width:767px){.home-ui{display:flex;min-height:100vh;padding:10px 10px 100px}.player-card{width:205px}.resource-bar{left:220px;width:auto}.central-home{margin-top:68px}.home-menu{position:absolute;left:7px;right:7px;bottom:8px;width:auto;grid-template-columns:repeat(5,1fr);gap:5px;padding:6px;border-width:3px;border-radius:17px}.home-menu-btn{min-width:0;min-height:64px;padding:4px 1px;border-width:3px;font-size:.7rem}.home-menu-btn span{font-size:1.35rem}.stages{padding-left:58px!important}.stages:before{left:23px!important}.stage:before{left:-43px;width:28px}.stage{grid-template-columns:56px minmax(0,1fr) 18px!important;min-height:104px!important;padding:12px!important}.stage .num{width:56px!important;height:56px!important;font-size:1.75rem!important}}
+@media(max-width:479px){#s-map{padding:14px 11px 20px!important}.stages{padding:8px 0 6px 48px!important;gap:14px!important}.stages:before{left:18px!important;width:9px!important}.stage:before{left:-36px;width:24px;height:6px}.stage{grid-template-columns:48px minmax(0,1fr) 14px!important;padding:10px 9px!important;border-radius:20px!important;min-height:96px!important}.stage .num{width:48px!important;height:48px!important;border-radius:16px!important;font-size:1.5rem!important}.stage .sname{font-size:.98rem!important}.stage .meta{font-size:.78rem!important}.barlab{gap:8px;flex-wrap:wrap}.home-menu-btn{font-size:.61rem}.home-menu-btn span{font-size:1.18rem}}
+
+
+/* ===== Cute animated background with protected UI safe zones ===== */
+#s-home{background:#79d8f8}.home-world{overflow:hidden}.home-world:after{background:radial-gradient(ellipse at 58% 45%,rgba(255,255,255,.24),transparent 43%),linear-gradient(90deg,rgba(24,76,38,.18),transparent 18%,transparent 82%,rgba(24,76,38,.2)),linear-gradient(0deg,rgba(36,104,48,.2),transparent 30%)}
+.central-home{position:relative}.central-home:before{content:"";position:absolute;inset:-30px -34px -24px;z-index:-1;border-radius:45%;background:radial-gradient(ellipse,rgba(255,255,255,.46),rgba(255,255,255,.08) 58%,transparent 72%);filter:blur(2px);pointer-events:none}
+.player-card,.resource-bar,.game-logo,.home-menu,.start-quest,.home-hint{isolation:isolate}.game-logo{backdrop-filter:blur(2px)}
+.bg-cloud{animation:cloudDrift 18s ease-in-out infinite alternate;transform-origin:center}.cloud-b{animation-duration:22s;animation-delay:-6s}.butterflies{animation:butterflyFloat 5.5s ease-in-out infinite;transform-origin:center}.water-shine{animation:waterGlow 3.8s ease-in-out infinite}.twinkle{animation:softTwinkle 3.2s ease-in-out infinite}.t2{animation-delay:-1s}.t3{animation-delay:-2s}.tower{animation:towerFloat 5.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes cloudDrift{to{transform:translateX(34px)}}@keyframes butterflyFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(13px,-9px)}}@keyframes waterGlow{0%,100%{opacity:.35;transform:translateX(0)}50%{opacity:.78;transform:translateX(8px)}}@keyframes softTwinkle{0%,100%{opacity:.42;transform:scale(.82)}50%{opacity:1;transform:scale(1.18)}}@keyframes towerFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+/* Clear menu and button zones */
+.home-menu{background:linear-gradient(180deg,rgba(255,252,232,.97),rgba(255,229,166,.96));box-shadow:inset 0 3px #fff,0 7px 0 #693719,0 16px 28px rgba(62,36,18,.3)}.home-menu-btn{background:linear-gradient(#FFE277,#F5AA25)}.home-hint{background:rgba(255,252,235,.97)}
+@media(max-width:767px){.home-world svg{transform:scale(1.08);transform-origin:58% 50%}.central-home:before{inset:-18px -8px -14px}.butterflies{opacity:.65}.flower-bed{opacity:.75}.tower{transform-origin:center}}
+@media(max-width:479px){.home-world svg{transform:scale(1.14);transform-origin:62% 46%}.home-world:after{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(39,112,53,.13))}.tower{opacity:.88}.flower-bed{opacity:.55}.butterflies{opacity:.5}}
+html.calm .bg-cloud,html.calm .butterflies,html.calm .water-shine,html.calm .twinkle,html.calm .tower{animation:none!important}
+@media(prefers-reduced-motion:reduce){.bg-cloud,.butterflies,.water-shine,.twinkle,.tower{animation:none!important}}
+
+
+/* =====================================================================
+   DARK MODE REBUILD: complete, consistent, readable
+   ===================================================================== */
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#17182A;--bg2:#252844;--card:#292D49;--card2:#343955;
+  --ink:#FFF6DE;--ink2:#D8CDAF;--line:#766445;
+  --green:#4ED789;--green-d:#207A4B;--gold:#FFD05A;--gold-d:#A96D10;
+  --coral:#FF8575;--coral-d:#A94538;--sky:#61C9F4;--sky-d:#247CA4;
+  --grape:#B99AFF;--grape-d:#6546A4;--pink:#FF86B8;--pink-d:#A64070;
+  --ok-bg:#173D2D;--ok-line:#50D58C;--no-bg:#4C292E;--no-line:#FF8575;
+  --shadow:rgba(4,7,18,.5);--game-shadow:rgba(2,5,15,.55);
+  --text-dark:#FFF6DE;--text-soft:#D8CDAF;--cream:#292D49;--cream-soft:#343955;
+  --paper:#292D49;--white:#FFFDF5;
+}
+:root[data-theme="dark"] body{background:#151728;background-image:radial-gradient(circle at 14% 8%,#303969 0 13%,transparent 34%),radial-gradient(circle at 88% 10%,#422F62 0 10%,transparent 30%),linear-gradient(180deg,#17182A,#202640 58%,#151728);color:var(--ink)}
+:root[data-theme="dark"] body:before{background:radial-gradient(circle at 15% 10%,rgba(118,151,255,.12),transparent 23%),radial-gradient(circle at 88% 20%,rgba(187,124,255,.1),transparent 22%)}
+/* Home scene becomes a calm moonlit world without losing illustration detail */
+:root[data-theme="dark"] #s-home{background:#172F55;border-color:#93713A;box-shadow:inset 0 0 0 4px #4E557E,0 12px 0 #352718,0 25px 55px rgba(1,5,18,.65)}
+:root[data-theme="dark"] .home-world svg{filter:brightness(.48) saturate(.78) hue-rotate(10deg) contrast(1.08)}
+:root[data-theme="dark"] .home-world:after{background:radial-gradient(ellipse at 58% 43%,rgba(100,127,205,.12),transparent 42%),linear-gradient(90deg,rgba(2,9,27,.48),transparent 22%,transparent 78%,rgba(2,9,27,.5)),linear-gradient(0deg,rgba(2,11,28,.52),rgba(21,29,63,.08) 55%,rgba(4,8,24,.32))}
+:root[data-theme="dark"] .central-home:before{background:radial-gradient(ellipse,rgba(60,69,111,.72),rgba(34,39,73,.3) 58%,transparent 74%)}
+:root[data-theme="dark"] .player-card,
+:root[data-theme="dark"] .home-menu,
+:root[data-theme="dark"] .home-hint{background:linear-gradient(160deg,rgba(48,52,83,.98),rgba(34,38,67,.98));border-color:#8C754A;color:var(--ink);box-shadow:inset 0 3px rgba(255,255,255,.08),0 7px 0 #342819,0 14px 25px rgba(0,0,0,.5)}
+:root[data-theme="dark"] .player-level{background:linear-gradient(#FFE27A,#C88B24);color:#39240E;border-color:#D9A53A}
+:root[data-theme="dark"] .xp-track{background:#15182B;border-color:#827049}
+:root[data-theme="dark"] .resource-pill{background:linear-gradient(#3C4264,#292D49);border-color:#A98A4E;color:#FFF8E7;box-shadow:inset 0 2px rgba(255,255,255,.1),0 4px 0 #17182A,0 8px 15px rgba(0,0,0,.45)}
+:root[data-theme="dark"] .game-logo{background:repeating-linear-gradient(3deg,rgba(255,255,255,.035) 0 2px,transparent 2px 12px),linear-gradient(#5A4161,#342840);border-color:#A97847;box-shadow:inset 0 4px rgba(255,255,255,.1),0 9px 0 #211927,0 18px 30px rgba(0,0,0,.55)}
+:root[data-theme="dark"] .logo-main{background:linear-gradient(#FFF18A,#FFC44E 52%,#FF8B66);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke-color:#FFF7D9;filter:drop-shadow(0 5px 0 #3C2133)}
+:root[data-theme="dark"] .logo-ribbon{background:linear-gradient(#564668,#3B355A);border-color:#B98B4C;color:#FFF3CD;box-shadow:0 4px 0 #211A31}
+:root[data-theme="dark"] .home-menu-btn{background:linear-gradient(#63557C,#443A62);border-color:#BDA05F;color:#FFF6DE;box-shadow:inset 0 3px rgba(255,255,255,.12),0 6px 0 #282039;text-shadow:0 2px rgba(0,0,0,.35)}
+:root[data-theme="dark"] .home-menu-btn:hover{filter:brightness(1.16)}
+:root[data-theme="dark"] .start-quest{background:linear-gradient(#FF8AA9,#D94776 55%,#A82F5D);border-color:#FFE6B5;box-shadow:inset 0 4px rgba(255,255,255,.3),0 9px 0 #722342,0 17px 28px rgba(0,0,0,.48)}
+/* All content screens */
+:root[data-theme="dark"] .screen:not(#s-home){background:linear-gradient(180deg,rgba(38,42,69,.98),rgba(27,30,53,.98));border-color:#8E7446;box-shadow:0 10px 0 #3C2D20,0 24px 56px rgba(0,0,0,.5);color:var(--ink)}
+:root[data-theme="dark"] .screen:not(#s-home)>h1{background:linear-gradient(#5E466A,#3B304F);color:#FFF5D6;border-color:#A57C47;box-shadow:inset 0 3px rgba(255,255,255,.1),0 7px 0 #292032;text-shadow:0 2px #1B1420}
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .story-panel,
+:root[data-theme="dark"] .hud,
+:root[data-theme="dark"] .subject-score,
+:root[data-theme="dark"] .speech .bubble,
+:root[data-theme="dark"] .guide .g,
+:root[data-theme="dark"] .tile,
+:root[data-theme="dark"] .loot .l,
+:root[data-theme="dark"] .badge,
+:root[data-theme="dark"] .stage-score-card{background:linear-gradient(155deg,#343955,#292D49);border-color:#796847;color:var(--ink);box-shadow:inset 0 2px rgba(255,255,255,.06),0 6px 0 #242035,0 14px 24px rgba(0,0,0,.32)}
+:root[data-theme="dark"] .speech .bubble:before{border-right-color:#343955}
+:root[data-theme="dark"] .speech .bubble:after{border-right-color:#796847}
+:root[data-theme="dark"] .page-kicker,
+:root[data-theme="dark"] .mission-chips span,
+:root[data-theme="dark"] .qtag,
+:root[data-theme="dark"] .chip,
+:root[data-theme="dark"] .subject-metrics span{background:#3A405D;border-color:#786B50;color:#F7EFD9}
+:root[data-theme="dark"] .bar,
+:root[data-theme="dark"] .qbar,
+:root[data-theme="dark"] .mini-progress,
+:root[data-theme="dark"] .subj-mini{background:#1B1F35;border-color:#655A45}
+:root[data-theme="dark"] .bar>i,
+:root[data-theme="dark"] .qbar>i{filter:saturate(.9) brightness(1.12)}
+/* Stage map */
+:root[data-theme="dark"] #s-map{background-image:radial-gradient(circle at 10% 20%,rgba(76,164,126,.12),transparent 20%),radial-gradient(circle at 90% 70%,rgba(82,134,210,.14),transparent 23%),linear-gradient(160deg,#2D324F,#20243B)}
+:root[data-theme="dark"] .stages:before{border-color:#6E5836!important;background:repeating-linear-gradient(#C29443 0 23px,#56432D 23px 39px)!important}
+:root[data-theme="dark"] .stage,
+:root[data-theme="dark"] .stage:nth-child(even),
+:root[data-theme="dark"] .stage:nth-child(4),
+:root[data-theme="dark"] .stage:nth-child(5){background:linear-gradient(155deg,#3A405E,#2B304B)!important;border-color:#86714B!important;color:#FFF6DE!important;box-shadow:inset 0 3px rgba(255,255,255,.07),0 7px 0 #211D2C,0 14px 22px rgba(0,0,0,.4)!important}
+:root[data-theme="dark"] .stage:before{background:#86683A;border-color:#4E3B27}
+:root[data-theme="dark"] .stage.done{background:linear-gradient(155deg,#294D3B,#213A32)!important;border-color:#4DAA76!important}
+:root[data-theme="dark"] .stage.open{background:linear-gradient(155deg,#4B4250,#373348)!important;border-color:#D2A54D!important;box-shadow:inset 0 3px rgba(255,255,255,.08),0 0 0 4px rgba(255,200,71,.14),0 8px 0 #392A20,0 15px 23px rgba(0,0,0,.42)!important}
+:root[data-theme="dark"] .stage.lock{background:linear-gradient(155deg,#303348,#282B3D)!important;opacity:.62}
+:root[data-theme="dark"] .stage .num{background:#424861;border-color:#75694F;color:#FFF6DE}
+:root[data-theme="dark"] .stage.open .num{background:linear-gradient(#FFD76A,#B77B25);border-color:#D3A146;color:#2A1D0E}
+:root[data-theme="dark"] .stage.done .num{background:linear-gradient(#55CB86,#2D8B59);border-color:#67D797;color:#11271C}
+/* Gameplay */
+:root[data-theme="dark"] .qvisual{background:linear-gradient(145deg,#344364,#293450 55%,#353A55);border-color:#76694E}
+:root[data-theme="dark"] .opt{background:linear-gradient(#3A405E,#2C314C);border-color:#7C6A48;color:#FFF7E4;box-shadow:inset 0 2px rgba(255,255,255,.06),0 6px 0 #232034,0 10px 16px rgba(0,0,0,.28)}
+:root[data-theme="dark"] .opt .key{background:#474D68;border-color:#827454;color:#FFF7E4}
+:root[data-theme="dark"] .opt:hover:not([disabled]){border-color:#6ACBF3;background:linear-gradient(#424A6B,#323A58)}
+:root[data-theme="dark"] .opt.right{background:linear-gradient(#23543D,#1B4031);border-color:#50D58C;color:#F1FFF5}
+:root[data-theme="dark"] .opt.wrongpick{background:linear-gradient(#5A3238,#47272D);border-color:#FF8575;color:#FFF2EF}
+:root[data-theme="dark"] .feed{background:#303650;border-color:#76694E}.feed.good{background:var(--ok-bg)}.feed.bad{background:var(--no-bg)}
+:root[data-theme="dark"] .feed .why{background:#22263D;border-color:#74674C;color:#FFF5DC}
+:root[data-theme="dark"] .gain span{background:#23283F;border-color:#75694D;color:#FFF5DC}
+/* Score, rewards, settings and dialogs */
+:root[data-theme="dark"] #s-rewards{background-image:radial-gradient(circle at 50% 0,rgba(255,205,77,.12),transparent 28%),linear-gradient(160deg,#302C48,#20243B)}
+:root[data-theme="dark"] .badge.got{background:linear-gradient(145deg,#493D4C,#3B354D);border-color:#D2A84D;box-shadow:0 5px 0 #76511A,0 0 18px rgba(255,205,90,.14)}
+:root[data-theme="dark"] .badge.off{opacity:.58;filter:grayscale(.45)}
+:root[data-theme="dark"] .subject-score{border-color:var(--subject-color);box-shadow:0 7px 0 #221E31,0 14px 24px rgba(0,0,0,.34)}
+:root[data-theme="dark"] .stage-score-card.passed{background:linear-gradient(145deg,#383E5B,#2A304A)}
+:root[data-theme="dark"] .subject-total{color:#fff}
+:root[data-theme="dark"] .sw{background:#252A42;border-color:#76694E}
+:root[data-theme="dark"] .sw:after{background:#B9B1A0}
+:root[data-theme="dark"] .sw[aria-checked="true"]{background:#27885A;border-color:#55D58D}
+:root[data-theme="dark"] .settings-state{color:#72E5A5}
+:root[data-theme="dark"] dialog.confirm-dialog{color:var(--ink)}
+:root[data-theme="dark"] .dialog-card{background:linear-gradient(#343955,#272B45);border-color:#8A734B;box-shadow:0 12px 0 #201C2A,0 24px 50px rgba(0,0,0,.6)}
+:root[data-theme="dark"] .btn.ghost{background:linear-gradient(#414762,#323750);color:#FFF6DE;border-color:#867650;box-shadow:inset 0 2px rgba(255,255,255,.08),0 7px 0 #242033}
+:root[data-theme="dark"] .foot,
+:root[data-theme="dark"] .meta,
+:root[data-theme="dark"] .stage-topic,
+:root[data-theme="dark"] .stage-status,
+:root[data-theme="dark"] .tile .tl,
+:root[data-theme="dark"] .loot .ll,
+:root[data-theme="dark"] .badge small,
+:root[data-theme="dark"] .guide .g span,
+:root[data-theme="dark"] .setrow small,
+:root[data-theme="dark"] .barlab,
+:root[data-theme="dark"] .qcount{color:#D8CDAF}
+:root[data-theme="dark"] .toast{background:#FFF1CB;color:#2A1E17}
+
+
+/* ===== True animated night landscape for the home screen ===== */
+.scene-moon,.night-stars,.night-fireflies{opacity:0;transition:opacity .55s ease}.scene-sun{transition:opacity .55s ease}.home-world svg{transition:filter .55s ease}
+:root[data-theme="dark"] .scene-sun{opacity:0}
+:root[data-theme="dark"] .scene-moon{opacity:1}
+:root[data-theme="dark"] .night-stars{opacity:.95}
+:root[data-theme="dark"] .night-fireflies{opacity:1}
+:root[data-theme="dark"] .bg-cloud{fill:#C9D7F2;opacity:.28}
+:root[data-theme="dark"] .home-world svg{filter:none!important}
+:root[data-theme="dark"] .home-world svg>rect:first-of-type{fill:#18274B}
+:root[data-theme="dark"] .home-world svg>path:nth-of-type(1){fill:#30466B!important;opacity:.75!important}
+:root[data-theme="dark"] .home-world svg>path:nth-of-type(2){fill:#294A4B!important}
+:root[data-theme="dark"] .home-world svg>path:nth-of-type(3){fill:#173D3A!important}
+:root[data-theme="dark"] .tower{filter:brightness(.72) saturate(.78) drop-shadow(0 8px 8px rgba(0,0,0,.4))}
+:root[data-theme="dark"] .water-shine{stroke:#A7DFFF;opacity:.4}
+:root[data-theme="dark"] .flower-bed{filter:brightness(.65) saturate(.72)}
+:root[data-theme="dark"] .butterflies{opacity:0}
+:root[data-theme="dark"] .twinkle{fill:#FFF6A5;opacity:1}
+:root[data-theme="dark"] .night-stars{animation:nightStarPulse 4.5s ease-in-out infinite}
+:root[data-theme="dark"] .night-fireflies{animation:fireflyDrift 5s ease-in-out infinite;transform-origin:center}
+:root[data-theme="dark"] .scene-moon{animation:moonGlow 5.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes nightStarPulse{0%,100%{opacity:.58}50%{opacity:1}}
+@keyframes fireflyDrift{0%,100%{transform:translate(0,0);opacity:.55}50%{transform:translate(12px,-8px);opacity:1}}
+@keyframes moonGlow{0%,100%{filter:drop-shadow(0 0 8px rgba(255,245,184,.38))}50%{filter:drop-shadow(0 0 22px rgba(255,245,184,.72))}}
+html.calm .night-stars,html.calm .night-fireflies,html.calm .scene-moon{animation:none!important}
+@media(prefers-reduced-motion:reduce){.night-stars,.night-fireflies,.scene-moon{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -324,54 +596,79 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
 
 <!-- ========== 1. หน้าแรก ========== -->
 <section class="screen on" id="s-home" aria-label="หน้าแรก">
-  <div class="topbar">
-    <button class="iconbtn" data-go="s-rewards" title="รางวัล" aria-label="รางวัล">🏅</button>
-    <button class="iconbtn" data-go="s-settings" title="ตั้งค่า" aria-label="ตั้งค่า">⚙️</button>
-  </div>
-  <div class="hero">
-    <svg class="scene" viewBox="0 0 400 230" role="img" aria-label="ฉากผจญภัย ภูเขา ป่าไม้ และปราสาทความรู้">
-      <rect width="400" height="230" fill="var(--sky-bg)"/>
-      <circle cx="338" cy="44" r="27" fill="var(--sun)"/>
-      <g fill="#fff" opacity=".88">
-        <ellipse cx="70" cy="44" rx="30" ry="15"/><ellipse cx="94" cy="38" rx="21" ry="16"/><ellipse cx="46" cy="40" rx="18" ry="12"/>
-        <ellipse cx="240" cy="30" rx="24" ry="12"/><ellipse cx="258" cy="26" rx="17" ry="12"/>
+  <div class="home-world" aria-hidden="true">
+    <svg viewBox="0 0 1400 850" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="awSky" x2="0" y2="1"><stop stop-color="#57CCFA"/><stop offset=".62" stop-color="#C9F2FF"/><stop offset="1" stop-color="#F5F8CE"/></linearGradient>
+        <linearGradient id="awHillBack" x2="0" y2="1"><stop stop-color="#8CD96B"/><stop offset="1" stop-color="#5BAA58"/></linearGradient>
+        <linearGradient id="awHillFront" x2="0" y2="1"><stop stop-color="#73D559"/><stop offset="1" stop-color="#329247"/></linearGradient>
+        <linearGradient id="awWater" x2="0" y2="1"><stop stop-color="#8AECFF"/><stop offset=".55" stop-color="#35BDEB"/><stop offset="1" stop-color="#168FC7"/></linearGradient>
+        <linearGradient id="awPath" x2="0" y2="1"><stop stop-color="#FFE8A4"/><stop offset="1" stop-color="#D59B4C"/></linearGradient>
+        <linearGradient id="awTower" x2="0" y2="1"><stop stop-color="#FFF2C6"/><stop offset="1" stop-color="#EFC574"/></linearGradient>
+        <radialGradient id="awSun"><stop stop-color="#FFFCE0"/><stop offset=".45" stop-color="#FFE77A"/><stop offset="1" stop-color="#FFD54B" stop-opacity="0"/></radialGradient>
+        <filter id="awSoft"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#235A35" flood-opacity=".22"/></filter>
+        <filter id="awGlow"><feGaussianBlur stdDeviation="5"/></filter>
+      </defs>
+      <rect width="1400" height="850" fill="url(#awSky)"/>
+      <circle class="scene-sun" cx="1120" cy="105" r="104" fill="url(#awSun)"/><g class="scene-moon"><circle cx="1120" cy="105" r="48" fill="#FFF8D5"/><circle cx="1138" cy="90" r="48" fill="#24345E"/><circle cx="1098" cy="123" r="4" fill="#E9DDAF" opacity=".65"/></g>
+      <g class="night-stars" fill="#FFF7BD" aria-hidden="true">
+        <circle cx="165" cy="118" r="3"/><circle cx="460" cy="92" r="4"/><circle cx="620" cy="175" r="3"/><circle cx="735" cy="82" r="2.5"/><circle cx="930" cy="135" r="3.5"/><circle cx="1240" cy="180" r="3"/>
+        <path d="M350 165l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/><path d="M865 72l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/><path d="M1280 265l3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/>
       </g>
-      <g fill="#8E79B8" opacity=".55"><path d="M0 130 L54 66 L104 130 Z"/><path d="M92 130 L150 58 L206 130 Z"/></g>
-      <g transform="translate(276,52)">
-        <rect x="14" y="26" width="52" height="58" fill="#B49AD8"/>
-        <rect x="2" y="12" width="20" height="72" fill="#C9B2E8"/><rect x="58" y="12" width="20" height="72" fill="#C9B2E8"/>
-        <path d="M-2 12 L12 -10 L26 12 Z" fill="var(--grape)"/><path d="M54 12 L68 -10 L82 12 Z" fill="var(--grape)"/>
-        <path d="M12 14 L40 -14 L68 14 Z" fill="var(--grape)"/>
-        <rect x="33" y="52" width="16" height="32" rx="8" fill="#6B5090"/>
-        <circle cx="40" cy="20" r="5" fill="var(--gold)"/>
+      <g class="night-fireflies" fill="#FFF38A"><circle cx="285" cy="390" r="4"/><circle cx="420" cy="510" r="3"/><circle cx="875" cy="420" r="4"/><circle cx="1195" cy="500" r="3"/></g>
+      <g class="bg-cloud cloud-a" fill="#fff" opacity=".9"><ellipse cx="260" cy="115" rx="82" ry="28"/><ellipse cx="325" cy="104" rx="60" ry="40"/><ellipse cx="375" cy="119" rx="64" ry="25"/></g>
+      <g class="bg-cloud cloud-b" fill="#fff" opacity=".82"><ellipse cx="775" cy="155" rx="72" ry="25"/><ellipse cx="830" cy="146" rx="52" ry="34"/><ellipse cx="875" cy="160" rx="55" ry="22"/></g>
+      <path d="M0 440 165 300 305 420 475 250 660 430 850 285 1040 425 1215 250 1400 415V565H0Z" fill="#77B96B" opacity=".52"/>
+      <path d="M0 492Q190 380 365 468T710 468T1050 454T1400 462V850H0Z" fill="url(#awHillBack)"/>
+      <path d="M0 580Q180 500 390 570T800 565T1140 540T1400 565V850H0Z" fill="url(#awHillFront)"/>
+      <!-- central clear path leads the eye behind the logo and CTA -->
+      <path d="M650 900C610 765 680 678 775 610S910 515 1015 470" fill="none" stroke="#B77A39" stroke-width="126" stroke-linecap="round" opacity=".36"/>
+      <path d="M650 900C610 765 680 678 775 610S910 515 1015 470" fill="none" stroke="url(#awPath)" stroke-width="108" stroke-linecap="round"/>
+      <g class="tower" transform="translate(990 260)" filter="url(#awSoft)">
+        <path d="M0 220V78h42V34L88 0l46 34v44h44v142Z" fill="url(#awTower)" stroke="#8D572E" stroke-width="7"/>
+        <path d="m35 80 53-60 54 60Z" fill="#9A69DE" stroke="#653B99" stroke-width="7"/>
+        <path d="M68 220v-58q20-27 40 0v58" fill="#78513B"/>
+        <rect x="18" y="111" width="30" height="38" rx="13" fill="#65CEF0"/><rect x="130" y="111" width="30" height="38" rx="13" fill="#65CEF0"/>
+        <path d="M88 43l9 18 20 3-15 14 4 20-18-10-18 10 4-20-15-14 20-3Z" fill="#FFD135"/>
+        <g fill="#fff7bf"><circle cx="20" cy="45" r="5"/><circle cx="155" cy="46" r="4"/></g>
       </g>
-      <path d="M0 132 Q70 104 140 132 Q220 160 300 130 Q350 112 400 128 L400 230 L0 230 Z" fill="var(--hill)"/>
-      <path d="M0 168 Q90 142 176 172 Q262 200 400 164 L400 230 L0 230 Z" fill="var(--hill2)"/>
-      <path d="M186 230 Q196 186 200 164 Q204 186 214 230 Z" fill="#E6C98C" opacity=".85"/>
-      <g>
-        <rect x="42" y="150" width="9" height="30" fill="#7A5230"/><circle cx="46" cy="144" r="21" fill="#2E8C4E"/><circle cx="31" cy="152" r="13" fill="#3AA35D"/><circle cx="62" cy="152" r="13" fill="#3AA35D"/>
-        <rect x="336" y="156" width="9" height="30" fill="#7A5230"/><circle cx="340" cy="150" r="19" fill="#2E8C4E"/><circle cx="356" cy="158" r="12" fill="#3AA35D"/>
-        <rect x="112" y="176" width="8" height="24" fill="#7A5230"/><circle cx="116" cy="170" r="16" fill="#3AA35D"/>
-      </g>
-      <g font-size="15" opacity=".9"><text x="262" y="150">📗</text><text x="146" y="128">✨</text><text x="86" y="112">⭐</text><text x="308" y="186">🔬</text></g>
+      <!-- stream and bridge stay in lower right safe zone -->
+      <path d="M1010 900C950 805 1010 742 1110 690s80-122 185-145 95-87 125-135V900Z" fill="url(#awWater)" stroke="#D9FAFF" stroke-width="8"/>
+      <path class="water-shine" d="M1055 790q80-38 150-88M1120 835q88-45 165-100M1195 648q56-27 112-71" fill="none" stroke="#E9FEFF" stroke-width="10" stroke-linecap="round" opacity=".55"/>
+      <g transform="translate(1025 646) rotate(-10)" filter="url(#awSoft)"><rect width="250" height="82" rx="12" fill="#75401F"/><g fill="#C87A35" stroke="#693719" stroke-width="5"><rect x="5" y="5" width="42" height="72" rx="7"/><rect x="54" y="5" width="42" height="72" rx="7"/><rect x="103" y="5" width="42" height="72" rx="7"/><rect x="152" y="5" width="42" height="72" rx="7"/><rect x="201" y="5" width="42" height="72" rx="7"/></g></g>
+      <!-- forest framing kept outside UI safe zone -->
+      <g filter="url(#awSoft)"><path d="M0 0h145l58 250-72 600H0Z" fill="#70401E"/><path d="M1400 0h-140l-54 250 62 600h132Z" fill="#70401E"/><g fill="#247D3C"><circle cx="70" cy="65" r="128"/><circle cx="190" cy="38" r="108"/><circle cx="1325" cy="65" r="132"/><circle cx="1210" cy="35" r="106"/></g><g fill="#62BE4B"><circle cx="120" cy="115" r="74"/><circle cx="1275" cy="120" r="78"/></g><g fill="#94E35A"><circle cx="20" cy="195" r="53"/><circle cx="1380" cy="190" r="58"/></g></g>
+      <!-- cute, low-detail foreground decorations -->
+      <g class="flower-bed" font-size="40"><text x="24" y="805">🌼</text><text x="108" y="754">🍄</text><text x="210" y="815">🌸</text><text x="324" y="780">🌻</text><text x="1210" y="798">🌺</text><text x="1320" y="730">🍄</text><text x="1125" y="830">🌷</text></g>
+      <g class="butterflies" font-size="34"><text x="420" y="238">🦋</text><text x="920" y="215">✨</text><text x="1180" y="345">🦋</text></g>
+      <g fill="#FFF38B" opacity=".9"><circle class="twinkle t1" cx="478" cy="168" r="6"/><circle class="twinkle t2" cx="810" cy="205" r="5"/><circle class="twinkle t3" cx="1160" cy="305" r="7"/></g>
     </svg>
-    <div class="heroChar" id="heroChar" aria-hidden="true"></div>
   </div>
-
-  <div class="logo">
-    <div class="title">ภารกิจนักล่าความรู้</div>
-    <div class="sub">เกมตอบคำถามวิทยาศาสตร์ สำหรับนักเรียนประถม</div>
+  <div class="home-ui">
+    <div class="player-card" aria-label="โปรไฟล์นักผจญภัย">
+      <div class="avatar-ring" id="homeAvatar"></div>
+      <div><div class="player-name">นักผจญภัยตัวน้อย</div><span class="player-level" id="homeLevel">Lv. 1</span><div class="xp-label"><span>ประสบการณ์</span><span id="homeXPText">0 / 100</span></div><div class="xp-track" role="progressbar" aria-label="ค่าประสบการณ์" aria-valuemin="0" aria-valuemax="100"><i class="xp-fill" id="homeXP" style="width:0%"></i></div></div>
+    </div>
+    <div class="resource-bar" aria-label="ทรัพยากรผู้เล่น">
+      <div class="resource-pill heart"><span class="resource-icon">❤️</span><span>พลังเต็ม</span></div>
+      <div class="resource-pill"><span class="resource-icon">🪙</span><span id="homeCoins">0</span></div>
+      <div class="resource-pill gem"><span class="resource-icon">💎</span><span id="homeGems">0</span></div>
+    </div>
+    <div class="central-home">
+      <div class="game-logo"><div class="logo-main">ภารกิจ<br>นักล่าความรู้</div><div class="logo-ribbon">ออกผจญภัย ฝึกทักษะ และสะสมดาวแห่งความรู้</div></div>
+      <button class="start-quest" id="btnStart">🚀 เริ่มผจญภัย</button>
+      <div class="home-hint">🌟 มี 6 ดินแดน 30 ด่าน และ 180 คำถามรอให้ค้นพบ</div>
+    </div>
+    <div class="home-character" id="heroChar" aria-hidden="true"></div><div class="helper-creature" aria-hidden="true">🦉</div>
+    <nav class="home-menu" aria-label="เมนูหลัก">
+      <button class="home-menu-btn" data-go="s-howto"><span aria-hidden="true">📚</span><b>วิธีเล่น</b></button>
+      <button class="home-menu-btn" id="btnPickStage"><span aria-hidden="true">🗺️</span><b>เลือกด่าน</b></button>
+      <button class="home-menu-btn" data-go="s-stats"><span aria-hidden="true">🏆</span><b>คะแนน</b></button>
+      <button class="home-menu-btn" data-go="s-rewards"><span aria-hidden="true">🎁</span><b>รางวัล</b></button>
+      <button class="home-menu-btn" data-go="s-settings"><span aria-hidden="true">⚙️</span><b>ตั้งค่า</b></button>
+    </nav>
   </div>
-
-  <div class="greet"><span aria-hidden="true">👋</span><span>สวัสดีนักผจญภัย! วันนี้พร้อมออกล่าความรู้หรือยัง</span></div>
-
-  <button class="btn gold" id="btnStart">🚀 เริ่มเกม</button>
-  <button class="btn sky" data-go="s-howto">📖 วิธีเล่น</button>
-  <button class="btn grape" data-go="s-stats">📊 ดูคะแนน</button>
-  <button class="btn ghost" id="btnPickStage">🗺️ เลือกด่าน</button>
-  <p class="foot">ความคืบหน้าเก็บไว้ในเครื่องนี้ ไม่ต้องล็อกอิน</p>
 </section>
-
 <!-- ========== 2. วิธีเล่น ========== -->
 <section class="screen" id="s-howto" aria-label="วิธีเล่น">
   <h1>📖 วิธีเล่น</h1>
@@ -396,7 +693,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
 <!-- ========== 3. เลือกวิชา ========== -->
 <section class="screen" id="s-subjects" aria-label="เลือกวิชา">
   <h1>เลือกวิชาที่อยากผจญภัย</h1>
-  <p style="color:var(--ink2);margin-top:6px">ตอนนี้เปิดให้เล่นวิชาวิทยาศาสตร์ก่อน วิชาอื่นกำลังตามมา</p>
+  <p style="color:var(--ink2);margin-top:6px">เลือกสนุกได้ครบ 6 วิชา แต่ละวิชามี 5 ด่าน พร้อมคำอธิบายทุกข้อ</p>
   <div class="subjects" id="subjectList"></div>
   <button class="btn ghost" style="margin-top:18px" data-go="s-home">🏠 กลับหน้าหลัก</button>
 </section>
@@ -417,12 +714,9 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
 
 <!-- ========== 5. เรื่องราวก่อนเข้าด่าน ========== -->
 <section class="screen" id="s-story" aria-label="เรื่องราวก่อนเข้าด่าน">
-  <h1 id="storyTitle"></h1>
-  <div class="speech" style="margin-top:16px">
-    <div class="who" id="storyChar" aria-hidden="true"></div>
-    <div class="bubble" id="storyText"></div>
-  </div>
-  <button class="btn gold" id="btnStoryGo">⚔️ ลุยด่านนี้</button>
+  <span class="page-kicker">📍 เรื่องราวก่อนเริ่มด่าน</span>
+  <h1 id="storyTitle"></h1><div class="story-panel"><div class="speech"><div class="who" id="storyChar" aria-hidden="true"></div><div class="bubble" id="storyText"></div></div><div class="mission-chips" aria-label="ข้อมูลภารกิจ"><span>❓ 6 คำถาม</span><span>❤️ หัวใจ 3 ดวง</span><span>💡 คำใบ้ 3 ครั้ง</span></div></div>
+  <button class="btn gold" id="btnStoryGo">🚀 เริ่มภารกิจ</button>
   <button class="btn ghost" data-go="s-map">🗺️ กลับแผนที่</button>
 </section>
 
@@ -439,6 +733,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
     <div class="qbar"><i id="hudBar" style="width:0%"></i></div>
   </div>
 
+  <div class="qvisual" aria-hidden="true"><span class="pic" id="qPic">💡</span></div>
   <div class="card">
     <span class="qtag" id="qTag"></span>
     <div class="qtext" id="qText"></div>
@@ -519,6 +814,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
       <div><b>🐢 ลดอนิเมชัน</b><small>ปิดภาพเคลื่อนไหว เหมาะกับเด็กที่ไวต่อการกระพริบ หรือเครื่องที่ช้า</small></div>
       <button class="sw" id="swCalm" role="switch" aria-checked="false" aria-label="เปิดปิดการลดอนิเมชัน"></button>
     </div>
+    <div class="setrow"><div><b>🌙 โหมดกลางคืน</b><small>เปลี่ยนพื้นหลังเป็นสีเข้มเพื่อให้สบายตา</small><span class="settings-state" id="themeState">ปิด</span></div><button class="sw" id="swTheme" role="switch" aria-checked="false" aria-label="เปิดปิดโหมดกลางคืน"></button></div>
   </div>
   <div class="card tint">
     <h3>🧹 ล้างความคืบหน้า</h3>
@@ -528,7 +824,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
   <button class="btn ghost" data-go="s-home">🏠 กลับหน้าหลัก</button>
 </section>
 
-</main>
+</main><dialog class="confirm-dialog" id="wipeDialog" aria-labelledby="wipeTitle" aria-describedby="wipeDesc"><div class="dialog-card"><div class="dialog-icon" aria-hidden="true">🧹</div><h2 id="wipeTitle">ล้างความคืบหน้าหรือไม่?</h2><p id="wipeDesc">คะแนน ดาว เหรียญ เพชร เหรียญตรา และด่านที่ปลดล็อกจะถูกลบ แต่การตั้งค่าจะยังคงเดิม</p><div class="dialog-actions"><button class="btn ghost" id="btnCancelWipe">ยกเลิก</button><button class="btn coral" id="btnConfirmWipe">ล้างข้อมูล</button></div></div></dialog><div id="toastSlot" aria-live="polite" aria-atomic="true"></div>
 <script>
 /* ============================================================================
    ╔══════════════════════════════════════════════════════════════════════╗
@@ -546,7 +842,7 @@ html.calm *,html.calm *::before,html.calm *::after{animation:none !important;tra
    -----------------------------------------------------------------------
    หาวิชาที่เขียนว่า ready:false แล้วเปลี่ยนเป็น ready:true
    จากนั้นใส่ levels ให้ครบ 5 ด่าน เลียนแบบรูปแบบของวิชาวิทยาศาสตร์
-   จำนวนข้อต่อด่านไม่จำเป็นต้องเท่ากับ 6 ระบบนับจำนวนข้อให้อัตโนมัติ
+   แต่ละด่านในฉบับนี้มี 6 ข้อ ระบบนับจำนวนข้อให้อัตโนมัติ
 ============================================================================ */
 
 const SUBJECTS = [
@@ -646,12 +942,17 @@ const SUBJECTS = [
       }
     ]
   },
-  { id:"social",  name:"สังคมศึกษา",      emoji:"🌏", tint:"var(--gold)",  tintD:"var(--gold-d)",  blurb:"ชุมชน ประเทศไทย และโลกของเรา", ready:false, levels:[] },
-  { id:"math",    name:"คณิตศาสตร์",       emoji:"🔢", tint:"var(--sky)",   tintD:"var(--sky-d)",   blurb:"บวก ลบ คูณ หาร และรูปทรง",   ready:false, levels:[] },
-  { id:"thai",    name:"ภาษาไทย",         emoji:"📕", tint:"var(--coral)", tintD:"var(--coral-d)", blurb:"สระ วรรณยุกต์ และคำศัพท์",   ready:false, levels:[] },
-  { id:"english", name:"ภาษาอังกฤษ",      emoji:"🔤", tint:"var(--grape)", tintD:"var(--grape-d)", blurb:"คำศัพท์และประโยคง่าย ๆ",     ready:false, levels:[] },
-  { id:"coding",  name:"วิทยาการคำนวณ",   emoji:"💻", tint:"var(--pink)",  tintD:"var(--pink-d)",  blurb:"ลำดับขั้นตอนและการแก้ปัญหา",  ready:false, levels:[] }
+  {"id":"social","name":"สังคมศึกษา","emoji":"🌏","tint":"var(--gold)","tintD":"var(--gold-d)","blurb":"ชุมชน ประเทศไทย หน้าที่พลเมือง และวัฒนธรรม","ready":true,"levels":[{"name":"ชุมชนแสนสุข","emoji":"🏘️","topic":"ครอบครัว โรงเรียน และชุมชน","story":"ยินดีต้อนรับสู่ ชุมชนแสนสุข มาช่วยกันตอบคำถามเรื่องครอบครัว โรงเรียน และชุมชนให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ข้อใดเป็นหน้าที่ของนักเรียน","c":["ตั้งใจเรียนและเคารพกติกา","แกล้งเพื่อน","ทำลายของส่วนรวม","ทิ้งขยะ"],"a":0,"why":"นักเรียนควรตั้งใจเรียน เคารพกติกา และรับผิดชอบงานของตน","pic":"🎒"},{"q":"เมื่อใช้ของส่วนรวมเสร็จควรทำอย่างไร","c":["เก็บเข้าที่","นำกลับบ้าน","ซ่อนไว้","วางทิ้งไว้"],"a":0,"why":"ของส่วนรวมเป็นของทุกคน จึงควรดูแลและเก็บคืนที่เดิม","pic":"🧸"},{"q":"เมื่อเพื่อนคิดต่างควรทำอย่างไร","c":["รับฟังอย่างสุภาพ","ตะโกนใส่","บังคับให้เห็นด้วย","เลิกคบ"],"a":0,"why":"การรับฟังช่วยให้เราอยู่ร่วมกันได้อย่างเข้าใจ","pic":"💬"}]},{"name":"เมืองคนดี","emoji":"⚖️","topic":"สิทธิ หน้าที่ และประชาธิปไตย","story":"ยินดีต้อนรับสู่ เมืองคนดี มาช่วยกันตอบคำถามเรื่องสิทธิ หน้าที่ และประชาธิปไตยให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"การเลือกหัวหน้าห้องควรใช้วิธีใด","c":["ลงคะแนนอย่างสุจริต","เลือกคนให้ขนม","ให้คนเดียวตัดสิน","ทะเลาะกัน"],"a":0,"why":"การลงคะแนนเปิดโอกาสให้ทุกคนมีส่วนร่วมอย่างเท่าเทียม","pic":"🗳️"},{"q":"ข้อใดเป็นสิทธิของเด็ก","c":["ได้รับการศึกษา","ทำร้ายผู้อื่น","ทำลายของ","ไม่เคารพกติกา"],"a":0,"why":"เด็กทุกคนมีสิทธิได้รับการศึกษาและความปลอดภัย","pic":"📚"},{"q":"พบของหายควรทำอย่างไร","c":["ส่งครูหรือจุดรับของหาย","เก็บไว้เอง","นำไปขาย","ซ่อน"],"a":0,"why":"การส่งคืนเป็นความซื่อสัตย์และเคารพสิทธิผู้อื่น","pic":"🔎"}]},{"name":"ตลาดภูมิปัญญา","emoji":"🛍️","topic":"เศรษฐศาสตร์ในชีวิตประจำวัน","story":"ยินดีต้อนรับสู่ ตลาดภูมิปัญญา มาช่วยกันตอบคำถามเรื่องเศรษฐศาสตร์ในชีวิตประจำวันให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ข้อใดเป็นการออม","c":["เก็บเงินไว้ใช้ในอนาคต","ซื้อทุกอย่างทันที","ทำเงินหาย","ยืมทุกวัน"],"a":0,"why":"การออมช่วยเตรียมเงินสำหรับเป้าหมายและเหตุจำเป็น","pic":"🐷"},{"q":"ก่อนซื้อของควรทำอะไร","c":["คิดถึงความจำเป็นและเปรียบเทียบราคา","ซื้อเพราะเพื่อนซื้อ","ไม่ดูราคา","ซื้อทุกชิ้น"],"a":0,"why":"การวางแผนช่วยให้ใช้เงินคุ้มค่า","pic":"🧾"},{"q":"ชาวนาทำงานสำคัญอะไร","c":["ปลูกข้าวและพืชอาหาร","ซ่อมเครื่องบิน","รักษาผู้ป่วย","สอนหนังสือ"],"a":0,"why":"ชาวนาผลิตอาหารให้คนในสังคม","pic":"🌾"}]},{"name":"แผนที่ประเทศไทย","emoji":"🗺️","topic":"ภูมิศาสตร์และทรัพยากร","story":"ยินดีต้อนรับสู่ แผนที่ประเทศไทย มาช่วยกันตอบคำถามเรื่องภูมิศาสตร์และทรัพยากรให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ประเทศไทยอยู่ในทวีปใด","c":["เอเชีย","ยุโรป","แอฟริกา","อเมริกาใต้"],"a":0,"why":"ประเทศไทยอยู่ในเอเชียตะวันออกเฉียงใต้","pic":"🌏"},{"q":"ดวงอาทิตย์ขึ้นทางทิศใด","c":["ตะวันออก","ตะวันตก","เหนือ","ใต้"],"a":0,"why":"เรามองเห็นดวงอาทิตย์ขึ้นทางทิศตะวันออก","pic":"🌅"},{"q":"การประหยัดน้ำทำได้อย่างไร","c":["ปิดก๊อกขณะแปรงฟัน","เปิดน้ำทิ้ง","เทน้ำสะอาดทิ้ง","เล่นน้ำทุกวัน"],"a":0,"why":"ปิดก๊อกเมื่อไม่ใช้ช่วยลดการสูญเสียน้ำ","pic":"🚰"}]},{"name":"พิพิธภัณฑ์กาลเวลา","emoji":"🏛️","topic":"ประวัติศาสตร์ ศาสนา และวัฒนธรรม","story":"ยินดีต้อนรับสู่ พิพิธภัณฑ์กาลเวลา มาช่วยกันตอบคำถามเรื่องประวัติศาสตร์ ศาสนา และวัฒนธรรมให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"สิ่งใดช่วยให้รู้เรื่องในอดีต","c":["โบราณวัตถุ","ของที่เพิ่งผลิต","โฆษณาใหม่","เกมใหม่"],"a":0,"why":"โบราณวัตถุและเอกสารเก่าช่วยศึกษาอดีต","pic":"🏺"},{"q":"การไหว้แสดงถึงอะไร","c":["ความเคารพ","การแข่งขัน","ความโกรธ","การซื้อขาย"],"a":0,"why":"การไหว้ใช้ทักทาย ขอบคุณ ขอโทษ และแสดงความเคารพ","pic":"🙏"},{"q":"ควรปฏิบัติอย่างไรในศาสนสถาน","c":["สุภาพและเคารพกติกา","ส่งเสียงดัง","วิ่งเล่น","จับของทุกชิ้น"],"a":0,"why":"ศาสนสถานเป็นพื้นที่เคารพ จึงควรวางตัวสุภาพ","pic":"🪷"}]}]},
+  {"id":"math","name":"คณิตศาสตร์","emoji":"🔢","tint":"var(--sky)","tintD":"var(--sky-d)","blurb":"จำนวน การคำนวณ รูปทรง การวัด และโจทย์ปัญหา","ready":true,"levels":[{"name":"เกาะตัวเลข","emoji":"🔢","topic":"จำนวนและค่าประจำหลัก","story":"ยินดีต้อนรับสู่ เกาะตัวเลข มาช่วยกันตอบคำถามเรื่องจำนวนและค่าประจำหลักให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"เลข 7 ในจำนวน 375 มีค่าเท่าใด","c":["70","7","700","7000"],"a":0,"why":"7 อยู่ในหลักสิบ จึงมีค่า 70","pic":"7️⃣"},{"q":"จำนวนถัดจาก 999 คือข้อใด","c":["1000","998","990","1099"],"a":0,"why":"999 เพิ่มอีก 1 เท่ากับ 1000","pic":"➡️"},{"q":"ข้อใดเป็นจำนวนคู่","c":["24","17","31","45"],"a":0,"why":"จำนวนคู่ลงท้ายด้วย 0, 2, 4, 6 หรือ 8","pic":"✌️"}]},{"name":"สะพานบวกลบ","emoji":"➕","topic":"การบวกและการลบ","story":"ยินดีต้อนรับสู่ สะพานบวกลบ มาช่วยกันตอบคำถามเรื่องการบวกและการลบให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"36 + 27 เท่ากับเท่าใด","c":["63","53","73","62"],"a":0,"why":"36 บวก 20 ได้ 56 แล้วบวก 7 ได้ 63","pic":"➕"},{"q":"90 - 48 เท่ากับเท่าใด","c":["42","52","38","48"],"a":0,"why":"90 ลบ 48 เหลือ 42","pic":"➖"},{"q":"มีลูกโป่ง 50 ใบ แตก 18 ใบ เหลือกี่ใบ","c":["32","28","38","42"],"a":0,"why":"50 - 18 = 32","pic":"🎈"}]},{"name":"ถ้ำคูณหาร","emoji":"✖️","topic":"การคูณและการหาร","story":"ยินดีต้อนรับสู่ ถ้ำคูณหาร มาช่วยกันตอบคำถามเรื่องการคูณและการหารให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"6 × 4 เท่ากับเท่าใด","c":["24","20","28","10"],"a":0,"why":"6 กลุ่ม กลุ่มละ 4 มีทั้งหมด 24","pic":"✖️"},{"q":"35 ÷ 5 เท่ากับเท่าใด","c":["7","5","6","8"],"a":0,"why":"เพราะ 5 × 7 = 35","pic":"➗"},{"q":"ขนม 24 ชิ้น แบ่ง 6 คน คนละกี่ชิ้น","c":["4","3","5","6"],"a":0,"why":"24 ÷ 6 = 4","pic":"🍪"}]},{"name":"นครรูปทรง","emoji":"📐","topic":"รูปทรงและการวัด","story":"ยินดีต้อนรับสู่ นครรูปทรง มาช่วยกันตอบคำถามเรื่องรูปทรงและการวัดให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"รูปสามเหลี่ยมมีกี่ด้าน","c":["3","4","5","ไม่มีด้าน"],"a":0,"why":"รูปสามเหลี่ยมมี 3 ด้าน","pic":"🔺"},{"q":"รูปใดไม่มีมุม","c":["วงกลม","สี่เหลี่ยม","สามเหลี่ยม","ห้าเหลี่ยม"],"a":0,"why":"วงกลมเป็นเส้นโค้งต่อเนื่อง","pic":"⭕"},{"q":"1 เมตรเท่ากับกี่เซนติเมตร","c":["100","10","1000","60"],"a":0,"why":"1 เมตรมี 100 เซนติเมตร","pic":"📏"}]},{"name":"ปราสาทโจทย์ปัญหา","emoji":"🏰","topic":"เวลา เงิน และการประยุกต์","story":"ยินดีต้อนรับสู่ ปราสาทโจทย์ปัญหา มาช่วยกันตอบคำถามเรื่องเวลา เงิน และการประยุกต์ให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"8:30 น. อีก 1 ชั่วโมงเป็นเวลาใด","c":["9:30 น.","8:31 น.","7:30 น.","10:30 น."],"a":0,"why":"เพิ่ม 1 ชั่วโมงเป็น 9:30 น.","pic":"⏰"},{"q":"มี 50 บาท ซื้อของ 32 บาท เหลือเท่าใด","c":["18 บาท","22 บาท","12 บาท","82 บาท"],"a":0,"why":"50 - 32 = 18 บาท","pic":"💵"},{"q":"สมุด 12 บาท ซื้อ 3 เล่มจ่ายเท่าใด","c":["36 บาท","24 บาท","15 บาท","48 บาท"],"a":0,"why":"12 × 3 = 36 บาท","pic":"📒"}]}]},
+  {"id":"thai","name":"ภาษาไทย","emoji":"📕","tint":"var(--coral)","tintD":"var(--coral-d)","blurb":"พยัญชนะ สระ คำ ประโยค และการอ่าน","ready":true,"levels":[{"name":"สวนพยัญชนะ","emoji":"ก","topic":"พยัญชนะและสระ","story":"ยินดีต้อนรับสู่ สวนพยัญชนะ มาช่วยกันตอบคำถามเรื่องพยัญชนะและสระให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"พยัญชนะไทยมีกี่ตัว","c":["44 ตัว","42 ตัว","46 ตัว","50 ตัว"],"a":0,"why":"พยัญชนะไทยมี 44 ตัว ตั้งแต่ ก ถึง ฮ","pic":"กข"},{"q":"คำว่า กา ใช้สระใด","c":["สระอา","สระอี","สระอู","สระเอ"],"a":0,"why":"กา ประสมด้วย ก และสระอา","pic":"🐦"},{"q":"คำใดมีสระอู","c":["ปู","ปลา","เป็ด","นก"],"a":0,"why":"คำว่า ปู ใช้สระอู","pic":"🦀"}]},{"name":"หุบเขาวรรณยุกต์","emoji":"่","topic":"วรรณยุกต์","story":"ยินดีต้อนรับสู่ หุบเขาวรรณยุกต์ มาช่วยกันตอบคำถามเรื่องวรรณยุกต์ให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"วรรณยุกต์ไทยมีกี่รูป","c":["4 รูป","5 รูป","3 รูป","6 รูป"],"a":0,"why":"มีไม้เอก ไม้โท ไม้ตรี และไม้จัตวา","pic":"่้๊๋"},{"q":"คำใดมีไม้เอก","c":["ไก่","ไก้","ไก๊","ไก๋"],"a":0,"why":"ไก่ มีเครื่องหมายไม้เอก","pic":"🐔"},{"q":"คำว่า จ๋า ใช้วรรณยุกต์ใด","c":["ไม้จัตวา","ไม้เอก","ไม้โท","ไม้ตรี"],"a":0,"why":"เครื่องหมาย ๋ เรียกว่าไม้จัตวา","pic":"📣"}]},{"name":"เมืองคำศัพท์","emoji":"📝","topic":"ชนิดและความหมายของคำ","story":"ยินดีต้อนรับสู่ เมืองคำศัพท์ มาช่วยกันตอบคำถามเรื่องชนิดและความหมายของคำให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"คำใดเป็นคำนาม","c":["โรงเรียน","วิ่ง","สวย","เร็ว"],"a":0,"why":"โรงเรียนเป็นชื่อสถานที่ จึงเป็นคำนาม","pic":"🏫"},{"q":"คำใดเป็นคำกริยา","c":["กระโดด","เด็ก","สีแดง","เบา"],"a":0,"why":"กระโดดแสดงการกระทำ","pic":"🦘"},{"q":"คำตรงข้ามของ สูง คือข้อใด","c":["ต่ำ","ยาว","ใหญ่","ไกล"],"a":0,"why":"สูงและต่ำมีความหมายตรงข้าม","pic":"↕️"}]},{"name":"สะพานประโยค","emoji":"💬","topic":"ประโยคและการสื่อสาร","story":"ยินดีต้อนรับสู่ สะพานประโยค มาช่วยกันตอบคำถามเรื่องประโยคและการสื่อสารให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ประโยคใดสมบูรณ์","c":["น้องอ่านหนังสือ","ที่สนาม","สีแดงมาก","เพราะฝนตก"],"a":0,"why":"มีผู้กระทำและการกระทำครบ","pic":"📖"},{"q":"ข้อใดเป็นประโยคคำถาม","c":["เธอจะไปไหน","ฉันไปโรงเรียน","อย่าวิ่ง","วันนี้อากาศดี"],"a":0,"why":"ประโยคนี้ใช้ถามสถานที่","pic":"❓"},{"q":"ข้อใดเรียงคำถูกต้อง","c":["แมวกินปลา","กินปลาแมว","ปลากินแมว","ปลาแมวกิน"],"a":0,"why":"ภาษาไทยมักเรียง ประธาน กริยา กรรม","pic":"🐱"}]},{"name":"หอสมุดนักอ่าน","emoji":"📚","topic":"อ่านจับใจความ","story":"ยินดีต้อนรับสู่ หอสมุดนักอ่าน มาช่วยกันตอบคำถามเรื่องอ่านจับใจความให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ใจความสำคัญคืออะไร","c":["สาระหลักของเรื่อง","คำยาวที่สุด","ประโยคสุดท้ายเสมอ","ชื่อผู้เขียน"],"a":0,"why":"ใจความสำคัญคือสาระหลักที่ผู้เขียนต้องการสื่อ","pic":"💡"},{"q":"นิทานมักให้ประโยชน์ใด","c":["ความสนุกและข้อคิด","ทำให้ไม่ต้องเรียน","บอกอากาศเสมอ","ใช้แทนแผนที่"],"a":0,"why":"นิทานให้ความเพลิดเพลิน จินตนาการ และข้อคิด","pic":"📕"},{"q":"อ่านในห้องสมุดควรทำอย่างไร","c":["อ่านเงียบและดูแลหนังสือ","ตะโกน","ฉีกหนังสือ","วางบนพื้น"],"a":0,"why":"ควรรักษาความสงบและดูแลของส่วนรวม","pic":"🤫"}]}]},
+  {"id":"english","name":"ภาษาอังกฤษ","emoji":"🔤","tint":"var(--grape)","tintD":"var(--grape-d)","blurb":"คำศัพท์ ประโยค บทสนทนา และการอ่าน","ready":true,"levels":[{"name":"ABC Garden","emoji":"🔤","topic":"Alphabet and sounds","story":"ยินดีต้อนรับสู่ ABC Garden มาช่วยกันตอบคำถามเรื่องAlphabet and soundsให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"Which letter comes after B?","c":["C","A","D","E"],"a":0,"why":"The alphabet begins A, B, C, D.","pic":"ABC"},{"q":"Which word begins with D?","c":["Dog","Cat","Fish","Ant"],"a":0,"why":"Dog begins with the letter D.","pic":"🐶"},{"q":"Which is a vowel?","c":["A","B","C","D"],"a":0,"why":"A is a vowel.","pic":"🅰️"}]},{"name":"Word Forest","emoji":"🌳","topic":"Everyday vocabulary","story":"ยินดีต้อนรับสู่ Word Forest มาช่วยกันตอบคำถามเรื่องEveryday vocabularyให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"What does apple mean?","c":["แอปเปิล","กล้วย","ส้ม","องุ่น"],"a":0,"why":"Apple means แอปเปิล.","pic":"🍎"},{"q":"Which word means สีฟ้า?","c":["Blue","Red","Green","Black"],"a":0,"why":"Blue means สีฟ้าหรือสีน้ำเงิน.","pic":"🔵"},{"q":"Which animal says meow?","c":["Cat","Dog","Cow","Duck"],"a":0,"why":"A cat says meow.","pic":"🐱"}]},{"name":"Sentence Train","emoji":"🚂","topic":"Simple sentences","story":"ยินดีต้อนรับสู่ Sentence Train มาช่วยกันตอบคำถามเรื่องSimple sentencesให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"Choose the correct sentence.","c":["I am a student.","I student am a.","Am I student a.","Student a I am."],"a":0,"why":"English statements use subject + verb + complement.","pic":"🚂"},{"q":"She ___ happy.","c":["is","are","am","be"],"a":0,"why":"Use is with she.","pic":"😊"},{"q":"This is ___ orange.","c":["an","a","some a","two"],"a":0,"why":"Use an before a vowel sound.","pic":"🍊"}]},{"name":"Conversation Town","emoji":"🗣️","topic":"Greetings and polite words","story":"ยินดีต้อนรับสู่ Conversation Town มาช่วยกันตอบคำถามเรื่องGreetings and polite wordsให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"What do you say in the morning?","c":["Good morning.","Good night.","Goodbye.","Sorry."],"a":0,"why":"Good morning is used in the morning.","pic":"🌞"},{"q":"Someone gives you a gift. You say...","c":["Thank you.","Sit down.","Be quiet.","Never mind."],"a":0,"why":"Thank you shows gratitude.","pic":"🎁"},{"q":"A polite request is...","c":["Can you help me, please?","Help now!","Go away.","No talking."],"a":0,"why":"Please makes a request polite.","pic":"🙏"}]},{"name":"Reading Castle","emoji":"🏰","topic":"Reading and grammar","story":"ยินดีต้อนรับสู่ Reading Castle มาช่วยกันตอบคำถามเรื่องReading and grammarให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"Tom has two dogs. How many dogs?","c":["Two","One","Three","Four"],"a":0,"why":"The sentence says two dogs.","pic":"🐶🐶"},{"q":"The sun is hot. Which word describes it?","c":["Hot","Sun","Is","The"],"a":0,"why":"Hot is an adjective.","pic":"☀️"},{"q":"Which word is plural?","c":["Books","Book","Chair","Table"],"a":0,"why":"Books means more than one book.","pic":"📚"}]}]},
+  {"id":"coding","name":"วิทยาการคำนวณ","emoji":"💻","tint":"var(--pink)","tintD":"var(--pink-d)","blurb":"ขั้นตอน ตรรกะ ข้อมูล โค้ด และความปลอดภัยดิจิทัล","ready":true,"levels":[{"name":"หมู่บ้านอัลกอริทึม","emoji":"🧩","topic":"ลำดับขั้นตอน","story":"ยินดีต้อนรับสู่ หมู่บ้านอัลกอริทึม มาช่วยกันตอบคำถามเรื่องลำดับขั้นตอนให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"อัลกอริทึมคืออะไร","c":["ลำดับขั้นตอนแก้ปัญหา","ชื่อเกม","อุปกรณ์","สีหน้าจอ"],"a":0,"why":"อัลกอริทึมคือลำดับขั้นตอนที่ชัดเจน","pic":"🪜"},{"q":"คำสั่งใดชัดเจนที่สุด","c":["เดินหน้า 3 ก้าว","ไปตรงนั้น","ทำให้ดี","ขยับนิดหน่อย"],"a":0,"why":"คำสั่งควรระบุการกระทำและจำนวน","pic":"🤖"},{"q":"การทำซ้ำหลายครั้งเรียกว่าอะไร","c":["วนซ้ำ","เงื่อนไข","ข้อมูล","ภาพ"],"a":0,"why":"การวนซ้ำช่วยทำคำสั่งเดิมหลายครั้ง","pic":"🔁"}]},{"name":"เขาวงกตตรรกะ","emoji":"🧠","topic":"เงื่อนไขและการแก้ปัญหา","story":"ยินดีต้อนรับสู่ เขาวงกตตรรกะ มาช่วยกันตอบคำถามเรื่องเงื่อนไขและการแก้ปัญหาให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ถ้าฝนตกให้กางร่ม เป็นแนวคิดใด","c":["เงื่อนไข","วนซ้ำ","วาดภาพ","บันทึกเสียง"],"a":0,"why":"ถ้า...ให้... คือการตัดสินใจตามเงื่อนไข","pic":"☔"},{"q":"แบ่งปัญหาใหญ่เป็นปัญหาย่อยดีอย่างไร","c":["แก้ง่ายขึ้น","ปัญหาใหญ่ขึ้น","ข้อมูลหาย","ไม่ต้องคิด"],"a":0,"why":"ทำให้วางแผนและตรวจสอบทีละส่วนได้","pic":"🧩"},{"q":"วิธีแรกไม่สำเร็จควรทำอย่างไร","c":["ตรวจสอบและลองใหม่","ยอมแพ้","ลบทุกอย่าง","เดาสุ่ม"],"a":0,"why":"ตรวจข้อผิดพลาดและปรับวิธีเป็นทักษะสำคัญ","pic":"🔧"}]},{"name":"สถานีข้อมูล","emoji":"📊","topic":"ข้อมูลและการนำเสนอ","story":"ยินดีต้อนรับสู่ สถานีข้อมูล มาช่วยกันตอบคำถามเรื่องข้อมูลและการนำเสนอให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"ข้อใดเป็นข้อมูลตัวเลข","c":["นักเรียน 30 คน","สีฟ้า","ชื่อมานี","รูปแมว"],"a":0,"why":"จำนวนคนเป็นข้อมูลเชิงจำนวน","pic":"3️⃣0️⃣"},{"q":"เปรียบเทียบจำนวนแต่ละกลุ่มใช้อะไร","c":["แผนภูมิแท่ง","เพลง","นิทาน","พื้นหลัง"],"a":0,"why":"แผนภูมิแท่งแสดงความต่างได้ชัด","pic":"📊"},{"q":"ข้อมูลใดไม่ควรบอกคนแปลกหน้า","c":["รหัสผ่าน","สีที่ชอบ","สัตว์ที่ชอบ","วิชาที่ชอบ"],"a":0,"why":"รหัสผ่านต้องเก็บเป็นความลับ","pic":"🔐"}]},{"name":"ห้องทดลองโค้ด","emoji":"💻","topic":"โปรแกรมและการดีบัก","story":"ยินดีต้อนรับสู่ ห้องทดลองโค้ด มาช่วยกันตอบคำถามเรื่องโปรแกรมและการดีบักให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"โปรแกรมคอมพิวเตอร์คืออะไร","c":["ชุดคำสั่งให้คอมพิวเตอร์ทำงาน","จอภาพ","โต๊ะ","สายไฟ"],"a":0,"why":"โปรแกรมคือชุดคำสั่งที่คอมพิวเตอร์ทำตาม","pic":"💻"},{"q":"debug หมายถึงอะไร","c":["ค้นหาและแก้ข้อผิดพลาด","ตกแต่งจอ","ปิดเครื่อง","ซื้ออุปกรณ์"],"a":0,"why":"ดีบักคือการตรวจและแก้ข้อผิดพลาด","pic":"🐞"},{"q":"ให้ตัวละครเดิน 5 ครั้งควรใช้อะไร","c":["วนซ้ำ 5 ครั้ง","หยุดทั้งหมด","สุ่ม","ลบตัวละคร"],"a":0,"why":"บล็อกวนซ้ำช่วยทำคำสั่งซ้ำตามจำนวน","pic":"🔁"}]},{"name":"ปราสาทพลเมืองดิจิทัล","emoji":"🛡️","topic":"ความปลอดภัยออนไลน์","story":"ยินดีต้อนรับสู่ ปราสาทพลเมืองดิจิทัล มาช่วยกันตอบคำถามเรื่องความปลอดภัยออนไลน์ให้ครบ แล้วปลดล็อกด่านต่อไปกันเถอะ!","questions":[{"q":"รหัสผ่านที่ดีควรเป็นอย่างไร","c":["ยาวและคาดเดายาก","1234","ชื่อเล่น","บอกทุกคน"],"a":0,"why":"รหัสผ่านยาว ไม่ซ้ำ และเดายากช่วยปกป้องบัญชี","pic":"🔑"},{"q":"คนแปลกหน้าขอที่อยู่ควรทำอย่างไร","c":["ไม่ส่งและบอกผู้ใหญ่","ส่งทันที","นัดพบ","ให้รหัสผ่าน"],"a":0,"why":"อย่าเผยข้อมูลส่วนตัวและควรบอกผู้ใหญ่ที่ไว้ใจ","pic":"🚫"},{"q":"ก่อนเชื่อข่าวออนไลน์ควรทำอะไร","c":["ตรวจหลายแหล่งน่าเชื่อถือ","เชื่อทันที","ส่งต่อทันที","ดูเฉพาะภาพ"],"a":0,"why":"ตรวจแหล่งที่มาและข้อมูลหลายแหล่งก่อนเชื่อ","pic":"🧐"}]}]}
 ];
+
+
+/* Added question pack: ensures 6 questions per level */
+const EXTRA_QUESTIONS={"social":[[["ข้อใดช่วยให้ห้องเรียนสะอาด",["ทิ้งขยะลงถัง","วางขยะใต้โต๊ะ","เขียนโต๊ะ","ฉีกกระดาษเล่น"],0,"การทิ้งขยะลงถังช่วยรักษาพื้นที่ส่วนรวม","🧹"],["เมื่อเพื่อนล้มควรทำอย่างไร",["ช่วยพยุงและบอกครู","หัวเราะ","เดินหนี","แกล้งซ้ำ"],0,"การช่วยเหลือกันทำให้ชุมชนน่าอยู่","🤝"],["กติกามีประโยชน์อย่างไร",["ช่วยให้อยู่ร่วมกันเป็นระเบียบ","ทำให้ทะเลาะกัน","ทำให้ไม่มีหน้าที่","ใช้กับบางคนเท่านั้น"],0,"กติกาที่เป็นธรรมช่วยให้ทุกคนอยู่ร่วมกันอย่างปลอดภัย","📜"]],[["ประชาธิปไตยให้ความสำคัญกับสิ่งใด",["การมีส่วนร่วมของประชาชน","คำสั่งของคนเดียว","การใช้กำลัง","การไม่รับฟัง"],0,"ประชาธิปไตยเปิดโอกาสให้คนมีส่วนร่วมและเคารพเสียงต่าง","🗣️"],["ข้อใดแสดงความรับผิดชอบ",["ทำงานที่ได้รับมอบหมาย","โยนงานให้เพื่อน","ปิดบังความผิด","ไม่รักษาสัญญา"],0,"ความรับผิดชอบคือการทำหน้าที่ของตนให้สำเร็จ","✅"],["เมื่อทำผิดควรทำอย่างไร",["ยอมรับ ขอโทษ และแก้ไข","กล่าวโทษผู้อื่น","ทำซ้ำ","หนีปัญหา"],0,"การยอมรับและแก้ไขช่วยให้เราเรียนรู้จากความผิดพลาด","🌱"]],[["เงินมีหน้าที่สำคัญอย่างไร",["ใช้แลกเปลี่ยนสินค้าและบริการ","ใช้แทนอาหาร","ทำให้ของฟรี","ทำให้ไม่ต้องทำงาน"],0,"เงินเป็นสื่อกลางในการแลกเปลี่ยน","🪙"],["สิ่งใดเป็นความจำเป็นพื้นฐาน",["อาหาร","ของเล่นชิ้นที่สิบ","สติกเกอร์ซ้ำ","ลูกโป่งทุกวัน"],0,"อาหารจำเป็นต่อการดำรงชีวิต","🍚"],["การทำบัญชีรายรับรายจ่ายช่วยอะไร",["รู้ว่าเงินเข้าออกเท่าไร","ทำให้เงินหาย","ซื้อได้ไม่จำกัด","ไม่ต้องออม"],0,"การจดบันทึกช่วยวางแผนการใช้เงิน","📒"]],[["สีฟ้าบนแผนที่มักแทนสิ่งใด",["แหล่งน้ำ","ภูเขา","อาคาร","ถนน"],0,"แผนที่นิยมใช้สีฟ้าแทนแม่น้ำและทะเล","💧"],["เข็มทิศใช้ทำอะไร",["บอกทิศทาง","ชั่งน้ำหนัก","วัดอุณหภูมิ","ดูเวลา"],0,"เข็มทิศช่วยระบุทิศเหนือ ใต้ ตะวันออก และตะวันตก","🧭"],["ข้อใดเป็นทรัพยากรธรรมชาติ",["ป่าไม้","โทรศัพท์","รถยนต์","ของเล่น"],0,"ป่าไม้เกิดขึ้นตามธรรมชาติและมีประโยชน์ต่อสิ่งมีชีวิต","🌲"]],[["ประเพณีมีประโยชน์อย่างไร",["ช่วยสืบทอดวัฒนธรรม","ทำให้ลืมอดีต","ทำลายชุมชน","ทำให้ทุกคนเหมือนกัน"],0,"ประเพณีถ่ายทอดคุณค่าและเชื่อมคนในชุมชน","🎊"],["เหตุใดควรรักษาโบราณสถาน",["เป็นหลักฐานและมรดกของสังคม","เพื่อเขียนเล่น","เพื่อนำชิ้นส่วนกลับบ้าน","เพราะเป็นของใหม่"],0,"โบราณสถานช่วยให้เราเรียนรู้เรื่องราวในอดีต","🏛️"],["การเคารพวัฒนธรรมที่ต่างกันช่วยอะไร",["อยู่ร่วมกันอย่างเข้าใจ","เพิ่มการแบ่งแยก","ทำให้ทะเลาะ","ทำให้บังคับผู้อื่น"],0,"การเคารพความหลากหลายทำให้สังคมสงบและเป็นมิตร","🌈"]]],"math":[[["ค่าของเลข 5 ใน 542 คือเท่าใด",["500","50","5","5000"],0,"5 อยู่ในหลักร้อย จึงมีค่า 500","5️⃣"],["จำนวนใดน้อยที่สุด",["206","260","620","602"],0,"206 มีค่าหลักร้อยเท่ากับ 2 และหลักสิบต่ำที่สุด","🔍"],["ข้อใดเรียงจากน้อยไปมาก",["18, 27, 36","36, 27, 18","27, 18, 36","18, 36, 27"],0,"18 น้อยกว่า 27 และ 27 น้อยกว่า 36","📈"]],[["48 + 35 เท่ากับเท่าใด",["83","73","93","82"],0,"48 บวก 30 ได้ 78 แล้วบวก 5 ได้ 83","➕"],["72 - 29 เท่ากับเท่าใด",["43","53","41","47"],0,"72 ลบ 29 เหลือ 43","➖"],["□ + 26 = 60 ควรเติมจำนวนใด",["34","36","44","24"],0,"60 ลบ 26 เท่ากับ 34","🧮"]],[["7 × 5 เท่ากับเท่าใด",["35","30","40","12"],0,"7 กลุ่ม กลุ่มละ 5 รวมเป็น 35","✖️"],["48 ÷ 6 เท่ากับเท่าใด",["8","6","7","9"],0,"เพราะ 6 × 8 = 48","➗"],["ลูกอม 30 เม็ดแบ่ง 5 ถุง ถุงละกี่เม็ด",["6","5","8","10"],0,"30 หาร 5 เท่ากับ 6","🍬"]],[["รูปสี่เหลี่ยมจัตุรัสมีกี่ด้าน",["4","3","5","6"],0,"สี่เหลี่ยมจัตุรัสมี 4 ด้านยาวเท่ากัน","🟨"],["เครื่องมือใดใช้ชั่งน้ำหนัก",["เครื่องชั่ง","ไม้บรรทัด","นาฬิกา","เข็มทิศ"],0,"เครื่องชั่งใช้วัดน้ำหนัก","⚖️"],["กระป๋องน้ำมีรูปทรงคล้ายอะไร",["ทรงกระบอก","ทรงกลม","ลูกบาศก์","พีระมิด"],0,"กระป๋องมีฐานวงกลมสองด้านและผิวข้างโค้ง","🥫"]],[["เวลา 14:00 น. คือกี่โมง",["บ่ายสองโมง","เที่ยง","สี่โมงเย็น","สองทุ่ม"],0,"14:00 น. คือบ่ายสองโมง","⏰"],["ดินสอ 8 บาท ซื้อ 4 แท่งจ่ายเท่าใด",["32 บาท","12 บาท","24 บาท","40 บาท"],0,"8 × 4 = 32 บาท","✏️"],["มีส้ม 20 ผล แจก 7 ผล เหลือกี่ผล",["13","12","14","27"],0,"20 - 7 = 13","🍊"]]],"thai":[[["คำใดประสมด้วยสระอี",["ดี","ดู","ดา","โด"],0,"คำว่า ดี มีสระอีอยู่ด้านบน ด","😊"],["พยัญชนะต้นของคำว่า ปลา คือข้อใด",["ป","ล","า","พ"],0,"คำว่า ปลา มี ป เป็นพยัญชนะต้น","🐟"],["คำใดมีสระเอ",["เท","ทา","ที","ทู"],0,"คำว่า เท ประสมด้วยสระเอ","🌟"]],[["คำใดมีไม้โท",["บ้าน","ป่า","โต๊ะ","จ๋า"],0,"คำว่า บ้าน ใช้ไม้โท","🏠"],["คำใดมีไม้ตรี",["โต๊ะ","ไก่","บ้าน","จ๋า"],0,"คำว่า โต๊ะ มีไม้ตรี","🪑"],["คำว่า ป่า ใช้วรรณยุกต์ใด",["ไม้เอก","ไม้โท","ไม้ตรี","ไม้จัตวา"],0,"คำว่า ป่า มีรูปไม้เอก","🌳"]],[["คำใดเป็นคำวิเศษณ์",["สวย","เด็ก","วิ่ง","โรงเรียน"],0,"สวยใช้บอกลักษณะของคำนาม","🌸"],["คำที่มีความหมายคล้าย รวดเร็ว คือข้อใด",["ว่องไว","เชื่องช้า","เงียบ","หนัก"],0,"ว่องไวหมายถึงเคลื่อนไหวได้เร็ว","⚡"],["ข้อใดเป็นคำสุภาพ",["รับประทาน","เขมือบ","ซัด","กินแหลก"],0,"รับประทานเป็นคำสุภาพที่ใช้แทนคำว่ากิน","🍽️"]],[["เติมคำใดในประโยค คุณแม่ ___ อาหาร",["ทำ","โต๊ะ","สีเขียว","ช้า ๆ มาก"],0,"คำว่า ทำ เป็นกริยาที่ทำให้ประโยคสมบูรณ์","👩‍🍳"],["เมื่อขอความช่วยเหลือควรพูดอย่างไร",["กรุณาช่วยหน่อยค่ะ/ครับ","ทำให้เดี๋ยวนี้","ไปไกล ๆ","ไม่ต้องฟัง"],0,"คำว่า กรุณา และคำลงท้ายทำให้ประโยคสุภาพ","🙏"],["ประโยคใดเป็นคำสั่ง",["กรุณาปิดประตู","วันนี้อากาศดี","เธอชื่ออะไร","ฉันชอบอ่านหนังสือ"],0,"กรุณาปิดประตูเป็นประโยคที่ขอให้ทำสิ่งหนึ่ง","🚪"]],[["ก่อนสรุปเรื่องควรทำอย่างไร",["อ่านครบและหาประเด็นสำคัญ","อ่านเฉพาะชื่อ","เดาอย่างเดียว","คัดทุกคำ"],0,"อ่านครบช่วยให้สรุปได้ถูกต้อง","🔎"],["ตัวละครในเรื่องหมายถึงอะไร",["ผู้ที่มีบทบาทในเรื่อง","ชื่อหนังสือ","สถานที่เท่านั้น","คำสุดท้าย"],0,"ตัวละครคือผู้ที่กระทำหรือมีบทบาทในเรื่อง","🧑‍🚀"],["ชื่อเรื่องมีประโยชน์อย่างไร",["ช่วยบอกแนวคิดของเรื่อง","บอกคำตอบทุกข้อ","ใช้แทนเนื้อหา","ไม่มีประโยชน์"],0,"ชื่อเรื่องช่วยคาดเดาหัวข้อหรือสาระของเรื่อง","📘"]]],"english":[[["Which letter comes before F?",["E","G","D","H"],0,"E comes before F.","EF"],["Which word begins with B?",["Ball","Cat","Dog","Fish"],0,"Ball begins with B.","⚽"],["Which is a lowercase A?",["a","b","d","e"],0,"The lowercase form of A is a.","Aa"]],[["Which word means หนังสือ?",["Book","Chair","Door","Bag"],0,"Book means หนังสือ.","📘"],["What color is a banana?",["Yellow","Blue","Purple","Black"],0,"A ripe banana is usually yellow.","🍌"],["Which one is a fruit?",["Mango","Table","Pencil","Shoe"],0,"A mango is a fruit.","🥭"]],[["They ___ students.",["are","is","am","be"],0,"Use are with they.","👧👦"],["I ___ happy.",["am","is","are","be"],0,"Use am with I.","😊"],["He ___ a bike.",["has","have","having","are"],0,"Use has with he.","🚲"]],[["How do you ask someone's name?",["What is your name?","How old is it?","Where is the book?","What color is it?"],0,"What is your name? asks for a name.","👋"],["What do you say before bed?",["Good night.","Good morning.","Welcome.","Hello."],0,"Good night is used before sleeping.","🌙"],["What do you say after making a mistake?",["I'm sorry.","Good morning.","Welcome.","Sit down."],0,"I'm sorry is used to apologize.","💙"]],[["Yesterday, I ___ to school.",["went","go","goes","going"],0,"Went is the past form of go.","🏫"],["Which sentence is a question?",["Do you like milk?","I like milk.","Milk is white.","Drink milk."],0,"A question asks for information and ends with ?","❓"],["Which sentence has correct punctuation?",["Where are you?","where are you","Where are you.","where Are you!"],0,"A question starts with a capital letter and ends with a question mark.","✍️"]]],"coding":[[["ก่อนทำอาหารควรทำอะไรเป็นขั้นแรก",["เตรียมวัตถุดิบ","ล้างจานหลังอาหาร","เก็บอาหาร","ปิดไฟ"],0,"การเตรียมวัตถุดิบเป็นขั้นตอนก่อนเริ่มทำอาหาร","🥕"],["หุ่นยนต์ต้องเดินเป็นสี่เหลี่ยม คำสั่งใดต้องทำซ้ำ",["เดินหน้าและเลี้ยว","ปิดเครื่อง","ส่งเสียง","เปลี่ยนสี"],0,"การเดินหน้าและเลี้ยวซ้ำทำให้เกิดเส้นทางสี่เหลี่ยม","🤖"],["เหตุใดคำสั่งต้องชัดเจน",["เพื่อให้ทำตามได้ถูกต้อง","เพื่อให้เดายาก","เพื่อให้ยาวที่สุด","เพื่อให้มีสีสวย"],0,"คำสั่งชัดเจนช่วยลดความผิดพลาด","🎯"]],[["ลำดับ 3, 6, 9 มีรูปแบบใด",["เพิ่มทีละ 3","ลดทีละ 3","เพิ่มทีละ 2","ไม่มีรูปแบบ"],0,"แต่ละจำนวนเพิ่มจากก่อนหน้า 3","🔢"],["ถ้าคะแนนมากกว่า 5 ให้ผ่าน เป็นแนวคิดใด",["เงื่อนไข","ภาพวาด","เสียง","ข้อมูลส่วนตัว"],0,"โปรแกรมตัดสินใจตามเงื่อนไขคะแนน","🚦"],["การลองหลายวิธีช่วยเรื่องใด",["ค้นหาวิธีที่เหมาะสม","ทำให้ห้ามคิด","ทำให้ข้อมูลหาย","ทำให้เครื่องพัง"],0,"การทดลองและเปรียบเทียบช่วยพัฒนาวิธีแก้ปัญหา","🧪"]],[["การจัดหนังสือตามหมวดมีประโยชน์อย่างไร",["ค้นหาได้ง่าย","ทำให้หาย","ทำให้อ่านไม่ได้","ทำให้ข้อมูลผิด"],0,"การจัดกลุ่มทำให้ค้นหาและใช้งานสะดวก","🗂️"],["ถ้าต้องการรู้ผลไม้ที่เพื่อนชอบควรทำอะไร",["สำรวจและบันทึก","เดาเอง","ถามคนเดียว","ไม่เก็บข้อมูล"],0,"การสำรวจหลายคนทำให้ข้อมูลน่าเชื่อถือขึ้น","📋"],["ข้อมูลใดเหมาะแสดงด้วยกราฟแท่ง",["จำนวนหนังสือแต่ละประเภท","เสียงเพลง","รหัสผ่าน","นิทานทั้งเรื่อง"],0,"กราฟแท่งเหมาะกับการเปรียบเทียบจำนวน","📊"]],[["บล็อก เมื่อคลิกธงเขียว ทำหน้าที่อะไร",["เริ่มโปรแกรม","ลบข้อมูล","ปิดเครื่อง","เปลี่ยนคอมพิวเตอร์"],0,"บล็อกเหตุการณ์กำหนดจุดเริ่มทำงาน","🚩"],["โปรแกรมไม่ทำงานตามคาดควรทำอะไร",["ตรวจคำสั่งทีละขั้น","ทุบเครื่อง","ยอมแพ้","เดาสุ่ม"],0,"การตรวจทีละขั้นช่วยหาจุดผิดพลาด","🔎"],["ตัวแปรใช้เก็บอะไร",["ข้อมูลที่เปลี่ยนค่าได้","หน้าจอ","สายไฟ","โต๊ะ"],0,"ตัวแปรใช้เก็บค่า เช่น คะแนนหรือชื่อผู้เล่น","📦"]],[["พบข้อความไม่เหมาะสมในเกมควรทำอย่างไร",["บล็อก รายงาน และบอกผู้ใหญ่","ด่ากลับ","ส่งต่อ","เปิดเผยข้อมูล"],0,"การบล็อกและรายงานเป็นวิธีที่ปลอดภัย","🛡️"],["ก่อนโพสต์รูปเพื่อนควรทำอะไร",["ขออนุญาตเพื่อน","โพสต์ทันที","ใส่ที่อยู่เพื่อน","ส่งให้คนแปลกหน้า"],0,"การขออนุญาตเคารพความเป็นส่วนตัวของเพื่อน","📷"],["มารยาทออนไลน์ที่ดีคือข้อใด",["ใช้คำสุภาพและเคารพผู้อื่น","ล้อเลียน","ส่งข้อความรบกวน","เผยรหัสผ่าน"],0,"โลกออนไลน์ควรมีความสุภาพและรับผิดชอบเช่นเดียวกับโลกจริง","💬"]]]};
+SUBJECTS.forEach(function(s){ if(!EXTRA_QUESTIONS[s.id]) return; s.levels.forEach(function(lv,i){ (EXTRA_QUESTIONS[s.id][i]||[]).forEach(function(x){ lv.questions.push({q:x[0],c:x[1],a:x[2],why:x[3],pic:x[4]}); }); }); });
 
 /* เหรียญตราความสำเร็จ */
 const BADGES = [
@@ -662,7 +963,7 @@ const BADGES = [
   { id:"star10",    e:"⭐", n:"นักสะสมดาว",         d:"สะสมดาวครบ 10 ดวง" },
   { id:"coin100",   e:"🪙", n:"เศรษฐีเหรียญ",       d:"สะสมเหรียญครบ 100 เหรียญ" },
   { id:"correct50", e:"📚", n:"ขยันเรียน",          d:"ตอบถูกรวม 50 ข้อ" },
-  { id:"champion",  e:"🏆", n:"เจ้าแห่งความรู้",     d:"ผ่านครบทั้ง 5 ด่าน" }
+  { id:"champion",  e:"🏆", n:"เจ้าแห่งความรู้",     d:"ผ่านครบทุกด่านของทั้ง 6 วิชา" }
 ];
 
 /* ============================================================================
@@ -679,70 +980,42 @@ function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.rand
 
 /* ---------- ตัวละครนักสำรวจ 5 อารมณ์ ---------- */
 function charSVG(mood){
-  mood = mood || 'happy';
-  const SKIN='#F5C595', INK='#33261A', SHIRT='#1E9A52', SHIRT_D='#136B39';
-  const up = mood==='celebrate';
-  let eyes, mouth, brow='', extra='';
-
-  if(mood==='happy' || mood==='celebrate'){
-    eyes = '<path d="M48 70 q9 -12 18 0" stroke="'+INK+'" stroke-width="5" fill="none" stroke-linecap="round"/>'
-         + '<path d="M74 70 q9 -12 18 0" stroke="'+INK+'" stroke-width="5" fill="none" stroke-linecap="round"/>';
-  } else if(mood==='surprised'){
-    eyes = '<circle cx="57" cy="68" r="10" fill="#fff" stroke="'+INK+'" stroke-width="3"/><circle cx="57" cy="68" r="4.5" fill="'+INK+'"/>'
-         + '<circle cx="83" cy="68" r="10" fill="#fff" stroke="'+INK+'" stroke-width="3"/><circle cx="83" cy="68" r="4.5" fill="'+INK+'"/>';
-  } else if(mood==='thinking'){
-    eyes = '<ellipse cx="57" cy="68" rx="7" ry="8" fill="#fff" stroke="'+INK+'" stroke-width="2.5"/><circle cx="59" cy="64" r="3.6" fill="'+INK+'"/>'
-         + '<ellipse cx="83" cy="68" rx="7" ry="8" fill="#fff" stroke="'+INK+'" stroke-width="2.5"/><circle cx="85" cy="64" r="3.6" fill="'+INK+'"/>';
-  } else { /* confident */
-    eyes = '<ellipse cx="57" cy="69" rx="6.5" ry="7.5" fill="'+INK+'"/><circle cx="59.5" cy="66" r="2.3" fill="#fff"/>'
-         + '<ellipse cx="83" cy="69" rx="6.5" ry="7.5" fill="'+INK+'"/><circle cx="85.5" cy="66" r="2.3" fill="#fff"/>';
-    brow = '<path d="M48 56 q9 -4 18 -1" stroke="'+INK+'" stroke-width="4" fill="none" stroke-linecap="round"/>'
-         + '<path d="M74 52 q9 -3 18 2" stroke="'+INK+'" stroke-width="4" fill="none" stroke-linecap="round"/>';
+  mood=mood||'happy';
+  const ink='#4A2B2B',skin='#FFD7B5',hair='#6A3C28',teal='#32BFAE',tealD='#167D78',gold='#FFC64A',coral='#FF6F72';
+  const celebrate=mood==='celebrate', thinking=mood==='thinking', surprised=mood==='surprised', confident=mood==='confident';
+  let eyes='';
+  if(mood==='happy'||celebrate){
+    eyes='<path d="M52 68q8-10 16 0" fill="none" stroke="'+ink+'" stroke-width="5" stroke-linecap="round"/><path d="M82 68q8-10 16 0" fill="none" stroke="'+ink+'" stroke-width="5" stroke-linecap="round"/>';
+  }else{
+    eyes='<ellipse cx="60" cy="67" rx="9" ry="11" fill="#fff" stroke="'+ink+'" stroke-width="3"/><ellipse cx="90" cy="67" rx="9" ry="11" fill="#fff" stroke="'+ink+'" stroke-width="3"/><circle cx="62" cy="68" r="5" fill="'+ink+'"/><circle cx="92" cy="68" r="5" fill="'+ink+'"/><circle cx="64" cy="65" r="2" fill="#fff"/><circle cx="94" cy="65" r="2" fill="#fff"/>';
   }
-
-  if(mood==='celebrate'){
-    mouth = '<path d="M56 82 Q70 104 84 82 Z" fill="#8E3B3B"/><path d="M62 93 Q70 101 78 93 Z" fill="#E8798F"/>';
-    extra = '<path d="M16 34 l3.5 8 8 3.5 -8 3.5 -3.5 8 -3.5 -8 -8 -3.5 8 -3.5 Z" fill="#F0A81E"/>'
-          + '<path d="M124 46 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 Z" fill="#F0A81E"/>';
-  } else if(mood==='surprised'){
-    mouth = '<ellipse cx="70" cy="89" rx="7.5" ry="9.5" fill="#8E3B3B"/>';
-    extra = '<path d="M122 16 L122 32" stroke="#E4523C" stroke-width="5" stroke-linecap="round"/><circle cx="122" cy="40" r="3" fill="#E4523C"/>';
-  } else if(mood==='thinking'){
-    mouth = '<path d="M59 88 q6 -5 11 0 q5 5 11 0" stroke="'+INK+'" stroke-width="3.5" fill="none" stroke-linecap="round"/>';
-    extra = '<circle cx="110" cy="42" r="4" fill="#fff" stroke="'+INK+'" stroke-width="2"/>'
-          + '<circle cx="119" cy="24" r="12" fill="#fff" stroke="'+INK+'" stroke-width="2"/>'
-          + '<circle cx="113.5" cy="24" r="1.9" fill="'+INK+'"/><circle cx="119" cy="24" r="1.9" fill="'+INK+'"/><circle cx="124.5" cy="24" r="1.9" fill="'+INK+'"/>';
-  } else if(mood==='confident'){
-    mouth = '<path d="M58 85 q13 9 24 -3" stroke="'+INK+'" stroke-width="4" fill="none" stroke-linecap="round"/>';
-  } else {
-    mouth = '<path d="M57 84 q13 12 26 0" stroke="'+INK+'" stroke-width="4.5" fill="none" stroke-linecap="round"/>';
-  }
-
-  return '<svg viewBox="0 0 140 176" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ตัวละครนักสำรวจ">'
-    + '<ellipse cx="70" cy="170" rx="40" ry="6" fill="rgba(0,0,0,.14)"/>'
-    + '<rect x="55" y="140" width="13" height="22" rx="6.5" fill="#4A3B2A"/><rect x="72" y="140" width="13" height="22" rx="6.5" fill="#4A3B2A"/>'
-    + '<rect x="48" y="156" width="24" height="12" rx="6" fill="#2F2419"/><rect x="68" y="156" width="24" height="12" rx="6" fill="#2F2419"/>'
-    + '<g transform="rotate('+(up?-46:12)+' 44 108)"><rect x="30" y="102" width="15" height="38" rx="7.5" fill="'+SHIRT+'"/><circle cx="37.5" cy="142" r="8.5" fill="'+SKIN+'"/></g>'
-    + '<g transform="rotate('+(up?46:-12)+' 96 108)"><rect x="95" y="102" width="15" height="38" rx="7.5" fill="'+SHIRT+'"/><circle cx="102.5" cy="142" r="8.5" fill="'+SKIN+'"/></g>'
-    + '<rect x="42" y="98" width="56" height="48" rx="19" fill="'+SHIRT+'"/>'
-    + '<path d="M56 99 L62 146 M84 99 L78 146" stroke="'+SHIRT_D+'" stroke-width="5" stroke-linecap="round"/>'
-    + '<rect x="62" y="88" width="16" height="14" fill="'+SKIN+'"/>'
-    + '<path d="M47 94 q23 15 46 0 l4 13 q-27 15 -54 0 Z" fill="#E4523C"/>'
-    + '<ellipse cx="70" cy="66" rx="34" ry="32" fill="'+SKIN+'"/>'
-    + '<circle cx="36" cy="72" r="7.5" fill="'+SKIN+'"/><circle cx="104" cy="72" r="7.5" fill="'+SKIN+'"/>'
-    + '<ellipse cx="45" cy="81" rx="8.5" ry="5.5" fill="#F0837F" opacity=".5"/><ellipse cx="95" cy="81" rx="8.5" ry="5.5" fill="#F0837F" opacity=".5"/>'
-    + brow + eyes + mouth
-    + '<path d="M40 42 C41 14 54 5 70 5 C86 5 99 14 100 42 Z" fill="#CE9151"/>'
-    + '<path d="M41 32 C52 27 88 27 99 32 L100 42 L40 42 Z" fill="'+SHIRT+'"/>'
-    + '<ellipse cx="70" cy="43" rx="46" ry="9.5" fill="#B57A3C"/>'
-    + '<path d="M70 12 l3.5 8 8.5 1 -6.5 6 1.8 8.5 -7.3 -4.5 -7.3 4.5 1.8 -8.5 -6.5 -6 8.5 -1 Z" fill="#F0A81E"/>'
-    + extra + '</svg>';
+  let mouth=surprised?'<ellipse cx="75" cy="88" rx="7" ry="8" fill="#9D4350"/>':'<path d="M61 84q14 17 28 0" fill="#fff" stroke="'+ink+'" stroke-width="4" stroke-linejoin="round"/>';
+  let prop=thinking?'<g transform="translate(116 92)"><circle r="18" fill="#BDEEFF" stroke="'+ink+'" stroke-width="4"/><rect x="12" y="12" width="9" height="30" rx="4" transform="rotate(-42)" fill="'+gold+'" stroke="'+ink+'" stroke-width="3"/></g>':'<g transform="translate(105 111) rotate(-8)"><rect width="35" height="45" rx="5" fill="#FFF0B8" stroke="'+ink+'" stroke-width="3"/><path d="M7 11h21M7 19h18M7 27h21" stroke="'+tealD+'" stroke-width="3" stroke-linecap="round"/></g>';
+  let extras=celebrate?'<g fill="'+gold+'"><path d="M20 34l4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1Z"/><path d="M132 43l3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1Z"/></g>':thinking?'<g fill="#fff" stroke="'+ink+'" stroke-width="2"><circle cx="126" cy="31" r="12"/><circle cx="115" cy="49" r="5"/></g>':'';
+  return '<svg viewBox="0 0 150 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ตัวละครนักผจญภัยตัวน้อย">'
+   +'<ellipse cx="75" cy="181" rx="45" ry="7" fill="rgba(70,45,24,.18)"/>'
+   +'<path d="M40 114q35-22 70 0v47q-35 20-70 0Z" fill="'+teal+'" stroke="'+ink+'" stroke-width="4"/>'
+   +'<path d="M52 118l7 44M98 118l-7 44" stroke="'+tealD+'" stroke-width="6" stroke-linecap="round"/>'
+   +'<path d="M53 157v19h19v-19M78 157v19h19v-19" fill="#7A563A" stroke="'+ink+'" stroke-width="4"/><path d="M47 173h28v12H47zM75 173h28v12H75z" rx="6" fill="#493127"/>'
+   +'<g transform="rotate('+(celebrate?-42:8)+' 42 124)"><rect x="29" y="112" width="18" height="44" rx="9" fill="'+teal+'" stroke="'+ink+'" stroke-width="4"/><circle cx="38" cy="157" r="10" fill="'+skin+'" stroke="'+ink+'" stroke-width="3"/></g>'
+   +'<g transform="rotate('+(celebrate?42:-8)+' 108 124)"><rect x="103" y="112" width="18" height="44" rx="9" fill="'+teal+'" stroke="'+ink+'" stroke-width="4"/><circle cx="112" cy="157" r="10" fill="'+skin+'" stroke="'+ink+'" stroke-width="3"/></g>'
+   +'<path d="M43 125q32 17 64 0" fill="none" stroke="'+gold+'" stroke-width="8"/><circle cx="75" cy="128" r="10" fill="'+gold+'" stroke="'+ink+'" stroke-width="3"/><path d="M75 121l2 5 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1Z" fill="#fff8c7"/>'
+   +'<rect x="66" y="101" width="18" height="16" rx="7" fill="'+skin+'"/>'
+   +'<circle cx="75" cy="70" r="48" fill="'+hair+'" stroke="'+ink+'" stroke-width="4"/>'
+   +'<circle cx="35" cy="79" r="13" fill="'+hair+'" stroke="'+ink+'" stroke-width="4"/><circle cx="115" cy="79" r="13" fill="'+hair+'" stroke="'+ink+'" stroke-width="4"/>'
+   +'<ellipse cx="75" cy="72" rx="39" ry="38" fill="'+skin+'"/>'
+   +'<path d="M38 59q6-39 37-39t39 39q-14-16-34-21-20 18-42 21Z" fill="'+hair+'"/>'
+   +'<circle cx="43" cy="82" r="7" fill="'+skin+'"/><circle cx="107" cy="82" r="7" fill="'+skin+'"/>'
+   +'<ellipse cx="48" cy="84" rx="9" ry="5" fill="'+coral+'" opacity=".32"/><ellipse cx="102" cy="84" rx="9" ry="5" fill="'+coral+'" opacity=".32"/>'
+   +eyes+mouth
+   +'<path d="M38 37q2-28 37-31 35 3 37 31Z" fill="'+gold+'" stroke="'+ink+'" stroke-width="4"/><path d="M42 31h66v14H42z" fill="'+teal+'"/><ellipse cx="75" cy="43" rx="49" ry="11" fill="'+gold+'" stroke="'+ink+'" stroke-width="4"/><path d="M75 11l4 9 10 1-8 7 3 10-9-5-9 5 3-10-8-7 10-1Z" fill="#fff4a3" stroke="'+ink+'" stroke-width="2"/>'
+   +prop+extras+'</svg>';
 }
 
 /* ---------- บันทึกความคืบหน้าในเครื่อง ---------- */
 const KEY='knowledge-quest-th-v1';
 const FRESH={ unlocked:{science:1}, best:{}, coins:0, diamonds:0, correct:0, wrong:0,
-              bestScore:0, totalScore:0, plays:0, badges:[], sound:true, calm:false };
+              bestScore:0, totalScore:0, plays:0, badges:[], sound:true, calm:false, dark:false };
 let SAVE = JSON.parse(JSON.stringify(FRESH));
 
 function load(){
@@ -834,8 +1107,16 @@ function curtain(cb){
   setTimeout(function(){ c.classList.remove('on'); },1320);
 }
 
+
+function renderHome(){
+  const xp=Math.max(0,SAVE.correct*10), level=Math.floor(xp/100)+1, inLevel=xp%100;
+  const c=$('#homeCoins'),g=$('#homeGems'),l=$('#homeLevel'),xt=$('#homeXPText'),xb=$('#homeXP');
+  if(c)c.textContent=SAVE.coins;if(g)g.textContent=SAVE.diamonds;if(l)l.textContent='Lv. '+level;if(xt)xt.textContent=inLevel+' / 100';if(xb){xb.style.width=inLevel+'%';xb.parentElement.setAttribute('aria-valuenow',inLevel);}
+}
 /* ---------- สลับหน้าจอ ---------- */
 function go(id){
+  document.body.setAttribute('data-screen',id);
+  if(id==='s-home') renderHome();
   $$('.screen').forEach(function(s){ s.classList.toggle('on', s.id===id); });
   window.scrollTo(0,0);
 }
@@ -844,8 +1125,8 @@ function go(id){
 let G={ sid:'science', li:0, qi:0, qs:[], score:0, hearts:3, hints:3,
         streak:0, bestStreak:0, right:0, wrong:0, hintsUsed:0, locked:false };
 
-const PRAISE=['เก่งมาก!','สุดยอดไปเลย!','ถูกต้องนะครับ!','ยอดเยี่ยม!','เยี่ยมมาก!','แม่นมาก!'];
-const CHEER =['ไม่เป็นไรนะ ข้อนี้ยากจริง ๆ','ใกล้แล้ว! อ่านคำอธิบายแล้วไปต่อกัน','ตอบผิดได้ เราได้ความรู้เพิ่มแล้ว','ไม่ต้องเสียใจ ข้อหน้าเอาใหม่!'];
+const PRAISE=['เก่งมาก!','สุดยอดไปเลย!','ถูกต้องแล้ว!','ยอดเยี่ยม!','เยี่ยมมาก!','แม่นมาก!'];
+const CHEER =['ไม่เป็นไร ข้อนี้ช่วยให้เราได้เรียนรู้เพิ่ม','ใกล้แล้ว! อ่านคำอธิบายแล้วไปต่อกัน','ตอบผิดได้ เราได้ความรู้เพิ่มแล้ว','ไม่ต้องเสียใจ ข้อหน้าเอาใหม่!'];
 
 /* ---------- 3. เลือกวิชา ---------- */
 function renderSubjects(){
@@ -855,12 +1136,9 @@ function renderSubjects(){
     b.className='subj'+(s.ready?'':' locked');
     b.style.background=s.tint;
     b.style.boxShadow='0 6px 0 '+s.tintD+',0 11px 16px var(--shadow)';
-    const tail = s.ready
-      ? '<span class="sd">ผ่านแล้ว '+clearedCount(s.id)+' จาก '+s.levels.length+' ด่าน</span>'
-      : '<span class="soon">เร็ว ๆ นี้</span>';
-    b.innerHTML='<span class="se" aria-hidden="true">'+s.emoji+'</span>'
-      +'<span style="flex:1"><span class="sn">'+esc(s.name)+'</span>'
-      +'<span class="sd">'+esc(s.blurb)+'</span>'+tail+'</span>';
+    const passed=clearedCount(s.id), pct=Math.round(passed/s.levels.length*100); let sStars=0; s.levels.forEach(function(lv,i){const x=bestOf(s.id,i);if(x)sStars+=x.stars;});
+    const tail=s.ready?'<span class="subj-foot"><span>✅ '+passed+'/'+s.levels.length+' ด่าน</span><span>⭐ '+sStars+'/'+(s.levels.length*3)+'</span></span><span class="subj-mini" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><i style="width:'+pct+'%"></i></span>':'<span class="soon">เร็ว ๆ นี้</span>';
+    b.innerHTML='<span class="se" aria-hidden="true">'+s.emoji+'</span><span class="subj-info" style="flex:1"><span class="sn">'+esc(s.name)+'</span><span class="sd">'+esc(s.blurb)+'</span>'+tail+'</span>';
     if(s.ready){
       b.addEventListener('click',function(){ SFX.click(); G.sid=s.id; renderMap(); go('s-map'); });
     }else{
@@ -910,7 +1188,7 @@ function showStory(){
 function prepare(list){
   return shuffle(list.slice()).map(function(q){
     const order=shuffle(q.c.map(function(_,i){ return i; }));
-    return { q:q.q, c:order.map(function(i){ return q.c[i]; }), a:order.indexOf(q.a), why:q.why };
+    return { q:q.q, c:order.map(function(i){ return q.c[i]; }), a:order.indexOf(q.a), why:q.why, pic:q.pic||"💡" };
   });
 }
 function startLevel(){
@@ -938,6 +1216,7 @@ function renderQuestion(){
   G.locked=false;
   $('#qTag').textContent=lv.emoji+' '+lv.topic;
   $('#qText').textContent=q.q;
+  $('#qPic').textContent=q.pic||lv.emoji||'💡';
   $('#hudStage').textContent='ด่าน '+(G.li+1)+' · '+lv.name;
   $('#hudCount').textContent='ข้อที่ '+(G.qi+1)+' จาก '+G.qs.length;
   $('#hudBar').style.width=Math.round(G.qi/G.qs.length*100)+'%';
@@ -1035,7 +1314,7 @@ function checkBadges(stars){
   if(starsTotal()>=10) add('star10');
   if(SAVE.coins>=100) add('coin100');
   if(SAVE.correct>=50) add('correct50');
-  if(clearedCount(G.sid)>=subj(G.sid).levels.length) add('champion');
+  if(SUBJECTS.filter(function(s){return s.ready;}).every(function(s){return clearedCount(s.id)>=s.levels.length;})) add('champion');
   return got;
 }
 const tiles = arr => arr.map(function(t){
@@ -1091,29 +1370,55 @@ function renderOver(){
 
 /* ---------- 10. ผลการเรียนรู้ ---------- */
 function renderStats(){
-  const s=subj(G.sid), total=s.levels.length, cleared=clearedCount(G.sid);
-  const pct=Math.round(cleared/total*100);
+  const ready=SUBJECTS.filter(function(x){ return x.ready; });
+  const totalStages=ready.reduce(function(n,x){ return n+x.levels.length; },0);
+  const cleared=ready.reduce(function(n,x){ return n+clearedCount(x.id); },0);
+  const pct=totalStages ? Math.round(cleared/totalStages*100) : 0;
   $('#statPct').textContent=pct+'%';
   $('#statBar').style.width=pct+'%';
   const ans=SAVE.correct+SAVE.wrong;
   const acc=ans>0 ? Math.round(SAVE.correct/ans*100) : 0;
+  const allBestScore=ready.reduce(function(sum,s){
+    return sum+s.levels.reduce(function(x,lv,i){ const b=bestOf(s.id,i); return x+(b?b.score:0); },0);
+  },0);
   $('#statTiles').innerHTML=tiles([
-    ['⭐',SAVE.totalScore,'คะแนนรวมสะสม'],
+    ['⭐',allBestScore,'คะแนนรวมดีที่สุดทุกวิชา'],
     ['🏆',SAVE.bestScore,'คะแนนสูงสุดในด่านเดียว'],
     ['✅',SAVE.correct,'ตอบถูกทั้งหมด'],
     ['❌',SAVE.wrong,'ตอบผิดทั้งหมด'],
     ['🎯',acc+'%','ความแม่นยำ'],
-    ['🗺️',cleared+'/'+total,'ด่านที่ผ่าน']
+    ['🗺️',cleared+'/'+totalStages,'ด่านที่ผ่านทั้งหมด'],['⭐',starsTotal(),'ดาวสะสม'],['🪙',SAVE.coins,'เหรียญสะสม'],['💎',SAVE.diamonds,'เพชรสะสม']
   ]);
-  let html='<h3>คะแนนสูงสุดของแต่ละด่าน</h3>';
-  s.levels.forEach(function(lv,i){
-    const b=bestOf(G.sid,i);
-    html+='<div class="setrow"><div><b>'+lv.emoji+' ด่าน '+(i+1)+' · '+esc(lv.name)+'</b><small>'+esc(lv.topic)+'</small></div>'
-      +'<div style="text-align:right;flex:0 0 auto"><div class="stars">'+(b?starRow(b.stars):'☆☆☆')+'</div>'
-      +'<small>'+(b? b.score+' คะแนน' : 'ยังไม่ผ่าน')+'</small></div></div>';
+
+  let html='<h2 class="score-page-title">📚 คะแนนรวมทุกวิชาและทุกด่าน</h2>';
+  ready.forEach(function(s){
+    let subjectScore=0, subjectStars=0, passed=0;
+    s.levels.forEach(function(lv,i){
+      const b=bestOf(s.id,i);
+      if(b){ subjectScore+=b.score; subjectStars+=b.stars; passed++; }
+    });
+    const subjectPct=Math.round(passed/s.levels.length*100);
+    html+='<section class="subject-score" style="--subject-color:'+s.tint+';--subject-dark:'+s.tintD+'">'
+      +'<div class="subject-score-head">'
+      +'<div class="subject-score-name"><span class="subject-score-icon">'+s.emoji+'</span><div><h3>'+esc(s.name)+'</h3><small>'+esc(s.blurb)+'</small></div></div>'
+      +'<div class="subject-total"><b>'+subjectScore+'</b><span>คะแนนรวม</span></div></div>'
+      +'<div class="subject-metrics"><span>⭐ '+subjectStars+'/'+(s.levels.length*3)+' ดาว</span><span>✅ ผ่าน '+passed+'/'+s.levels.length+' ด่าน</span><span>📈 '+subjectPct+'%</span></div>'
+      +'<div class="mini-progress"><i style="width:'+subjectPct+'%;background:'+s.tint+'"></i></div>'
+      +'<div class="stage-score-grid">';
+    s.levels.forEach(function(lv,i){
+      const b=bestOf(s.id,i);
+      html+='<article class="stage-score-card '+(b?'passed':'not-played')+'">'
+        +'<div class="stage-score-top"><span class="stage-emoji">'+lv.emoji+'</span><span class="stage-number">ด่าน '+(i+1)+'</span></div>'
+        +'<b class="stage-title">'+esc(lv.name)+'</b>'
+        +'<small class="stage-topic">'+esc(lv.topic)+'</small>'
+        +'<div class="stage-result"><span class="stars">'+(b?starRow(b.stars):'☆☆☆')+'</span><strong>'+(b?b.score:'0')+' คะแนน</strong></div>'
+        +'<span class="stage-status">'+(b?'ผ่านแล้ว':'ยังไม่ผ่าน')+'</span></article>';
+    });
+    html+='</div></section>';
   });
   $('#statPerStage').innerHTML=html;
 }
+
 
 /* ---------- 11. รางวัล ---------- */
 function renderRewards(){
@@ -1129,10 +1434,20 @@ function renderRewards(){
   }).join('');
 }
 
+function toast(msg){const s=$('#toastSlot');s.innerHTML='<div class="toast" role="status">'+esc(msg)+'</div>';clearTimeout(toast.t);toast.t=setTimeout(function(){s.innerHTML='';},2600);}
 /* ---------- 12. ตั้งค่า ---------- */
+function applyTheme(){
+  const dark=SAVE.dark===true;
+  document.documentElement.setAttribute('data-theme',dark?'dark':'light');
+  document.documentElement.style.colorScheme=dark?'dark':'light';
+  const sw=$('#swTheme'), state=$('#themeState');
+  if(sw){ sw.setAttribute('aria-checked',dark?'true':'false'); sw.setAttribute('aria-label',dark?'ปิดโหมดกลางคืน':'เปิดโหมดกลางคืน'); }
+  if(state) state.textContent=dark?'เปิดอยู่':'ปิดอยู่';
+}
 function renderSettings(){
   $('#swSound').setAttribute('aria-checked', SAVE.sound?'true':'false');
   $('#swCalm').setAttribute('aria-checked', SAVE.calm?'true':'false');
+  applyTheme();
 }
 
 /* ---------- เชื่อมปุ่มทั้งหมด ---------- */
@@ -1172,16 +1487,16 @@ $('#swCalm').addEventListener('click',function(){
   document.documentElement.classList.toggle('calm', !!SAVE.calm);
   SFX.click();
 });
-$('#btnWipe').addEventListener('click',function(){
-  if(confirm('ล้างความคืบหน้าทั้งหมดในเครื่องนี้ใช่ไหม คะแนน ดาว เหรียญ และด่านที่ปลดล็อกจะหายทั้งหมด')){
-    const keepSound=SAVE.sound, keepCalm=SAVE.calm;
-    SAVE=JSON.parse(JSON.stringify(FRESH));
-    SAVE.sound=keepSound; SAVE.calm=keepCalm;
-    persist(); renderSettings(); renderSubjects(); renderMap();
-    alert('ล้างความคืบหน้าเรียบร้อยแล้ว');
-  }
+$('#swTheme').addEventListener('click',function(){
+  SAVE.dark=!(SAVE.dark===true);
+  persist(); applyTheme(); SFX.click();
+  toast(SAVE.dark?'เปิดโหมดกลางคืนแล้ว':'เปิดโหมดสว่างแล้ว');
 });
+$('#btnWipe').addEventListener('click',function(){SFX.click();$('#wipeDialog').showModal();});
+$('#btnCancelWipe').addEventListener('click',function(){$('#wipeDialog').close();});
+$('#btnConfirmWipe').addEventListener('click',function(){const a=SAVE.sound,b=SAVE.calm,c=SAVE.dark;SAVE=JSON.parse(JSON.stringify(FRESH));SAVE.sound=a;SAVE.calm=b;SAVE.dark=c;persist();renderSettings();renderSubjects();G.sid='science';G.li=0;renderMap();$('#wipeDialog').close();toast('ล้างความคืบหน้าเรียบร้อยแล้ว');});
 
+$('#wipeDialog').addEventListener('click',function(e){if(e.target===$('#wipeDialog'))$('#wipeDialog').close();});
 /* ปุ่มลัดบนคีย์บอร์ด 1-4 สำหรับเล่นผ่านจอโปรเจกเตอร์ */
 document.addEventListener('keydown',function(e){
   if(!$('#s-play').classList.contains('on')) return;
@@ -1195,9 +1510,13 @@ document.addEventListener('keydown',function(e){
 
 /* ---------- เริ่มต้น ---------- */
 load();
+SAVE.dark=SAVE.dark===true;
 document.documentElement.classList.toggle('calm', !!SAVE.calm);
 $('#heroChar').innerHTML=charSVG('happy');
+$('#homeAvatar').innerHTML=charSVG('happy');
 $('#howtoChar').innerHTML=charSVG('thinking');
+applyTheme();
+renderHome();
 renderSubjects();
 </script>
 </body>
